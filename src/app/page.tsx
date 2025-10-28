@@ -1,3 +1,4 @@
+import Footer from "@/components/component.footer";
 import HomePage from "@/components/component.hero";
 import HeroSlider from "@/components/component.hero";
 import FeatureComponent from "@/components/components.feature";
@@ -9,6 +10,8 @@ const Page = () => {
       {/* <HeroSlider /> */}
       <HomePage />
       <FeatureComponent />
+      <Footer />
+
     </>
   );
 };

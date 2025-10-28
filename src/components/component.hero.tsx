@@ -1,4 +1,5 @@
 import HeroSlider, { HeroSlide } from "./component.heroslider";
+import FeatureComponent from "./components.feature";
 
 const heroSlides: HeroSlide[] = [
    {
@@ -32,6 +33,7 @@ export default function HomePage() {
   return (
     <main>
       <HeroSlider slides={heroSlides} />
+      {/* <FeatureComponent /> */}
     </main>
   );
 }
