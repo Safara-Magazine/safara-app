@@ -4,14 +4,15 @@
 import clsx from "clsx";
 import React from "react";
 
+export type DividerLineAlignmet = "left" | "right";
 interface Props {
   title: string;
-  alignment?: "left" | "right";
+  alignment?: DividerLineAlignmet;
 }
 
 const DividerLine = ({ title, alignment = "left" }: Props) => {
   return (
-    <div className="flex gap-8 items-end py-12 px-4 md:px-6 lg:px-8">
+    <div className="flex gap-8 items-end py-12 ">
       <p
         className={clsx(
           "inline-block bg-linear-to-b from-[#B59157] to-[#EBB659] bg-clip-text text-transparent text-4xl",
