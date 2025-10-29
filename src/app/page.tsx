@@ -13,7 +13,6 @@ const Page = () => {
       <FeatureComponent />
       <AdsComponent />
       <Footer />
-
     </>
   );
 };
