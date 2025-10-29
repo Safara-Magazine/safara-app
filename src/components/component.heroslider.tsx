@@ -86,12 +86,12 @@ const HeroSlider: React.FC<HeroSliderProps> = ({
   }
 
   return (
-    <div className={`relative w-full ${height} overflow-hidden ${className}`}>
+    <div className={`relative w-full rounded-br-4xl rounded-bl-4xl ${height} overflow-hidden ${className}`}>
       {/* Background Images */}
       {slides.map((slide, index) => (
         <div
           key={index}
-          className="absolute inset-0 transition-opacity duration-1000 ease-in-out"
+          className="absolute inset-0 transition-opacity duration-1000 ease-in-ou"
           style={{
             opacity: currentIndex === index ? 1 : 0,
           }}
