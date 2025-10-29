@@ -253,7 +253,7 @@ export const FeatureComponent: React.FC<ArticleFeatureProps> = ({
   return (
     <section ref={sectionRef} className="w-full py-12 px-4 md:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 max-h-[251px]">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Featured Article - Left Side */}
           <Link 
             ref={featuredRef}
@@ -289,7 +289,7 @@ export const FeatureComponent: React.FC<ArticleFeatureProps> = ({
               <Link
                 key={article.slug}
                 href={`/articles/${article.slug}`}
-                className="article-card group  flex gap-2 p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                className="article-card group  flex gap-2 rounded-lg shadow-md hover:bg-gray-50 hover:shadow-2xl text-[#1D1B18] transition-colors"
               >
                 {/* Article Image */}
                 <div className="relative w-32 h-32 md:w-40 md:h-32 flex-shrink-0 overflow-hidden rounded-lg">
@@ -303,14 +303,16 @@ export const FeatureComponent: React.FC<ArticleFeatureProps> = ({
 
                 {/* Article Content */}
                 <div className="article-content flex-1 flex flex-col justify-between min-w-0">
-                  <div>
-                    <time className="text-xs md:text-sm font-medium text-gray-500 dark:text-gray-400 mb-2 block">
-                      {article.date}
-                    </time>
-                    <h3 className="text-base md:text-lg font-bold text-gray-900 dark:text-white mb-2 line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                      {article.title}
-                    </h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-300 line-clamp-2">
+                  <div className='flex flex-col justify-between h-full p-1'>
+                    <div className='block md:flex items-center justify-between'>
+                        <h3 className="text-base md:text-lg font-bold text-[#1D1B18] mb-2 line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                        {article.title}
+                        </h3>
+                        <time className="text-xs md:text-sm font-medium text-red-500 mb-2 block">
+                        {article.date}
+                        </time>
+                    </div>
+                    <p className="text-[14px] text-[#1D1B18]">
                       {article.text}
                     </p>
                   </div>
