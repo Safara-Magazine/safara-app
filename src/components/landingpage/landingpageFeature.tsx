@@ -278,7 +278,6 @@ export const LandingPageFeatureComponent: React.FC<ArticleFeatureProps> = ({
                   />
                 </div>
 
-                {/* Article Content */}
                 <div className="article-content flex-1 flex flex-col justify-between min-w-0">
                   <div className='flex flex-col justify-center h-full p-1'>
                     <div className='block md:flex items-center justify-between'>
