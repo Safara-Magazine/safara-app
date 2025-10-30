@@ -32,7 +32,6 @@ export default function HomePage() {
   return (
     <main>
       <HeroSlider slides={heroSlides} />
-      {/* <FeatureComponent /> */}
     </main>
   );
 }
