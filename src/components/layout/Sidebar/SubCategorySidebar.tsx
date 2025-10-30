@@ -36,7 +36,7 @@ const SubCategorySidebar = ({ isOpen, setIsSidebarOpen }: Props) => {
         color="white"
         className="absolute top-4 right-4 z-50"
       />
-      <ul className="flex flex-col bg-white max-w-[40%] h-svh p-4">
+      <ul className="flex flex-col bg-white max-w-[20%] h-svh p-4">
         {items.map((item, index) => (
           <li
             key={index}

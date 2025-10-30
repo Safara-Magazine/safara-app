@@ -22,7 +22,7 @@ const Category = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   return (
     <>
-      <SubCategoryHeader setIsSidebarOpen={setIsSidebarOpen} />
+      <SubCategoryHeader isOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen} />
       <SubCategorySidebar isOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen} />
       <HeroSlider slides={heroSlides1} />
       <main className="px-8">

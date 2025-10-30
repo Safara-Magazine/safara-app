@@ -25,7 +25,6 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${afacad.className}  antialiased `}>
         {children}
-
         <Footer />
       </body>
     </html>

@@ -267,7 +267,7 @@ export const FeatureComponent: React.FC<ArticleFeatureProps> = ({
               className="featured-image object-cover"
             />
             {/* Dark gradient overlay */}
-            <div className="featured-overlay absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+            <div className="featured-overlay absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-transparent" />
             
             {/* Content */}
             <div className="featured-content absolute bottom-0 left-0 right-0 p-6 md:p-8 text-white">
@@ -292,7 +292,7 @@ export const FeatureComponent: React.FC<ArticleFeatureProps> = ({
                 className="article-card group  flex gap-2 rounded-lg shadow-md hover:bg-gray-50 hover:shadow-2xl text-[#1D1B18] transition-colors"
               >
                 {/* Article Image */}
-                <div className="relative w-32 h-32 md:w-40 md:h-32 flex-shrink-0 overflow-hidden rounded-lg">
+                <div className="relative w-32 h-32 md:w-40 md:h-32 shrink-0 overflow-hidden rounded-lg">
                   <Image
                     src={article.img}
                     alt={article.alt || article.title}
