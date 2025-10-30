@@ -38,7 +38,6 @@ export const NewsCard = () => {
             }
         )
 
-        // Hover animations for each card
         cards.forEach((card) => {
             if (!card) return
             
