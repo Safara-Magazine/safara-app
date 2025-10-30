@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
 import "@/styles/globals.css";
-import { Outfit } from 'next/font/google';
+import { Outfit } from "next/font/google";
 import { Afacad } from "next/font/google";
+import Footer from "@/components/component.footer";
 
+const outfit = Outfit({
+  subsets: ["latin"],
+  variable: "--font-outfit",
+});
 
- const outfit = Outfit({
-   subsets: ["latin"],
-   variable: "--font-outfit",
- });
-
- const afacad = Afacad({ subsets: ["latin"] });
+const afacad = Afacad({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Safara Front-end App",
@@ -23,8 +23,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-        <body  className={`${afacad.className}  antialiased `}>
+      <body className={`${afacad.className}  antialiased `}>
         {children}
+
+        <Footer />
       </body>
     </html>
   );

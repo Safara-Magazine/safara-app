@@ -11,7 +11,7 @@ const Page = () => {
       <HomePage />
       <FeatureComponent />
       <AdsComponent />
-      <Footer />
+      
     </>
   );
 };
