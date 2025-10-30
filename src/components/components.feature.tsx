@@ -251,8 +251,8 @@ export const FeatureComponent: React.FC<ArticleFeatureProps> = ({
   const [featuredArticle, ...remainingArticles] = displayArticles;
 
   return (
-    <section ref={sectionRef} className="w-full py-12 px-4 md:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
+    <section ref={sectionRef} className="w-full py-12 ">
+      <div className="">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Featured Article - Left Side */}
           <Link 
