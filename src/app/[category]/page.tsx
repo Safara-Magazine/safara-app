@@ -1,7 +1,12 @@
-import HeroSlider, { HeroSlide } from "@/components/component.heroslider";
-import ThreeCardDisplay from "@/components/templates/ThreeCardDisplay/page";
-import React from "react";
+"use client";
 
+import HeroSlider, { HeroSlide } from "@/components/component.heroslider";
+import FeatureComponent from "@/components/components.feature";
+import SubCategoryHeader from "@/components/layout/Header/SubCategoryHeader";
+import SubCategorySidebar from "@/components/layout/Sidebar/SubCategorySidebar";
+import DividerLine from "@/components/molecules/DividerLine/page";
+import ThreeCardDisplay from "@/components/templates/ThreeCardDisplay/page";
+import React, { useState } from "react";
 
 const heroSlides1: HeroSlide[] = [
   {
@@ -14,16 +19,19 @@ const heroSlides1: HeroSlide[] = [
 ];
 
 const Category = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   return (
-    <div>
+    <>
+      <SubCategoryHeader isOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen} />
+      <SubCategorySidebar isOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen} />
       <HeroSlider slides={heroSlides1} />
       <main className="px-8">
-        {/* <DividerLine title="features" /> */}
-        {/* <FeatureComponent /> */}
+        <DividerLine title="features" />
+        <FeatureComponent />
         <ThreeCardDisplay title="regular section" />
         <ThreeCardDisplay title="special reports" />
       </main>
-    </div>
+    </>
   );
 };
 
