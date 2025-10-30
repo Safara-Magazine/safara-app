@@ -14,10 +14,10 @@ export interface HeroSlide {
 
 interface HeroSliderProps {
   slides: HeroSlide[];
-  autoPlayInterval?: number; // in milliseconds, default 5000
+  autoPlayInterval?: number;
   showDots?: boolean;
-  height?: string; // Tailwind class like 'h-screen' or 'h-[600px]'
-  overlayOpacity?: number; // 0 to 1, default 0.5
+  height?: string;
+  overlayOpacity?: number;
   className?: string;
 }
 
@@ -97,10 +97,12 @@ const HeroSlider: React.FC<HeroSliderProps> = ({
           }}
         >
           {slide.image.startsWith('http') ? (
-            <img
+            <Image
               src={slide.image}
               alt={slide.alt || slide.title}
               className="absolute inset-0 w-full h-full object-cover"
+              width={100}
+              height={100}
             />
           ) : (
             <Image

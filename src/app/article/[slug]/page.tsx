@@ -17,6 +17,7 @@ async function getArticle(slug: string) {
     
     return res.json();
   } catch (error) {
+    console.log(error)
     return null;
   }
 }
@@ -72,6 +73,7 @@ export async function generateStaticParams() {
       slug: article.slug,
     }));
   } catch (error) {
+    console.log(error)
     return [];
   }
 }
