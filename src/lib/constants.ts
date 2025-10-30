@@ -38,3 +38,27 @@ export const landingPageNews: LandingPageNews[] = [
     span: 'continue reading'
 }
    ]
+
+
+export const landingPageNews2: LandingPageNews[] = [
+   { img: '/images/hannatu.jpg',
+    title: 'International Airlines: Global Connections to Nigeria',
+    text: "Story subheadline Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero Story subheadline Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero Story subheadline Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero . Story subheadline Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero Story subheadline Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero Story subheadline Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate ... ",
+    span: 'continue reading'
+}
+   ]
+
+   export const landingPageNews3: HighlightsImages[] = [
+    {
+        img: '/images/interviews.png',
+        text: "Taste of Naija: Nigeria on a Plate – Jollof to AfangSoup"
+    },
+    {
+        img: '/images/destination.png',
+        text: " Hotel Spotlight: Top 5 Luxury Stays in Nigeria"
+    },
+    {
+        img: '/images/fashion.jpg',
+        text: "Aviation Feature: Domestic Airlines & Their Routes"
+    },
+]
