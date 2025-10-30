@@ -46,7 +46,6 @@ export default function Footer() {
       {/* Main Footer Content */}
       <div className="max-w-7xl mx-auto px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-          {/* Logo and Newsletter Section */}
           <div className="md:col-span-1">
             <div className="mb-6">
               <div className="w-12 h-12 bg-[#d4af8f] rounded flex items-center justify-center font-bold text-[#4a2c5e] text-sm">
