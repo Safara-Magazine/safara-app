@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "@/styles/globals.css";
+import { Outfit } from "next/font/google";
+import { Afacad } from "next/font/google";
+import Footer from "@/components/component.footer";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const outfit = Outfit({
   subsets: ["latin"],
+  variable: "--font-outfit",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const afacad = Afacad({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Safara Front-end App",
@@ -24,10 +23,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${afacad.className}  antialiased `}>
         {children}
+        <Footer />
       </body>
     </html>
   );
