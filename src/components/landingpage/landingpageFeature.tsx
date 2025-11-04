@@ -4,7 +4,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
+import { generateSlug } from '@/lib/omniContents';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { landingPageArticles as DUMMY_ARTICLES } from '@/lib/constants';
+
+// work's here!!
+
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -16,6 +21,7 @@ export interface Article {
   title: string;
   text: string;
   alt?: string;
+  category: string;
 }
 
 interface ArticleFeatureProps {
@@ -23,36 +29,9 @@ interface ArticleFeatureProps {
   maxArticles?: number;
 }
 
-const DUMMY_ARTICLES: Article[] = [
-  {
-    slug: 'understanding-modern-web-development',
-    img: '/images/calabar.png',
-    title: 'Understanding Modern Web Development',
-    text: '',
-    alt: 'Modern web development workspace'
-  },
-  {
-    slug: 'design-systems-guide',
-    img: '/images/festivals.png',
-    title: 'Culture & Festivals: ',
-    text: 'Nigeria’s Celebration of 2025',
-    alt: 'Design system components'
-  },
-  {
-    slug: 'typescript-best-practices',
-    img: '/images/lifestyle.png',
-    title: 'Lifestyle Travel: ',
-    text: 'The Lagos Luxury Experience(nightlife, fashion, food)',
-    alt: 'TypeScript code editor'
-  },
-  {
-    slug: 'performance-optimization',
-    img: '/images/abuja.jpg',
-    title: 'International Gateway: ',
-    text: 'Abuja & Lagos as Africa’s Travel Hubs',
-    alt: 'Performance metrics dashboard'
-  },
-];
+// not necessary here then -- the description tags || designs for a global templating page for the articles is needed, since they'll be dynamic
+
+
 
 export const LandingPageFeatureComponent: React.FC<ArticleFeatureProps> = ({
   articles,
@@ -232,12 +211,14 @@ export const LandingPageFeatureComponent: React.FC<ArticleFeatureProps> = ({
   return (
     <section ref={sectionRef} className="w-full py-12 ">
       <div className="">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 ">
           {/* Featured Article - Left Side */}
+          {/* 1. CLICKABLE CARD - Featured article with full routing */}
+          
           <Link 
             ref={featuredRef}
-            href={`/articles/${featuredArticle.slug}`}
-            className="group relative max-h-[751px]  overflow-hidden rounded-lg"
+            href={`/article/${generateSlug(featuredArticle.title)}`}
+            className="group relative max-h-[751px]  overflow-hidden rounded-lg "
           >
             <Image
               src={featuredArticle.img}
@@ -251,6 +232,10 @@ export const LandingPageFeatureComponent: React.FC<ArticleFeatureProps> = ({
             {/* Content */}
             <div className="featured-content absolute bottom-0 left-0 right-0 p-6 md:p-8 text-white">
               
+               <button className="w-[100px] font-medium h-[32px]  rounded-[20px] border border-[#B59157] bg-[#B59157] text-white  text-[14px]  transition-colors duration-300">
+                                                    {featuredArticle.category}
+                      </button>
+
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 line-clamp-2">
                 {featuredArticle.title}
               </h2>
@@ -263,6 +248,7 @@ export const LandingPageFeatureComponent: React.FC<ArticleFeatureProps> = ({
           {/* Remaining Articles - Right Side */}
           <div ref={remainingArticlesRef} className="flex flex-col gap-2 max-h-[751px]">
             {remainingArticles.map((article) => (
+              // 2. CLICKABLE CARD - Remaining articles with full routing
               <Link
                 key={article.slug}
                 href={`/articles/${article.slug}`}
@@ -280,6 +266,11 @@ export const LandingPageFeatureComponent: React.FC<ArticleFeatureProps> = ({
 
                 <div className="article-content flex-1 flex flex-col justify-between min-w-0">
                   <div className='flex flex-col justify-center h-full p-1'>
+
+                      <button className="w-[100px] font-medium h-[32px]  rounded-[20px] border border-[#B59157] group-hover:bg-[#B59157] group-hover:text-white text-[#B59157] text-[14px]  transition-colors duration-300">
+                                                    {article.category}
+                      </button>
+
                     <div className='block md:flex items-center justify-between'>
                         <h3 className="text-base md:text-lg font-bold text-[#1D1B18] mb-2 line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                         {article.title}
