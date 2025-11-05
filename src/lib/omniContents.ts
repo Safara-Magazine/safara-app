@@ -20,18 +20,17 @@ export function generateSlug(title: string) {
 
 function normalizeHighlights(items: typeof landingPageHighLights) {
   return items.map(item => ({
-    slug: generateSlug(item.text),
-    title: item.text,
-    text: '', 
+    slug: generateSlug(item.title || item.text),
+    title: item.title || item.text,
+    text: item.text || '',
     img: item.img,
     category: item.category,
-    content: '', 
+    content: '',
     date: new Date().toISOString(),
     span: 'continue reading'
   }));
 }
 
-// tweaked landingPageNews to fit article structure
 function normalizeNews(items: typeof landingPageNews) {
   return items.map(item => ({
     slug: generateSlug(item.title),
@@ -39,7 +38,7 @@ function normalizeNews(items: typeof landingPageNews) {
     text: item.text,
     img: item.img,
     category: item.category,
-    content: item.text, 
+    content: item.text,
     date: new Date().toISOString(),
     span: item.span
   }));
@@ -51,7 +50,7 @@ export const allContent = [
   ...normalizeNews(landingPageNews),
   ...normalizeNews(landingPageNews2),
   ...normalizeHighlights(landingPageNews3),
-  ...normalizeHighlights(landingPageArticles),
+  ...landingPageArticles,
 ];
 
 

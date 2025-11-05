@@ -3,7 +3,7 @@
 import React, { useEffect, useRef } from "react";
 import DividerLine from "../molecules/DividerLine/page";
 import { landingPageNews, landingPageNews2 } from "@/lib/constants";
-import Image from "next/image";
+import Image from "@/components/Image";
 import Link from "next/link"; 
 import { generateSlug } from "@/lib/omniContents"; 
 
