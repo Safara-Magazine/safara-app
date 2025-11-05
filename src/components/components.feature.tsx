@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { generateSlug } from '@/lib/omniContents';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -251,13 +252,13 @@ export const FeatureComponent: React.FC<ArticleFeatureProps> = ({
   const [featuredArticle, ...remainingArticles] = displayArticles;
 
   return (
-    <section ref={sectionRef} className="w-full py-12 ">
+    <section ref={sectionRef} className="w-full py-12 border-2 border-red-400">
       <div className="">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Featured Article - Left Side */}
           <Link 
             ref={featuredRef}
-            href={`/articles/${featuredArticle.slug}`}
+            href={`/article/${generateSlug(featuredArticle.title)}`}
             className="group relative max-h-[751px]  overflow-hidden rounded-lg"
           >
             <Image
@@ -288,7 +289,7 @@ export const FeatureComponent: React.FC<ArticleFeatureProps> = ({
             {remainingArticles.map((article) => (
               <Link
                 key={article.slug}
-                href={`/articles/${article.slug}`}
+                href={`/article/${generateSlug(article.title)}`}
                 className="article-card group  flex gap-2 rounded-lg shadow-md hover:bg-gray-50 hover:shadow-2xl text-[#1D1B18] transition-colors"
               >
                 {/* Article Image */}
