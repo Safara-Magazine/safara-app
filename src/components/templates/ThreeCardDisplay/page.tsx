@@ -2,6 +2,7 @@ import DividerLine, {
   DividerLineAlignmet,
 } from "@/components/molecules/DividerLine/page";
 import HeadlineCard from "@/components/molecules/HeadlineCard/page";
+import Link from "next/link";
 import React from "react";
 
 export interface HeroSlideNew {
@@ -52,14 +53,80 @@ const heroSlides: HeroSlideNew[] = [
     subtitle: "Witness the beauty of untouched landscapes",
     alt: "Ocean sunset view",
   },
+
+  {
+    image:
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=80",
+    title: "Destination Highlights",
+    subtitle: "Explore Nigeria's iconic landmarks and hidden treasures",
+    alt: "Ocean sunset view",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1511593358241-7eea1f3c84e5?w=1920&q=80",
+    title: "Luxury Experiences",
+    subtitle: "Indulge in premium travel and accommodation",
+    alt: "Ocean sunset view",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1920&q=80",
+    title: "Natural Wonders",
+    subtitle: "Witness the beauty of untouched landscapes",
+    alt: "Ocean sunset view",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1920&q=80",
+    title: "Natural Wonders",
+    subtitle: "Witness the beauty of untouched landscapes",
+    alt: "Ocean sunset view",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1920&q=80",
+    title: "Natural Wonders",
+    subtitle: "Witness the beauty of untouched landscapes",
+    alt: "Ocean sunset view",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1920&q=80",
+    title: "Natural Wonders",
+    subtitle: "Witness the beauty of untouched landscapes",
+    alt: "Ocean sunset view",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1920&q=80",
+    title: "Natural Wonders",
+    subtitle: "Witness the beauty of untouched landscapes",
+    alt: "Ocean sunset view",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1920&q=80",
+    title: "Natural Wonders",
+    subtitle: "Witness the beauty of untouched landscapes",
+    alt: "Ocean sunset view",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1920&q=80",
+    title: "Natural Wonders",
+    subtitle: "Witness the beauty of untouched landscapes",
+    alt: "Ocean sunset view",
+  },
 ];
+
+const firstHeroSlides = heroSlides.slice(0, 12);
 
 const ThreeCardDisplay = ({ title, titleAlignment = "left" }: Props) => {
   return (
     <>
       <DividerLine title={title} alignment={titleAlignment} />
       <section className="grid grid-cols-1 justify-items-center md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {heroSlides.map((slide, index) => (
+        {firstHeroSlides.map((slide, index) => (
           <HeadlineCard
             key={index}
             src={slide.image}
@@ -69,6 +136,13 @@ const ThreeCardDisplay = ({ title, titleAlignment = "left" }: Props) => {
           />
         ))}
       </section>
+      {heroSlides.length > 12 ? (
+        <Link href="/memories?sub=features&full=true">
+          <p className="text-right py-12">Read More</p>
+        </Link>
+      ) : (
+        ""
+      )}
     </>
   );
 };

@@ -6,7 +6,10 @@ import SubCategoryHeader from "@/components/layout/Header/SubCategoryHeader";
 import SubCategorySidebar from "@/components/layout/Sidebar/SubCategorySidebar";
 import DividerLine from "@/components/molecules/DividerLine/page";
 import ThreeCardDisplay from "@/components/templates/ThreeCardDisplay/page";
-import React, { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import { usePathname } from "next/navigation";
+import React, { useEffect, useState } from "react";
 
 const heroSlides1: HeroSlide[] = [
   {
@@ -16,14 +19,44 @@ const heroSlides1: HeroSlide[] = [
     subtitle: "Explore Nigeria's iconic landmarks and hidden treasures",
     alt: "Ocean sunset view",
   },
+  {
+    image:
+      "https://images.unsplash.com/photo-1618828665011-0abd973f7bb8?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1332",
+    title: "Destination Highlights",
+    subtitle: "Explore Nigeria's iconic landmarks and hidden treasures",
+    alt: "Ocean sunset view",
+  },
 ];
 
 const Category = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const pathname = usePathname();
+
+  console.log("Current path:", pathname);
+
+  const { data, error, isLoading } = useQuery<HeroSlide[]>({
+    queryKey: ["category-data", pathname],
+    queryFn: async () => {
+      const res = await axios.get("https://jsonplaceholder.typicode.com/users");
+      return res.data;
+    },
+  });
+
+  console.log(data);
+
+  if (isLoading) return <p>Loading users...</p>;
+  if (error) return <p>Error loading users</p>;
+
   return (
     <>
-      <SubCategoryHeader isOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen} />
-      <SubCategorySidebar isOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen} />
+      <SubCategoryHeader
+        isOpen={isSidebarOpen}
+        setIsSidebarOpen={setIsSidebarOpen}
+      />
+      <SubCategorySidebar
+        isOpen={isSidebarOpen}
+        setIsSidebarOpen={setIsSidebarOpen}
+      />
       <HeroSlider slides={heroSlides1} />
       <main className="px-8">
         <DividerLine title="features" />
