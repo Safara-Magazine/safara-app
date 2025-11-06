@@ -35,12 +35,12 @@ export default function NotFound() {
       </p>
       <Link
         href="/"
-        className="fade-in mt-8 px-6 py-3 border border-gray-700 rounded-lg text-gray-200 hover:bg-gray-800 transition-all"
+        className="fade-in mt-8 px-6 py-3 border border-[#EAB353] text-[#EAB353] rounded-lg  bg-[#422746] transition-all"
       >
         Return Home
       </Link>
 
-      
+     
     </div>
   );
 }

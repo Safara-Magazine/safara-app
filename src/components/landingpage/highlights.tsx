@@ -26,10 +26,10 @@ export default function HighlightsSection() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 max-w-full mx-auto">
         {landingPageHighLights.map((highlight, index) => (
             <Link
-               key={highlight.slug || index}
-            href={`/article/${highlight.slug}`}>
+               key={index}
+            href="/destination">
           <div
-           
+            key={highlight.slug || index}
             ref={(el) => {
               itemsRef.current[index] = el
             }}
