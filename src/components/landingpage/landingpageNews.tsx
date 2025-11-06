@@ -4,8 +4,8 @@ import React, { useEffect, useRef } from "react";
 import DividerLine from "../molecules/DividerLine/page";
 import { landingPageNews, landingPageNews2 } from "@/lib/constants";
 import Image from "@/components/Image";
-import Link from "next/link"; 
-import { generateSlug } from "@/lib/omniContents"; 
+import Link from "next/link";
+import { generateSlug } from "@/lib/omniContents";
 
 export const LandingPageNews = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -32,11 +32,7 @@ export const LandingPageNews = () => {
           const isEven = i % 2 === 0;
 
           return (
-      
-            <Link
-              key={i}
-              href={`/article/${generateSlug(page.title)}`}
-            >
+            <Link key={i} href={`/article/${generateSlug(page.title)}`}>
               <div
                 ref={(el) => {
                   newsItemsRef.current[i] = el;
@@ -77,18 +73,14 @@ export const LandingPageNews = () => {
                   </h3>
 
                   <button className="w-[100px] font-medium h-[32px]  rounded-[20px] border border-[#B59157] bg-[#B59157] text-white  text-[14px]  transition-colors duration-300">
-                      {page.category}
+                    {page.category}
                   </button>
-
 
                   <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
                     {page.text}
                   </p>
 
                   <div className="flex justify-end pt-4 ">
-
-                    
-
                     <button className="group/btn relative text-sm md:text-base font-semibold text-[#EBB659] hover:text-[#d4af8f] transition-all duration-300 flex items-center gap-2 overflow-hidden">
                       <span className="relative z-10">{page.span}</span>
 
@@ -145,11 +137,7 @@ export const LandingPageNews2 = () => {
           const isEven = i % 2 === 0;
 
           return (
-            
-            <Link
-              key={i}
-              href={`/article/${generateSlug(page.title)}`}
-            >
+            <Link key={i} href={`/article/${generateSlug(page.title)}`}>
               <div
                 ref={(el) => {
                   newsItemsRef.current[i] = el;
@@ -188,7 +176,7 @@ export const LandingPageNews2 = () => {
                   </h3>
 
                   <button className="w-[100px] font-medium h-[32px]  rounded-[20px] border border-[#B59157] bg-[#B59157] text-white  text-[14px]  transition-colors duration-300">
-                      {page.category}
+                    {page.category}
                   </button>
 
                   <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
