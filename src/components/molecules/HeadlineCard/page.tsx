@@ -20,50 +20,52 @@ interface Props {
 
 const HeadlineCard = ({ src, headline, desc, alt, className, url }: Props) => {
   const imageRef = useRef<HTMLImageElement>(null);
-  const textRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLParagraphElement>(null);
 
-
-  const handleMouseEnter = () => {
-    if (imageRef.current && textRef.current) {
+  const handleMouseImageEnter = () => {
+    if (imageRef.current) {
       gsap.to(imageRef.current, {
-        scale: 1.05, // zoom in
-        duration: 0.5,
-        ease: "power3.out",
+        scale: 1.125,
+        duration: 0.75,
+        ease: "ease-in",
       });
-
-      gsap.to(textRef.current, {
-        y: -5, // subtle lift
-        opacity: 1,
-        duration: 0.5,
-        ease: "power3.out",
+    }
+  };
+  const handleMouseImageLeave = () => {
+    if (imageRef.current) {
+      gsap.to(imageRef.current, {
+        scale: 1,
+        duration: 0.75,
+        ease: "ease.out",
       });
     }
   };
 
-  const handleMouseLeave = () => {
-    if (imageRef.current && textRef.current) {
-      gsap.to(imageRef.current, {
-        scale: 1, // reset zoom
+  const handleMouseTextEnter = () => {
+    if (titleRef.current) {
+      gsap.to(titleRef.current, {
+        y: -2,
         duration: 0.5,
-        ease: "power3.out",
+        ease: "power1.inOut",
       });
-
-      gsap.to(textRef.current, {
-        y: 0, // reset position
-        opacity: 1,
-        duration: 0.5,
+    }
+  };
+  const handleMouseTextLeave = () => {
+    if (titleRef.current) {
+      gsap.to(titleRef.current, {
+        y: 0,
         ease: "power3.out",
       });
     }
   };
 
   return (
-    <figure
-      className="flex flex-col gap-6 my-2 cursor-pointer"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
-      <Link href={url}>
+    <figure className="flex flex-col gap-6 my-2 cursor-pointer">
+      <Link
+        href={`/article/${url}`}
+        onMouseEnter={handleMouseImageEnter}
+        onMouseLeave={handleMouseImageLeave}
+      >
         <div className="overflow-hidden w-full rounded-2xl">
           <Image
             width={450}
@@ -75,11 +77,18 @@ const HeadlineCard = ({ src, headline, desc, alt, className, url }: Props) => {
           />
         </div>
       </Link>
-      <figcaption ref={textRef}>
-        <h2 className="text-center font-semibold text-2xl">
-          {headline.toUpperCase()}
-        </h2>
-        <p className="text-center">{desc}</p>
+      <figcaption>
+        <Link href={`/article/${url}`}>
+          <h2
+            className="relative text-center font-semibold text-2xl mb-1.5 will-change-transform"
+            ref={titleRef}
+            onMouseEnter={handleMouseTextEnter}
+            onMouseLeave={handleMouseTextLeave}
+          >
+            {headline.toUpperCase()}
+          </h2>
+        </Link>
+        <p className="text-center line-clamp-2">{desc}</p>
       </figcaption>
     </figure>
   );

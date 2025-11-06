@@ -5,6 +5,7 @@ const FullDisplay = () => {
   return (
     <div>
       <ThreeCardDisplay title="lo" />
+      <p>Pagination</p>
     </div>
   );
 };
