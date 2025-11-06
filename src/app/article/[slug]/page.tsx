@@ -1,4 +1,4 @@
-import { notFound } from 'next/navigation';
+
 import Image from "@/components/Image";
 import { getContentBySlug, getAllSlugs } from '@/lib/omniContents';
 import ComingSoon from '@/components/component.comingsoon';

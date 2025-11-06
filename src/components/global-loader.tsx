@@ -12,11 +12,8 @@ export default function GlobalLoader() {
   const progressBarRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    let showTimeout: NodeJS.Timeout;
-    let hideTimeout: NodeJS.Timeout;
-
-    // Start by waiting 500ms — only show loader if it's taking long
-    showTimeout = setTimeout(() => {
+    // only show loader if it's taking long -- like 5000ms
+    const showTimeout = setTimeout(() => {
       setLoading(true);
 
       // Animate loader fade in
@@ -36,7 +33,7 @@ export default function GlobalLoader() {
     }, 500);
 
     // Fade out after navigation finishes
-    hideTimeout = setTimeout(() => {
+    const hideTimeout = setTimeout(() => {
       gsap.to(loaderRef.current, {
         opacity: 0,
         duration: 0.5,
