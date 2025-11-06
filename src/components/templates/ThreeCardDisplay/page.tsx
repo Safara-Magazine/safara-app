@@ -10,6 +10,7 @@ export interface HeroSlideNew {
   title: string;
   subtitle: string;
   alt: string;
+  url: string;
 }
 
 interface Props {
@@ -24,6 +25,7 @@ const heroSlides: HeroSlideNew[] = [
     title: "Destination Highlights",
     subtitle: "Explore Nigeria's iconic landmarks and hidden treasures",
     alt: "Ocean sunset view",
+    url: "./explore-nigeria-iconic",
   },
   {
     image:
@@ -31,6 +33,7 @@ const heroSlides: HeroSlideNew[] = [
     title: "Luxury Experiences",
     subtitle: "Indulge in premium travel and accommodation",
     alt: "Ocean sunset view",
+    url: "./explore-nigeria-iconic",
   },
   {
     image:
@@ -38,6 +41,7 @@ const heroSlides: HeroSlideNew[] = [
     title: "Natural Wonders",
     subtitle: "Witness the beauty of untouched landscapes",
     alt: "Ocean sunset view",
+    url: "./explore-nigeria-iconic",
   },
   {
     image:
@@ -45,6 +49,7 @@ const heroSlides: HeroSlideNew[] = [
     title: "Natural Wonders",
     subtitle: "Witness the beauty of untouched landscapes",
     alt: "Ocean sunset view",
+    url: "./explore-nigeria-iconic",
   },
   {
     image:
@@ -52,6 +57,7 @@ const heroSlides: HeroSlideNew[] = [
     title: "Natural Wonders",
     subtitle: "Witness the beauty of untouched landscapes",
     alt: "Ocean sunset view",
+    url: "./explore-nigeria-iconic",
   },
 
   {
@@ -60,6 +66,7 @@ const heroSlides: HeroSlideNew[] = [
     title: "Destination Highlights",
     subtitle: "Explore Nigeria's iconic landmarks and hidden treasures",
     alt: "Ocean sunset view",
+    url: "./explore-nigeria-iconic",
   },
   {
     image:
@@ -67,6 +74,7 @@ const heroSlides: HeroSlideNew[] = [
     title: "Luxury Experiences",
     subtitle: "Indulge in premium travel and accommodation",
     alt: "Ocean sunset view",
+    url: "./explore-nigeria-iconic",
   },
   {
     image:
@@ -74,6 +82,7 @@ const heroSlides: HeroSlideNew[] = [
     title: "Natural Wonders",
     subtitle: "Witness the beauty of untouched landscapes",
     alt: "Ocean sunset view",
+    url: "./explore-nigeria-iconic",
   },
   {
     image:
@@ -81,6 +90,7 @@ const heroSlides: HeroSlideNew[] = [
     title: "Natural Wonders",
     subtitle: "Witness the beauty of untouched landscapes",
     alt: "Ocean sunset view",
+    url: "./explore-nigeria-iconic",
   },
   {
     image:
@@ -88,6 +98,7 @@ const heroSlides: HeroSlideNew[] = [
     title: "Natural Wonders",
     subtitle: "Witness the beauty of untouched landscapes",
     alt: "Ocean sunset view",
+    url: "./explore-nigeria-iconic",
   },
   {
     image:
@@ -95,6 +106,7 @@ const heroSlides: HeroSlideNew[] = [
     title: "Natural Wonders",
     subtitle: "Witness the beauty of untouched landscapes",
     alt: "Ocean sunset view",
+    url: "./explore-nigeria-iconic",
   },
   {
     image:
@@ -102,6 +114,7 @@ const heroSlides: HeroSlideNew[] = [
     title: "Natural Wonders",
     subtitle: "Witness the beauty of untouched landscapes",
     alt: "Ocean sunset view",
+    url: "./explore-nigeria-iconic",
   },
   {
     image:
@@ -109,6 +122,7 @@ const heroSlides: HeroSlideNew[] = [
     title: "Natural Wonders",
     subtitle: "Witness the beauty of untouched landscapes",
     alt: "Ocean sunset view",
+    url: "./explore-nigeria-iconic",
   },
   {
     image:
@@ -116,6 +130,7 @@ const heroSlides: HeroSlideNew[] = [
     title: "Natural Wonders",
     subtitle: "Witness the beauty of untouched landscapes",
     alt: "Ocean sunset view",
+    url: "./explore-nigeria-iconic",
   },
 ];
 
@@ -133,12 +148,15 @@ const ThreeCardDisplay = ({ title, titleAlignment = "left" }: Props) => {
             alt={slide.alt}
             headline={slide.title}
             desc={slide.subtitle}
+            url={slide.url}
           />
         ))}
       </section>
       {heroSlides.length > 12 ? (
-        <Link href="/memories?sub=features&full=true">
-          <p className="text-right py-12">Read More</p>
+        <Link href="/full?cat=memories&sub=features">
+          <p className="text-right text-2xl my-12 hover:font-bold ">
+            Read More
+          </p>
         </Link>
       ) : (
         ""

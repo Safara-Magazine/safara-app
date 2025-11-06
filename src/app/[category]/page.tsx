@@ -30,22 +30,22 @@ const heroSlides1: HeroSlide[] = [
 
 const Category = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const pathname = usePathname();
 
-  console.log("Current path:", pathname);
+  
+  
+  // Data fetching snippet
+  // const pathname = usePathname();
 
-  const { data, error, isLoading } = useQuery<HeroSlide[]>({
-    queryKey: ["category-data", pathname],
-    queryFn: async () => {
-      const res = await axios.get("https://jsonplaceholder.typicode.com/users");
-      return res.data;
-    },
-  });
+  // const { data, error, isLoading } = useQuery<HeroSlide[]>({
+  //   queryKey: ["category-data", pathname],
+  //   queryFn: async () => {
+  //     const res = await axios.get("https://jsonplaceholder.typicode.com/users");
+  //     return res.data;
+  //   },
+  // });
 
-  console.log(data);
-
-  if (isLoading) return <p>Loading users...</p>;
-  if (error) return <p>Error loading users</p>;
+  // if (isLoading) return <p>Loading users...</p>;
+  // if (error) return <p>Error loading users</p>;
 
   return (
     <>
