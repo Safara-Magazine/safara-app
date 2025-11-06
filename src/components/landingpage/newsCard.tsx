@@ -1,7 +1,7 @@
 "use client";
 
 import { landingPageNews3 } from "@/lib/constants";
-import Image from "next/image";
+import Image from "@/components/Image";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
