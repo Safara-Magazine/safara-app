@@ -6,6 +6,7 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { generateSlug } from '@/lib/omniContents';
+import { dummyArticles } from '@/lib/constants';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -20,61 +21,61 @@ export interface Article {
   alt?: string;
 }
 
-interface ArticleFeatureProps {
+export interface ArticleFeatureProps {
   articles?: Article[];
   maxArticles?: number;
 }
 
-const DUMMY_ARTICLES: Article[] = [
-  {
-    slug: 'understanding-modern-web-development',
-    img: '/images/hompagehero.png',
-    title: 'Understanding Modern Web Development',
-    text: 'Explore the latest trends and best practices in web development, from React to Next.js and beyond.',
-    date: '29th Oct 2025',
-    alt: 'Modern web development workspace'
-  },
-  {
-    slug: 'design-systems-guide',
-    img: '/images/hompagehero.png',
-    title: 'Building Scalable Design Systems',
-    text: 'Learn how to create and maintain design systems that grow with your product.',
-    date: '28th Oct 2025',
-    alt: 'Design system components'
-  },
-  {
-    slug: 'typescript-best-practices',
-    img: '/images/hompagehero.png',
-    title: 'TypeScript Best Practices for 2025',
-    text: 'Master TypeScript with these essential tips and patterns for modern applications.',
-    date: '27th Oct 2025',
-    alt: 'TypeScript code editor'
-  },
-  {
-    slug: 'performance-optimization',
-    img: '/images/hompagehero.png',
-    title: 'Web Performance Optimization',
-    text: 'Techniques to make your website lightning fast and improve user experience.',
-    date: '26th Oct 2025',
-    alt: 'Performance metrics dashboard'
-  },
-  {
-    slug: 'accessible-web-design',
-    img: '/images/hompagehero.png',
-    title: 'Creating Accessible Web Experiences',
-    text: 'Build inclusive websites that work for everyone with these accessibility principles.',
-    date: '25th Oct 2025',
-    alt: 'Accessibility testing tools'
-  },
-  {
-    slug: 'nextjs-server-components',
-    img: '/images/hompagehero.png',
-    title: 'Next.js Server Components Deep Dive',
-    text: 'Understanding the power of React Server Components in Next.js applications.',
-    date: '24th Oct 2025',
-    alt: 'Next.js logo and code'
-  },
-];
+// const DUMMY_ARTICLES: Article[] = [
+//   {
+//     slug: 'understanding-modern-web-development',
+//     img: '/images/hompagehero.png',
+//     title: 'Understanding Modern Web Development',
+//     text: 'Explore the latest trends and best practices in web development, from React to Next.js and beyond.',
+//     date: '29th Oct 2025',
+//     alt: 'Modern web development workspace'
+//   },
+//   {
+//     slug: 'design-systems-guide',
+//     img: '/images/hompagehero.png',
+//     title: 'Building Scalable Design Systems',
+//     text: 'Learn how to create and maintain design systems that grow with your product.',
+//     date: '28th Oct 2025',
+//     alt: 'Design system components'
+//   },
+//   {
+//     slug: 'typescript-best-practices',
+//     img: '/images/hompagehero.png',
+//     title: 'TypeScript Best Practices for 2025',
+//     text: 'Master TypeScript with these essential tips and patterns for modern applications.',
+//     date: '27th Oct 2025',
+//     alt: 'TypeScript code editor'
+//   },
+//   {
+//     slug: 'performance-optimization',
+//     img: '/images/hompagehero.png',
+//     title: 'Web Performance Optimization',
+//     text: 'Techniques to make your website lightning fast and improve user experience.',
+//     date: '26th Oct 2025',
+//     alt: 'Performance metrics dashboard'
+//   },
+//   {
+//     slug: 'accessible-web-design',
+//     img: '/images/hompagehero.png',
+//     title: 'Creating Accessible Web Experiences',
+//     text: 'Build inclusive websites that work for everyone with these accessibility principles.',
+//     date: '25th Oct 2025',
+//     alt: 'Accessibility testing tools'
+//   },
+//   {
+//     slug: 'nextjs-server-components',
+//     img: '/images/hompagehero.png',
+//     title: 'Next.js Server Components Deep Dive',
+//     text: 'Understanding the power of React Server Components in Next.js applications.',
+//     date: '24th Oct 2025',
+//     alt: 'Next.js logo and code'
+//   },
+// ];
 
 export const FeatureComponent: React.FC<ArticleFeatureProps> = ({
   articles,
@@ -86,7 +87,7 @@ export const FeatureComponent: React.FC<ArticleFeatureProps> = ({
 
   const displayArticles = (articles && articles.length > 0 
     ? articles 
-    : DUMMY_ARTICLES
+    : dummyArticles
   ).slice(0, maxArticles);
 
   useEffect(() => {
@@ -252,13 +253,14 @@ export const FeatureComponent: React.FC<ArticleFeatureProps> = ({
   const [featuredArticle, ...remainingArticles] = displayArticles;
 
   return (
-    <section ref={sectionRef} className="w-full py-12 border-2 border-red-400">
+    <section ref={sectionRef} className="w-full py-12 ">
       <div className="">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Featured Article - Left Side */}
           <Link 
             ref={featuredRef}
             href={`/article/${generateSlug(featuredArticle.title)}`}
+
             className="group relative max-h-[751px]  overflow-hidden rounded-lg"
           >
             <Image
@@ -289,7 +291,7 @@ export const FeatureComponent: React.FC<ArticleFeatureProps> = ({
             {remainingArticles.map((article) => (
               <Link
                 key={article.slug}
-                href={`/article/${generateSlug(article.title)}`}
+               href={`/article/${article.slug}`}
                 className="article-card group  flex gap-2 rounded-lg shadow-md hover:bg-gray-50 hover:shadow-2xl text-[#1D1B18] transition-colors"
               >
                 {/* Article Image */}

@@ -20,6 +20,8 @@ export interface Article {
   text: string;
   alt?: string;
   category: string;
+  date?: string;  
+
 }
 
 export const landingPageHighLights: HighlightsImages[] = [
@@ -148,5 +150,57 @@ export const landingPageArticles: Article[] = [
     text: "Abuja & Lagos as Africa's Travel Hubs",
     alt: "Performance metrics dashboard",
     category: "Travel",
+  },
+];
+
+
+export const dummyArticles: Article[] = [
+  {
+    slug: "understanding-modern-web-development",
+    img: "/images/hompagehero.png",
+    title: "Understanding Modern Web Development",
+    text: "Explore the latest trends and best practices in web development, from React to Next.js and beyond.",
+    alt: "Modern web development workspace",
+    category: "Development",
+  },
+  {
+    slug: "design-systems-guide",
+    img: "/images/hompagehero.png",
+    title: "Building Scalable Design Systems",
+    text: "Learn how to create and maintain design systems that grow with your product.",
+    alt: "Design system components",
+    category: "Design",
+  },
+  {
+    slug: "typescript-best-practices",
+    img: "/images/hompagehero.png",
+    title: "TypeScript Best Practices for 2025",
+    text: "Master TypeScript with these essential tips and patterns for modern applications.",
+    alt: "TypeScript code editor",
+    category: "Development",
+  },
+  {
+    slug: "performance-optimization",
+    img: "/images/hompagehero.png",
+    title: "Web Performance Optimization",
+    text: "Techniques to make your website lightning fast and improve user experience.",
+    alt: "Performance metrics dashboard",
+    category: "Performance",
+  },
+  {
+    slug: "accessible-web-design",
+    img: "/images/hompagehero.png",
+    title: "Creating Accessible Web Experiences",
+    text: "Build inclusive websites that work for everyone with these accessibility principles.",
+    alt: "Accessibility testing tools",
+    category: "Accessibility",
+  },
+  {
+    slug: "nextjs-server-components",
+    img: "/images/hompagehero.png",
+    title: "Next.js Server Components Deep Dive",
+    text: "Understanding the power of React Server Components in Next.js applications.",
+    alt: "Next.js logo and code",
+    category: "Development",
   },
 ];

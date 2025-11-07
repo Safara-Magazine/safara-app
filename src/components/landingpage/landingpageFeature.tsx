@@ -213,7 +213,7 @@ export const LandingPageFeatureComponent: React.FC<ArticleFeatureProps> = ({
       <div className="">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 ">
           {/* Featured Article - Left Side */}
-          {/* 1. CLICKABLE CARD - Featured article with full routing */}
+          
           
           <Link 
             ref={featuredRef}
@@ -248,7 +248,7 @@ export const LandingPageFeatureComponent: React.FC<ArticleFeatureProps> = ({
           {/* Remaining Articles - Right Side */}
           <div ref={remainingArticlesRef} className="flex flex-col gap-2 max-h-[751px]">
             {remainingArticles.map((article) => (
-              // 2. CLICKABLE CARD - Remaining articles with full routing
+             
               <Link
                 key={article.slug}
                 href={`/articles/${article.slug}`}
