@@ -85,7 +85,7 @@ const Navigation: React.FC = () => {
             <div className="flex-shrink-0 z-50">
               <a href="/" className="flex items-center">
                 <img
-                  src="https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=150&h=50&fit=crop"
+                  src="/images/BrandLogo.png"
                   alt="Logo"
                   className="h-8 sm:h-10 w-auto object-contain"
                 />
