@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { ChevronDown, Menu, X } from 'lucide-react';
+import Link from 'next/link';
+import Image from 'next/image';
 
 interface DropdownItem {
   label: string;
@@ -77,39 +79,40 @@ const Navigation: React.FC = () => {
 
   return (
     <>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+      {/* <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script> */}
       <header className="bg-white/80 backdrop-blur-md border-b border-gray-200 sticky top-0 z-50 shadow-sm">
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 lg:py-4">
           <div className="flex items-center justify-between">
             {/* Logo */}
             <div className="flex-shrink-0 z-50">
-              <a href="/" className="flex items-center">
-                <img
+              <Link href="/" className="flex items-center">
+                <Image
                   src="/images/BrandLogo.png"
                   alt="Logo"
                   className="h-8 sm:h-10 w-auto object-contain"
+                  width={20}
+                  height={20}
                 />
-              </a>
+              </Link>
             </div>
 
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center space-x-6 xl:space-x-8">
-              <a
+              <Link
                 href="/"
                 className="text-base xl:text-lg text-gray-700 hover:text-gray-900 font-medium transition-colors duration-200 relative group"
               >
                 Home
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#B59157] to-[#EBB659] transition-all duration-300 group-hover:w-full"></span>
-              </a>
+              </Link>
 
-              <a
+              <Link
                 href="/about"
                 className="text-base xl:text-lg text-gray-700 hover:text-gray-900 font-medium transition-colors duration-200 relative group"
               >
                 About
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#B59157] to-[#EBB659] transition-all duration-300 group-hover:w-full"></span>
-              </a>
-
+              </Link>Link
               {/* Store Dropdown */}
               <div className="relative" ref={storeRef}>
                 <button
@@ -128,33 +131,33 @@ const Navigation: React.FC = () => {
                 {storeOpen && (
                   <div className="dropdown-menu absolute top-full left-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-100 py-2 overflow-hidden">
                     {storeItems.map((item, index) => (
-                      <a
+                      <Link
                         key={index}
                         href={item.href}
                         className="block px-5 py-3 text-gray-700 hover:bg-gradient-to-r hover:from-[#B59157]/10 hover:to-[#EBB659]/10 hover:text-gray-900 transition-all duration-150"
                       >
                         {item.label}
-                      </a>
+                      </Link>
                     ))}
                   </div>
                 )}
               </div>
 
-              <a
+              <Link
                 href="/contact"
                 className="text-base xl:text-lg text-gray-700 hover:text-gray-900 font-medium transition-colors duration-200 relative group"
               >
                 Contact
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#B59157] to-[#EBB659] transition-all duration-300 group-hover:w-full"></span>
-              </a>
+              </Link>
 
-              <a
+              <Link
                 href="/editors-note"
                 className="text-base xl:text-lg text-gray-700 hover:text-gray-900 font-medium transition-colors duration-200 relative group whitespace-nowrap"
               >
                 Editors Note
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#B59157] to-[#EBB659] transition-all duration-300 group-hover:w-full"></span>
-              </a>
+              </Link>
 
               {/* Categories Dropdown */}
               <div className="relative" ref={categoriesRef}>
@@ -174,24 +177,24 @@ const Navigation: React.FC = () => {
                 {categoriesOpen && (
                   <div className="dropdown-menu absolute top-full left-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-100 py-2 overflow-hidden">
                     {categoryItems.map((item, index) => (
-                      <a
+                      <Link
                         key={index}
                         href={item.href}
                         className="block px-5 py-3 text-gray-700 hover:bg-gradient-to-r hover:from-[#B59157]/10 hover:to-[#EBB659]/10 hover:text-gray-900 transition-all duration-150"
                       >
                         {item.label}
-                      </a>
+                      </Link>
                     ))}
                   </div>
                 )}
               </div>
 
-              <a
+              <Link
                 href="/signin"
                 className="px-5 xl:px-6 py-2 bg-gradient-to-r from-[#B59157] to-[#EBB659] text-white rounded-lg hover:shadow-lg hover:scale-105 font-medium transition-all duration-200"
               >
                 Sign In
-              </a>
+              </Link>
             </div>
 
             {/* Mobile Menu Button */}
@@ -216,24 +219,24 @@ const Navigation: React.FC = () => {
       {/* Mobile Menu - Slides from Left */}
       <div className={`lg:hidden fixed left-0 top-[57px] sm:top-[65px] bottom-0 w-72 bg-white z-50 overflow-y-auto shadow-2xl transition-transform duration-300 ease-in-out ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         <div className="px-4 py-6 space-y-4">
-          <a
+          <Link
             href="/"
             className="block text-lg text-gray-700 hover:text-gray-900 font-medium py-3 border-b border-gray-100 transition-colors"
             onClick={() => setMobileMenuOpen(false)}
           >
             Home
-          </a>
+          </Link>
 
-          <a
+          <Link
             href="/about"
             className="block text-lg text-gray-700 hover:text-gray-900 font-medium py-3 border-b border-gray-100 transition-colors"
             onClick={() => setMobileMenuOpen(false)}
           >
             About
-          </a>
+          </Link>
 
           {/* Mobile Store Dropdown */}
-          <div className="border-b border-gray-100">
+        Link<div className="border-b border-gray-100">
             <button
               onClick={() => setStoreOpen(!storeOpen)}
               className="flex items-center justify-between w-full text-lg text-gray-700 hover:text-gray-900 font-medium py-3 transition-colors"
@@ -248,34 +251,34 @@ const Navigation: React.FC = () => {
             {storeOpen && (
               <div className="pl-4 pb-3 space-y-2">
                 {storeItems.map((item, index) => (
-                  <a
+                  <Link
                     key={index}
                     href={item.href}
                     className="block text-base text-gray-600 hover:text-gray-900 py-2 transition-colors"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {item.label}
-                  </a>
+                  </Link>
                 ))}
               </div>
             )}
           </div>
 
-          <a
+          <Link
             href="/contact"
             className="block text-lg text-gray-700 hover:text-gray-900 font-medium py-3 border-b border-gray-100 transition-colors"
             onClick={() => setMobileMenuOpen(false)}
           >
             Contact
-          </a>
+          </Link>
 
-          <a
+          <Link
             href="/editors-note"
             className="block text-lg text-gray-700 hover:text-gray-900 font-medium py-3 border-b border-gray-100 transition-colors"
             onClick={() => setMobileMenuOpen(false)}
           >
             Editors Note
-          </a>
+          </Link>
 
           {/* Mobile Categories Dropdown */}
           <div className="border-b border-gray-100">
@@ -293,26 +296,26 @@ const Navigation: React.FC = () => {
             {categoriesOpen && (
               <div className="pl-4 pb-3 space-y-2">
                 {categoryItems.map((item, index) => (
-                  <a
+                  <Link
                     key={index}
                     href={item.href}
                     className="block text-base text-gray-600 hover:text-gray-900 py-2 transition-colors"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {item.label}
-                  </a>
+                  </Link>
                 ))}
               </div>
             )}
           </div>
 
-          <a
+          <Link
             href="/signin"
             className="block w-full text-center px-6 py-3 mt-6 bg-gradient-to-r from-[#B59157] to-[#EBB659] text-white rounded-lg font-medium hover:shadow-lg transition-all"
             onClick={() => setMobileMenuOpen(false)}
           >
             Sign In
-          </a>
+          </Link>
         </div>
       </div>
     </>

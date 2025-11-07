@@ -10,20 +10,20 @@ interface ArticlePageProps {
 }
 
 // For when you connect to backend later
-async function getArticleFromAPI(slug: string) {
-  try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/articles/${slug}`, {
-      next: { revalidate: 3600 }
-    });
+// async function getArticleFromAPI(slug: string) {
+//   try {
+//     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/articles/${slug}`, {
+//       next: { revalidate: 3600 }
+//     });
     
-    if (!res.ok) return null;
+//     if (!res.ok) return null;
     
-    return res.json();
-  } catch (error) {
-    console.log(error);
-    return null;
-  }
-}
+//     return res.json();
+//   } catch (error) {
+//     console.log(error);
+//     return null;
+//   }
+// }
 
 export default async function ArticlePage({ params }: ArticlePageProps) {
   // For now: using local data
