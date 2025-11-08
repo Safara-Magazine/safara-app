@@ -58,7 +58,7 @@ const ThreeCardDisplay = ({ title, titleAlignment = "left" }: Props) => {
   return (
     <>
       <DividerLine title={title} alignment={titleAlignment} />
-      <section className="grid grid-cols-1 justify-items-center md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <section className="grid grid-cols-2 justify-items-center md:grid-cols-2 lg:grid-cols-3 gap-4">
         {heroSlides.map((slide, index) => (
           <HeadlineCard
             key={index}
