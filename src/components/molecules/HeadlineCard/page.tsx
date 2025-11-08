@@ -26,7 +26,7 @@ const HeadlineCard = ({ src, headline, desc, alt, className, url }: Props) => {
       gsap.to(imageRef.current, {
         scale: 1.125,
         duration: 0.75,
-        ease: "ease-in",
+        ease: "expo.in",
       });
     }
   };
@@ -35,7 +35,7 @@ const HeadlineCard = ({ src, headline, desc, alt, className, url }: Props) => {
       gsap.to(imageRef.current, {
         scale: 1,
         duration: 0.75,
-        ease: "ease.out",
+        ease: "expo.out",
       });
     }
   };
