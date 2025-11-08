@@ -22,7 +22,7 @@ export interface Article {
   text: string;
   alt?: string;
   category: string;
-  date?: string;
+  date: string;
   content?: string;
 }
 
@@ -149,6 +149,7 @@ export const dummyArticles: Article[] = [
     text: "Explore the latest trends and best practices in web development, from React to Next.js and beyond.",
     alt: "Modern web development workspace",
     category: "Development",
+    date: "2025-08-11",
   },
   {
     slug: "design-systems-guide",
@@ -157,6 +158,7 @@ export const dummyArticles: Article[] = [
     text: "Learn how to create and maintain design systems that grow with your product.",
     alt: "Design system components",
     category: "Design",
+    date: "2025-08-11",
   },
   {
     slug: "typescript-best-practices",
@@ -165,7 +167,9 @@ export const dummyArticles: Article[] = [
     text: "Master TypeScript with these essential tips and patterns for modern applications.",
     alt: "TypeScript code editor",
     category: "Development",
+    date: "2025-08-11",
   },
+
   {
     slug: "performance-optimization",
     img: "/images/hompagehero.png",
@@ -173,6 +177,7 @@ export const dummyArticles: Article[] = [
     text: "Techniques to make your website lightning fast and improve user experience.",
     alt: "Performance metrics dashboard",
     category: "Performance",
+    date: "2025-08-11",
   },
   {
     slug: "accessible-web-design",
@@ -181,6 +186,7 @@ export const dummyArticles: Article[] = [
     text: "Build inclusive websites that work for everyone with these accessibility principles.",
     alt: "Accessibility testing tools",
     category: "Accessibility",
+    date: "2025-08-11",
   },
   {
     slug: "nextjs-server-components",
@@ -189,5 +195,6 @@ export const dummyArticles: Article[] = [
     text: "Understanding the power of React Server Components in Next.js applications.",
     alt: "Next.js logo and code",
     category: "Development",
+    date: "2025-08-11",
   },
 ];
