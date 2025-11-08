@@ -6,10 +6,11 @@ import SubCategoryHeader from "@/components/layout/Header/SubCategoryHeader";
 import SubCategorySidebar from "@/components/layout/Sidebar/SubCategorySidebar";
 import DividerLine from "@/components/molecules/DividerLine/page";
 import ThreeCardDisplay from "@/components/templates/ThreeCardDisplay/page";
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
-import { usePathname } from "next/navigation";
-import React, { useEffect, useState } from "react";
+// import { useQuery } from "@tanstack/react-query";
+// import axios from "axios";
+// import { usePathname } from "next/navigation";
+// import React, { useEffect, useState } from "react";
+import { useState } from "react";
 
 const heroSlides1: HeroSlide[] = [
   {

@@ -213,7 +213,7 @@ export const LandingPageFeatureComponent: React.FC<ArticleFeatureProps> = ({
       <div className="">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 ">
           {/* Featured Article - Left Side */}
-        
+          
           
           <Link 
             ref={featuredRef}

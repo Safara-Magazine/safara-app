@@ -1,13 +1,18 @@
 
 
+
 import { 
   landingPageHighLights, 
   landingPageNews, 
   landingPageNews2, 
   landingPageNews3 ,
-  landingPageArticles
+  landingPageArticles,
+  dummyArticles
 } from './constants';
 
+// trying something here 
+// import { Article } from '@/components/components.feature';
+// import { ArticleFeatureProps } from '@/components/components.feature';
 
 export function generateSlug(title: string) {
   return title
@@ -31,6 +36,8 @@ function normalizeHighlights(items: typeof landingPageHighLights) {
   }));
 }
 
+
+// tweaked landingPageNews to fit article structure
 function normalizeNews(items: typeof landingPageNews) {
   return items.map(item => ({
     slug: generateSlug(item.title),
@@ -51,6 +58,8 @@ export const allContent = [
   ...normalizeNews(landingPageNews2),
   ...normalizeHighlights(landingPageNews3),
   ...landingPageArticles,
+  ...dummyArticles
+  
 ];
 
 

@@ -2,7 +2,6 @@
 
 "use client";
 
-import { useGSAP } from "@gsap/react";
 import clsx from "clsx";
 import gsap from "gsap";
 import Image from "next/image";
