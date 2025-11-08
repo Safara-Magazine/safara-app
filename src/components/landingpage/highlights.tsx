@@ -22,10 +22,20 @@ export default function HighlightsSection() {
   }, []);
 
   return (
-    <div ref={containerRef} className="w-full py-8 px-4 md:px-0">
+    <div ref={containerRef} className="w-full py-8 px-4 md:px-0 my-12">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 max-w-full mx-auto">
         {landingPageHighLights.map((highlight, index) => (
-          <Link key={index} href={highlight.url}>
+            <Link
+               key={index}
+            href="/destination">
+          <div
+            key={highlight.slug || index}
+            ref={(el) => {
+              itemsRef.current[index] = el
+            }}
+            className="relative h-[300px] md:h-[378px] w-full overflow-hidden group opacity-0 translate-y-8 transition-all duration-700 ease-out"
+          >
+            {/* Background Image */}
             <div
               key={index}
               ref={(el) => {
@@ -54,7 +64,11 @@ export default function HighlightsSection() {
               {/* Hover Border Effect */}
               <div className="absolute inset-0 border-4 border-transparent group-hover:border-[#d4af8f] transition-all duration-500 pointer-events-none" />
             </div>
-          </Link>
+            
+            {/* Hover Border Effect */}
+            <div className="absolute inset-0 border-4 border-transparent group-hover:border-[#d4af8f] transition-all duration-500 pointer-events-none" />
+          </div>
+        </Link>
         ))}
       </div>
     </div>

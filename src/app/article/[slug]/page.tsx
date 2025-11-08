@@ -1,6 +1,7 @@
-import { notFound } from 'next/navigation';
-import Image from 'next/image';
+
+import Image from "@/components/Image";
 import { getContentBySlug, getAllSlugs } from '@/lib/omniContents';
+import ComingSoon from '@/components/component.comingsoon';
 
 interface ArticlePageProps {
   params: {
@@ -9,30 +10,40 @@ interface ArticlePageProps {
 }
 
 // For when you connect to backend later
-async function getArticleFromAPI(slug: string) {
-  try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/articles/${slug}`, {
-      next: { revalidate: 3600 }
-    });
+// async function getArticleFromAPI(slug: string) {
+//   try {
+//     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/articles/${slug}`, {
+//       next: { revalidate: 3600 }
+//     });
     
-    if (!res.ok) return null;
+//     if (!res.ok) return null;
     
-    return res.json();
-  } catch (error) {
-    console.log(error);
-    return null;
-  }
-}
+//     return res.json();
+//   } catch (error) {
+//     console.log(error);
+//     return null;
+//   }
+// }
 
 export default async function ArticlePage({ params }: ArticlePageProps) {
   // For now: using local data
-  const article = getContentBySlug(params.slug);
+  // const article = getContentBySlug(params.slug);
   
+   const { slug } = await params;
+  // console.log(' Looking for slug:', slug);
+
+  const article = getContentBySlug(slug);
+  // console.log(' Found article:', article);
+  
+  // delay i added to simulate loading
+   await new Promise(resolve => setTimeout(resolve, 3000));
+
   // When backend is ready
   // const article = await getArticleFromAPI(params.slug);
 
+  // handling the coming soon case
   if (!article) {
-    notFound();
+     return <ComingSoon title="Coming Soon!" />; 
   }
 
   return (
@@ -67,7 +78,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
       )}
 
       <article className="prose prose-lg max-w-none">
-        <p>{article.content}</p>
+        <p>{article.content }</p>
       </article>
     </main>
   );

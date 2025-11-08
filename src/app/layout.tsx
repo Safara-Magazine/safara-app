@@ -3,6 +3,7 @@ import "@/styles/globals.css";
 import { Afacad } from "next/font/google";
 import Footer from "@/components/component.footer";
 import Providers from "@/query/query.providers";
+import GlobalLoader from "@/components/global-loader";
 
 const afacad = Afacad({ subsets: ["latin"] });
 
@@ -19,7 +20,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${afacad.className}  antialiased `}>
-        <Providers>{children}</Providers>
+        
+        
+        {typeof window !== 'undefined' && <GlobalLoader />}
+       <Providers>{children}</Providers>
         <Footer />
       </body>
     </html>

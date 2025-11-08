@@ -1,6 +1,6 @@
 'use client';
 
-import Image from 'next/image';
+import Image from "@/components/Image";
 import Link from 'next/link';
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
@@ -209,11 +209,11 @@ export const LandingPageFeatureComponent: React.FC<ArticleFeatureProps> = ({
   const [featuredArticle, ...remainingArticles] = displayArticles;
 
   return (
-    <section ref={sectionRef} className="w-full py-12 ">
+    <section ref={sectionRef} className="w-full py-12  ">
       <div className="">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 ">
           {/* Featured Article - Left Side */}
-          {/* 1. CLICKABLE CARD - Featured article with full routing */}
+        
           
           <Link 
             ref={featuredRef}
@@ -248,10 +248,10 @@ export const LandingPageFeatureComponent: React.FC<ArticleFeatureProps> = ({
           {/* Remaining Articles - Right Side */}
           <div ref={remainingArticlesRef} className="flex flex-col gap-2 max-h-[751px]">
             {remainingArticles.map((article) => (
-              // 2. CLICKABLE CARD - Remaining articles with full routing
+             
               <Link
                 key={article.slug}
-                href={`/articles/${article.slug}`}
+                href={`/article/${article.slug}`}
                 className="article-card group  flex gap-2 rounded-lg shadow-md hover:bg-gray-50 hover:shadow-2xl text-[#1D1B18] transition-colors"
               >
                 {/* Article Image */}

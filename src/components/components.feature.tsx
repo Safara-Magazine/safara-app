@@ -1,6 +1,6 @@
 'use client';
 
-import Image from 'next/image';
+import Image from "@/components/Image";
 import Link from 'next/link';
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
@@ -252,7 +252,7 @@ export const FeatureComponent: React.FC<ArticleFeatureProps> = ({
   const [featuredArticle, ...remainingArticles] = displayArticles;
 
   return (
-    <section ref={sectionRef} className="w-full py-12 border-2 border-red-400">
+    <section ref={sectionRef} className="w-full py-12 ">
       <div className="">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Featured Article - Left Side */}
