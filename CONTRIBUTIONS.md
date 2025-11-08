@@ -1,4 +1,5 @@
 # Contributing to SAFARA
+
 This guide will help you get started with the development workflow and best practices.
 
 ## Table of Contents
@@ -22,27 +23,32 @@ This guide will help you get started with the development workflow and best prac
 ### Installation
 
 1. **Clone the repository**
+
    ```bash
    git git@github.com:Safara-Magazine/safara-app.git
    cd safara-app
    ```
 
 2. **Install pnpm** (if not already installed)
+
    ```bash
    npm install -g pnpm
    ```
 
 3. **Install dependencies**
+
    ```bash
    pnpm install
    ```
 
 4. **Set up environment variables**
+
    ```bash
    cp .env.example .env.local
    ```
 
 5. **Run the development server**
+
    ```bash
    pnpm dev
    ```
@@ -100,6 +106,7 @@ git checkout -b chore/refactor-api-service
 ```
 
 **Branch Naming Convention:**
+
 - `feature/` - New features or enhancements
 - `fix/` - Bug fixes
 - `hotfix/` - Urgent production fixes
@@ -135,6 +142,61 @@ const user: any = { ... };
 - **Dynamic imports**: Use for heavy components to improve performance
 - **Image optimization**: Always use `next/image` for images
 - **Metadata API**: Use for SEO optimization
+
+---
+
+## File Naming Conventions
+
+## General Rules
+
+- Use **clear and descriptive names** that reflect the file’s purpose.
+- Use **lowercase and dot-separated words** (e.g., `component.footer.tsx`).
+- Avoid abbreviations unless they are widely understood.
+
+## Prefix by Purpose
+
+Each file should be **prefixed by its functional category**.  
+This helps developers quickly identify a file’s purpose within the project.
+
+| **Prefix**    | **Purpose / Description**                                             | **Example Filename**                           |
+| ------------- | --------------------------------------------------------------------- | ---------------------------------------------- |
+| `component.`  | UI components (React components, layouts, reusable elements).         | `component.footer.tsx`, `component.navbar.tsx` |
+| `layout.`     | Page or section layouts.                                              | `layout.dashboard.tsx`, `layout.auth.tsx`      |
+| `page.`       | Next.js route files (optional naming for clarity).                    | `page.login.tsx`, `page.profile.tsx`           |
+| `hook.`       | Custom React hooks.                                                   | `hook.useAuth.ts`, `hook.useDebounce.ts`       |
+| `lib.`        | Utility functions, helpers, or shared logic.                          | `lib.fetchUser.ts`, `lib.formatDate.ts`        |
+| `config.`     | Configuration files (API endpoints, constants, environment settings). | `config.api.ts`, `config.theme.ts`             |
+| `store.`      | State management files (Zustand, Redux, etc.).                        | `store.user.ts`, `store.cart.ts`               |
+| `query.`      | TanStack Query functions or key definitions.                          | `query.user.ts`, `query.posts.ts`              |
+| `schema.`     | Type or validation schemas (e.g., Zod, Yup).                          | `schema.user.ts`, `schema.form.ts`             |
+| `type.`       | TypeScript type or interface definitions.                             | `type.user.ts`, `type.api.ts`                  |
+| `animation.`  | GSAP or motion animation logic.                                       | `animation.hero.ts`, `animation.menu.ts`       |
+| `icon.`       | Custom icon components or Lucide wrappers.                            | `icon.logo.tsx`, `icon.menu.tsx`               |
+| `style.`      | CSS Modules, Tailwind extensions, or styled components.               | `style.button.module.css`, `style.theme.ts`    |
+| `test.`       | Unit or integration test files.                                       | `test.user.spec.ts`, `test.api.test.ts`        |
+| `mock.`       | Mock data or API responses for testing/dev.                           | `mock.user.ts`, `mock.products.ts`             |
+| `service.`    | API interaction logic or backend integration.                         | `service.auth.ts`, `service.stripe.ts`         |
+| `context.`    | React context definitions and providers.                              | `context.theme.tsx`, `context.auth.tsx`        |
+| `middleware.` | Server-side logic or API middleware.                                  | `middleware.auth.ts`, `middleware.logger.ts`   |
+
+---
+
+## Example Project Structure
+
+```
+
+/app
+/dashboard
+component.header.tsx
+component.sidebar.tsx
+layout.dashboard.tsx
+store.dashboard.ts
+lib.fetchData.ts
+query.dashboard.ts
+animation.cards.ts
+style.dashboard.module.css
+
+```
 
 ---
 
@@ -197,6 +259,7 @@ git commit -m "fix(auth): prevent duplicate user registration
 ### Before Creating a PR
 
 1. **Ensure your branch is up to date**
+
    ```bash
    git checkout main
    git pull origin main
@@ -215,11 +278,13 @@ git commit -m "fix(auth): prevent duplicate user registration
 ### Creating a Pull Request
 
 1. **Push your branch**
+
    ```bash
    git push origin feature/your-feature-name
    ```
 
 2. **Create PR on GitHub**
+
    - Go to the repository on GitHub
    - Click "New Pull Request"
    - Select your branch
@@ -229,22 +294,27 @@ git commit -m "fix(auth): prevent duplicate user registration
 
    ```markdown
    ## Description
+
    Brief description of what this PR does
 
    ## Type of Change
+
    - [ ] Bug fix
    - [ ] New feature
    - [ ] Breaking change
    - [ ] Documentation update
 
    ## Changes Made
+
    - List key changes
    - Be specific about what was modified
 
    ## Screenshots (if applicable)
+
    Add screenshots for UI changes
 
    ## Related Issues
+
    Closes #123
    ```
 
