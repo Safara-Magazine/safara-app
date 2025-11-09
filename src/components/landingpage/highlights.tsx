@@ -27,7 +27,10 @@ export default function HighlightsSection() {
         {landingPageHighLights.map((highlight, index) => (
             <Link
                key={index}
-            href="/destination">
+            href={`/${highlight.category}`}
+
+            // for each highlight item -opens in new page based on category - interviews, destination, fashion, culture - sage
+          >
           <div
             key={highlight.slug || index}
             ref={(el) => {
