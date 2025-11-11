@@ -32,8 +32,6 @@ const heroSlides1: HeroSlide[] = [
 const Category = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  
-  
   // Data fetching snippet
   // const pathname = usePathname();
 
@@ -62,8 +60,8 @@ const Category = () => {
       <main className="px-8">
         <DividerLine title="features" />
         <FeatureComponent />
-        <ThreeCardDisplay title="regular section" />
-        <ThreeCardDisplay title="special reports" />
+        <ThreeCardDisplay title="regular section" paginationPresent={false} />
+        <ThreeCardDisplay title="special reports" paginationPresent={false} />
       </main>
     </>
   );
