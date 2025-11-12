@@ -121,7 +121,7 @@ export default function Footer() {
         <hr className="border-t border-[#B59157]" />
         <div className="pt-6">
           <p className="text-center text-gray-400 text-xs">
-            COPYRIGHT 2025 SAFARI TOURISM & TRAVELS. ALL RIGHTS RESERVED
+            COPYRIGHT 2025 SAFARA TOURISM & TRAVELS. ALL RIGHTS RESERVED
           </p>
         </div>
       </div>

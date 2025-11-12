@@ -1,5 +1,7 @@
 "use client";
 
+// Might have to change to /content-feed?cat='interviews'
+
 import HeroSlider, { HeroSlide } from "@/components/component.heroslider";
 import FeatureComponent from "@/components/components.feature";
 import SubCategoryHeader from "@/components/layout/Header/SubCategoryHeader";

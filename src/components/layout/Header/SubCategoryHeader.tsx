@@ -17,7 +17,7 @@ const SubCategoryHeader = ({ setIsSidebarOpen, isOpen }: Props) => {
   return (
     <header
       className={clsx(
-        "bg-transparent absolute z-50 px-16 py-4 flex items-center justify-between w-full",
+        "bg-transparent absolute z-50 flex items-center justify-between w-full px-4 sm:px-6 lg:px-8 py-3 lg:py-4",
         { hidden: isOpen }
       )}
     >
