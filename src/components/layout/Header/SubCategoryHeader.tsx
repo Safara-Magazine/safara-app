@@ -1,6 +1,7 @@
 import Logo from "@/icons/logo";
 import clsx from "clsx";
 import { Menu } from "lucide-react";
+import Link from "next/link";
 import React from "react";
 
 interface Props {
@@ -20,7 +21,9 @@ const SubCategoryHeader = ({ setIsSidebarOpen, isOpen }: Props) => {
         { hidden: isOpen }
       )}
     >
-      <Logo />
+      <Link href='/'>
+        <Logo />
+      </Link>
       <Menu onClick={toggleVisibility} />
     </header>
   );

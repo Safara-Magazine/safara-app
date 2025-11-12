@@ -50,7 +50,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     <main className="max-w-4xl mx-auto px-4 py-12">
       <div className="mb-8">
         <time className="text-sm text-gray-500 mb-4 block">
-          {new Date(article.date).toLocaleDateString()}
+          {new Date(article.date).toLocaleDateString() }
         </time>
         
         <h1 className="text-4xl md:text-5xl font-bold mb-6 text-[#4a2c5e]">
