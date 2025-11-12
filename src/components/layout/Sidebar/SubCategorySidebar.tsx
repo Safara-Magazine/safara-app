@@ -74,6 +74,7 @@ const SubCategorySidebar = ({ isSidebarOpen, setIsSidebarOpen }: Props) => {
           } else {
             return (
               <li
+                key={index}
                 onClick={() => setIsCategoryExpanded(!isCategoryExpanded)}
                 className="block text-lg cursor-pointer border-b border-gray-100 "
               >
