@@ -21,10 +21,14 @@ const SubCategoryHeader = ({ setIsSidebarOpen, isOpen }: Props) => {
         { hidden: isOpen }
       )}
     >
-      <Link href='/'>
+      <Link href="/">
         <Logo />
       </Link>
-      <Menu onClick={toggleVisibility} />
+      <Menu
+        color="#EAB353"
+        className="cursor-pointer transition-transform duration-200 hover:scale-110 "
+        onClick={toggleVisibility}
+      />
     </header>
   );
 };

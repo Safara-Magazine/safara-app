@@ -53,7 +53,7 @@ const Category = () => {
         setIsSidebarOpen={setIsSidebarOpen}
       />
       <SubCategorySidebar
-        isOpen={isSidebarOpen}
+        isSidebarOpen={isSidebarOpen}
         setIsSidebarOpen={setIsSidebarOpen}
       />
       <HeroSlider slides={heroSlides1} />

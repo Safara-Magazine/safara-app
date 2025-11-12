@@ -220,9 +220,9 @@ const ThreeCardDisplay = ({
       </section>
 
       {!paginationPresent && heroSlides.length > 12 ? (
-        <Link href="/full?cat=memories&sub=features">
+        <Link href="/full?cat=memories&sub=features" className="my-12 block">
           {" "}
-          <p className="text-right text-2xl my-12 hover:font-bold ">
+          <p className="text-right text-2xl hover:font-bold ">
             {" "}
             Read More{" "}
           </p>{" "}
@@ -231,7 +231,7 @@ const ThreeCardDisplay = ({
         ""
       )}
 
-      {totalPages > 1 && (
+      {paginationPresent && totalPages > 1 && (
         <div className="flex justify-center items-center gap-2 mt-8">
           {/* First and Prev */}
           <button
