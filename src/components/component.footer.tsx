@@ -49,7 +49,7 @@ export default function Footer() {
           <div className="md:col-span-1">
             <div className="mb-6">
               <div className="w-12 h-12 bg-[#d4af8f] rounded flex items-center justify-center font-bold text-[#4a2c5e] text-sm">
-                SAFARI
+                SAFARA
               </div>
             </div>
             <p className="text-sm text-gray-300 mb-4">Be the first to hear about new deals and promotions</p>

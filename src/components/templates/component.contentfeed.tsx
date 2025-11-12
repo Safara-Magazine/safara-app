@@ -1,5 +1,12 @@
 "use client";
 
+/* Displays content in a 3-card grid on desktop
+ Can customise to include pagination controls or not
+ Non paginated option includes the display of 12 cards and a read more button that 
+ takes users to a page that displays(paginated) all the articles for that particular section
+
+*/
+
 import DividerLine, {
   DividerLineAlignmet,
 } from "@/components/molecules/DividerLine/page";
@@ -9,6 +16,7 @@ import React, { useMemo, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
 import { useGSAP } from "@gsap/react";
+import clsx from "clsx";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -24,6 +32,9 @@ interface Props {
   title: string;
   titleAlignment?: DividerLineAlignmet;
   paginationPresent?: boolean;
+  numItemsDisplayed?: number;
+  cardContainerStyles?: string;
+  dividerLineStyles?: string;
 }
 
 const heroSlides: HeroSlideNew[] = [
@@ -133,14 +144,53 @@ const heroSlides: HeroSlideNew[] = [
   },
 ];
 
-const firstHeroSlides = heroSlides.slice(0, 12);
-
-const ThreeCardDisplay = ({
+const ContentFeedDisplay = ({
   title,
   titleAlignment = "left",
-  paginationPresent = true,
+  paginationPresent = false,
+  numItemsDisplayed = 12,
+  cardContainerStyles,
+  dividerLineStyles,
 }: Props) => {
   const cardContainerRef = useRef<HTMLDivElement>(null);
+
+  const firstHeroSlides = heroSlides.slice(0, numItemsDisplayed);
+
+  // Animation
+
+  useGSAP(() => {
+    if (!cardContainerRef.current) return;
+
+    const allCards = gsap.utils.toArray<HTMLElement>(
+      cardContainerRef.current.children
+    );
+
+    const rows = [];
+    for (let i = 0; i < allCards.length; i += 4) {
+      rows.push(allCards.slice(i, i + 4));
+    }
+
+    console.log(rows);
+
+    rows.forEach((row) => {
+      gsap.from(row, {
+        opacity: 0,
+        y: 40,
+        stagger: 0.1,
+        ease: "power3.out",
+        duration: 0.8,
+        scrollTrigger: {
+          trigger: row[0],
+          start: "top 85%",
+          toggleActions: "play none none reverse",
+        },
+      });
+    });
+
+    return () => ScrollTrigger.getAll().forEach((t) => t.kill());
+  }, []);
+
+  // Pagination logic
   const itemsPerPage = 6;
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(heroSlides.length / itemsPerPage);
@@ -150,50 +200,26 @@ const ThreeCardDisplay = ({
     return heroSlides.slice(start, start + itemsPerPage);
   }, [currentPage]);
 
-  useGSAP(() => {
-    if (cardContainerRef.current) {
-      const boxes: HTMLCollection[] = gsap.utils.toArray(
-        cardContainerRef.current?.children
-      );
-
-      boxes.forEach((box, index) => {
-        gsap.fromTo(
-          box,
-          { opacity: 0, y: 50, x: 50 },
-          {
-            opacity: 1,
-            y: 0,
-            x: 0,
-            delay: index * 0.1,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: box,
-              start: "top 90%",
-              end: "bottom 90%",
-              toggleActions: "play none none reverse",
-            },
-          }
-        );
-      });
-
-      return () => {
-        ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-      };
-    }
-  }, []);
-
   const goToPage = (page: number) => {
     if (page >= 1 && page <= totalPages) setCurrentPage(page);
   };
 
   return (
     <>
-      <DividerLine title={title} alignment={titleAlignment} />
+      <DividerLine
+        title={title}
+        alignment={titleAlignment}
+        styling={dividerLineStyles}
+      />
 
       <section
         ref={cardContainerRef}
-        className="grid grid-cols-1 justify-items-center md:grid-cols-2 lg:grid-cols-3 gap-y-8 gap-x-16"
+        className={clsx(
+          "grid grid-cols-1 justify-items-center md:grid-cols-2 lg:grid-cols-3 gap-y-8 gap-x-16",
+          cardContainerStyles
+        )}
       >
+        {/* Displays only the number of cards specified in numOfItemsDisplayed */}
         {!paginationPresent &&
           firstHeroSlides.map((slide, index) => (
             <HeadlineCard
@@ -206,6 +232,7 @@ const ThreeCardDisplay = ({
             />
           ))}
 
+        {/* Displays all the data it fetches */}
         {paginationPresent &&
           currentItems.map((slide, index) => (
             <HeadlineCard
@@ -219,13 +246,15 @@ const ThreeCardDisplay = ({
           ))}
       </section>
 
-      {!paginationPresent && heroSlides.length > 12 ? (
-        <Link href="/full?cat=memories&sub=features" className="my-12 block">
-          {" "}
-          <p className="text-right text-2xl hover:font-bold ">
-            {" "}
-            Read More{" "}
-          </p>{" "}
+      {/* Activated only when all the data fetched is greater than the default number set(12) */}
+      {!paginationPresent && heroSlides.length > numItemsDisplayed ? (
+        <Link
+          href="/full?cat=memories&sub=features"
+          className="my-12 text-right block"
+        >
+          <p className="relative inline-block text-[#d4af8f] font-semibold after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-0.5 after:w-0 after:bg-[#d4af8f] after:transition-all after:duration-300 hover:after:w-full">
+            Read More
+          </p>
         </Link>
       ) : (
         ""
@@ -266,7 +295,7 @@ const ThreeCardDisplay = ({
                   onClick={() => goToPage(page)}
                   className={`w-8 h-8 rounded-full ${
                     currentPage === page
-                      ? "bg-blue-500 text-white"
+                      ? "bg-[#4a2c5e] text-white"
                       : "hover:bg-gray-200"
                   }`}
                 >
@@ -313,4 +342,4 @@ const ThreeCardDisplay = ({
   );
 };
 
-export default ThreeCardDisplay;
+export default ContentFeedDisplay;

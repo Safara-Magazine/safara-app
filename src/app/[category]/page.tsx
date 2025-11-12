@@ -5,7 +5,7 @@ import FeatureComponent from "@/components/components.feature";
 import SubCategoryHeader from "@/components/layout/Header/SubCategoryHeader";
 import SubCategorySidebar from "@/components/layout/Sidebar/SubCategorySidebar";
 import DividerLine from "@/components/molecules/DividerLine/page";
-import ThreeCardDisplay from "@/components/templates/ThreeCardDisplay/page";
+import ContentFeedDisplay from "@/components/templates/component.contentfeed";
 // import { useQuery } from "@tanstack/react-query";
 // import axios from "axios";
 // import { usePathname } from "next/navigation";
@@ -60,8 +60,8 @@ const Category = () => {
       <main className="px-8">
         <DividerLine title="features" />
         <FeatureComponent />
-        <ThreeCardDisplay title="regular section" paginationPresent={false} />
-        <ThreeCardDisplay title="special reports" paginationPresent={false} />
+        <ContentFeedDisplay title="regular section" paginationPresent={false} />
+        <ContentFeedDisplay title="special reports" paginationPresent={false} />
       </main>
     </>
   );
