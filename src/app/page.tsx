@@ -21,7 +21,7 @@ const Page = () => {
         <LandingPageFeatureComponent />
         <LandingPageNews2 />
         <NewsCard />
-        <ContentFeedDisplay title={""} />
+        <ContentFeedDisplay title={"explore"} titleAlignment="right" />
         <AdsComponent />
       </div>
     </>
