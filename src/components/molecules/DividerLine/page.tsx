@@ -8,11 +8,12 @@ export type DividerLineAlignmet = "left" | "right";
 interface Props {
   title: string;
   alignment?: DividerLineAlignmet;
+  styling?: string
 }
 
-const DividerLine = ({ title, alignment = "left" }: Props) => {
+const DividerLine = ({ title, alignment = "left", styling }: Props) => {
   return (
-    <div className="flex gap-8 items-end py-12 ">
+    <div className={clsx("flex gap-8 items-end py-12 ",styling)}>
       <p
         className={clsx(
           "inline-block bg-linear-to-b from-[#B59157] to-[#EBB659] bg-clip-text text-transparent text-4xl",
