@@ -51,6 +51,30 @@ export const landingPageHighLights: HighlightsImages[] = [
     text: "Culture",
     category: "culture",
   },
+  {
+    slug: "interviews",
+    img: "/images/interviews.png",
+    text: "Interviews",
+    category: "interviews",
+  },
+  {
+    slug: "destination-highlight",
+    img: "/images/destination.png",
+    text: "Destination Highlight",
+    category: "destination",
+  },
+  {
+    slug: "fashion",
+    img: "/images/fashion.jpg",
+    text: "Fashion",
+    category: "fashion",
+  },
+  {
+    slug: "culture",
+    img: "/images/culture.png",
+    text: "Culture",
+    category: "culture",
+  },
 ];
 
 export const landingPageNews: LandingPageNews[] = [
