@@ -49,7 +49,7 @@ export default function HighlightsSection() {
   }, [currentIndex, itemsPerView]);
 
   return (
-    <div ref={containerRef} className="w-full py-8 px-4 md:px-0 my-12 ">
+    <div ref={containerRef} className="w-full overflow-hidden  py-8 px-4 md:px-0 my-12 ">
 
       {/* btn */}
       <div className="flex justify-end gap-2 mb-6 px-4 ">

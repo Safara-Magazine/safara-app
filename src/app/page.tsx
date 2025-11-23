@@ -13,10 +13,14 @@ import ContentFeedDisplay from "@/components/templates/component.contentfeed";
 const Page = () => {
   return (
     <>
+
+      <div className="overflow-x-hidden ">
       <Navigation />
       <HomePage />
       <HighlightsComponent />
-      <div className="max-w-[1400px] mx-auto flex flex-col justify-center px-4 md:px-6 lg:px-8">
+
+      </div>
+      <div className="w-full max-w-[1400px] mx-auto flex flex-col justify-center px-4 md:px-6 lg:px-8 overflow-x-hidden">
         <LandingPageNews />
         <LandingPageFeatureComponent />
         <LandingPageNews2 />

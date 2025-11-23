@@ -24,7 +24,7 @@ export const LandingPageNews = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-16 max-w-7xl mx-auto ">
+    <section ref={sectionRef} className="py-16 w-full max-w-7xl mx-auto ">
       <DividerLine title="FEATURED" />
 
       <div className="space-y-12 md:space-y-16 mb-8 md:mb-16">

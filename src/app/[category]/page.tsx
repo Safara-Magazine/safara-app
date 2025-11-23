@@ -59,7 +59,7 @@ const Category = () => {
         setIsSidebarOpen={setIsSidebarOpen}
       />
       <HeroSlider slides={heroSlides1} />
-      <main className="px-8">
+      <main className="w-full max-w-[1400px] mx-auto flex flex-col justify-center px-4 md:px-6 lg:px-8 overflow-x-hidden">
         <DividerLine title="features" />
         <FeatureComponent />
         <ContentFeedDisplay title="regular section" paginationPresent={false} />
