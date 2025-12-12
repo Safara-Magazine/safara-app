@@ -17,8 +17,6 @@ export default function SignInPage() {
     setIsLoading(true);
 
     try {
-      // TODO: Implement email/password sign-in with your backend
-      console.log('Email sign-in:', { email, password });
       alert('Email sign-in coming soon!');
     } catch (err) {
       setError('Failed to sign in. Please try again.');

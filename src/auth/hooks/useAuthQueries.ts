@@ -2,6 +2,19 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useAuthStore } from "@/store/useAuthStore";
 import { BACKEND_ENDPOINTS } from "../lib";
+import {
+  explorerSignup,
+  partnerSignup,
+  verifyOtp,
+  resendOtp,
+  adminLogin,
+  adminVerify,
+  type ExplorerSignupRequest,
+  type PartnerSignupRequest,
+  type OtpVerificationRequest,
+  type AdminLoginRequest,
+  type AdminVerifyRequest,
+} from "../lib/manualAuthService";
 
 export interface GoogleAuthResponse {
   token: string;
@@ -186,6 +199,195 @@ export const useLogout = () => {
       console.error("Logout failed:", error);
       // Still clear local state even if API call fails
       authStore.logout();
+    },
+  });
+};
+
+// ============================================================================
+// MANUAL AUTH MUTATIONS
+// ============================================================================
+
+/**
+ * Explorer signup mutation
+ */
+export const useExplorerSignup = () => {
+  const { setError, setLoading } = useAuthStore();
+
+  return useMutation({
+    mutationFn: explorerSignup,
+    onMutate: () => {
+      setLoading(true);
+    },
+    onSuccess: (data) => {
+      setError(null);
+      setLoading(false);
+      // Store email for OTP verification
+      localStorage.setItem("signupEmail", data.data.email);
+    },
+    onError: (error: any) => {
+      const errorMessage =
+        error.message || "Failed to sign up as explorer";
+      setError(errorMessage);
+      setLoading(false);
+    },
+  });
+};
+
+/**
+ * Partner signup mutation
+ */
+export const usePartnerSignup = () => {
+  const { setError, setLoading } = useAuthStore();
+
+  return useMutation({
+    mutationFn: partnerSignup,
+    onMutate: () => {
+      setLoading(true);
+    },
+    onSuccess: (data) => {
+      setError(null);
+      setLoading(false);
+      // Store email and service type for OTP verification
+      localStorage.setItem("signupEmail", data.data.email);
+      localStorage.setItem("typeOfService", data.data.typeOfService || "");
+    },
+    onError: (error: any) => {
+      const errorMessage =
+        error.message || "Failed to sign up as partner";
+      setError(errorMessage);
+      setLoading(false);
+    },
+  });
+};
+
+/**
+ * OTP verification mutation
+ */
+export const useVerifyOtp = () => {
+  const queryClient = useQueryClient();
+  const { setUser, setLoading, setError } = useAuthStore();
+
+  return useMutation({
+    mutationFn: verifyOtp,
+    onMutate: () => {
+      setLoading(true);
+    },
+    onSuccess: (data) => {
+      // Save token to localStorage
+      localStorage.setItem("authToken", data.access_token);
+
+      // Update auth store
+      setUser({
+        id: data.user.user_id,
+        email: data.user.email,
+        name: data.user.name,
+        role: data.user.role,
+      });
+
+      setError(null);
+      setLoading(false);
+
+      // Clear signup email from localStorage
+      localStorage.removeItem("signupEmail");
+      localStorage.removeItem("typeOfService");
+
+      // Invalidate user query
+      queryClient.invalidateQueries({ queryKey: ["current-user"] });
+    },
+    onError: (error: any) => {
+      const errorMessage = error.message || "Failed to verify OTP";
+      setError(errorMessage);
+      setLoading(false);
+    },
+  });
+};
+
+/**
+ * Resend OTP mutation
+ */
+export const useResendOtp = () => {
+  const { setError, setLoading } = useAuthStore();
+
+  return useMutation({
+    mutationFn: resendOtp,
+    onMutate: () => {
+      setLoading(true);
+    },
+    onSuccess: () => {
+      setError(null);
+      setLoading(false);
+    },
+    onError: (error: any) => {
+      const errorMessage = error.message || "Failed to resend OTP";
+      setError(errorMessage);
+      setLoading(false);
+    },
+  });
+};
+
+/**
+ * Admin login mutation (request password)
+ */
+export const useAdminLogin = () => {
+  const { setLoading, setError } = useAuthStore();
+
+  return useMutation({
+    mutationFn: adminLogin,
+    onMutate: () => {
+      setLoading(true);
+    },
+    onSuccess: (data) => {
+      setError(null);
+      setLoading(false);
+      // Store admin email for verification step
+      localStorage.setItem("adminEmail", data.data.email);
+    },
+    onError: (error: any) => {
+      const errorMessage = error.message || "Failed to initiate admin login";
+      setError(errorMessage);
+      setLoading(false);
+    },
+  });
+};
+
+/**
+ * Admin verify mutation (verify password)
+ */
+export const useAdminVerify = () => {
+  const queryClient = useQueryClient();
+  const { setUser, setLoading, setError } = useAuthStore();
+
+  return useMutation({
+    mutationFn: adminVerify,
+    onMutate: () => {
+      setLoading(true);
+    },
+    onSuccess: (data) => {
+      // Save token to localStorage
+      localStorage.setItem("authToken", data.access_token);
+
+      // Update auth store with admin user data
+      setUser({
+        id: data.user.user_id,
+        email: data.user.email,
+        name: data.user.name,
+        role: data.user.role,
+      });
+
+      setError(null);
+      setLoading(false);
+
+      // Clear admin email from localStorage
+      localStorage.removeItem("adminEmail");
+
+      // Invalidate user query
+      queryClient.invalidateQueries({ queryKey: ["current-user"] });
+    },
+    onError: (error: any) => {
+      const errorMessage =
+        error.message || "Failed to verify admin credentials";
+      setError(errorMessage);
+      setLoading(false);
     },
   });
 };

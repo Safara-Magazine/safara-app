@@ -8,5 +8,11 @@ export {
   useCurrentUser,
   useGoogleCallback,
   useLogout,
+  useExplorerSignup,
+  usePartnerSignup,
+  useVerifyOtp,
+  useResendOtp,
+  useAdminLogin,
+  useAdminVerify,
   type GoogleAuthResponse,
 } from "./useAuthQueries";

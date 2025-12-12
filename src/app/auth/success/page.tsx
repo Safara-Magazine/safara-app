@@ -35,7 +35,7 @@ export default function AuthSuccessPage() {
               .join('')
           );
           const decoded = JSON.parse(jsonPayload);
-          console.log('Decoded token:', decoded);
+        //   console.log('Decoded token:', decoded);
 
           if (decoded.sub || decoded.id) {
             setUser({
