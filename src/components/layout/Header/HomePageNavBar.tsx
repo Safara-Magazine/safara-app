@@ -152,6 +152,14 @@ const Navigation: React.FC = () => {
               </Link>
 
               <Link
+                href="/products"
+                className="text-base xl:text-lg text-gray-700 hover:text-gray-900 font-medium transition-colors duration-200 relative group"
+              >
+                Products
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#B59157] to-[#EBB659] transition-all duration-300 group-hover:w-full"></span>
+              </Link>
+
+              <Link
                 href="/editors-note"
                 className="text-base xl:text-lg text-gray-700 hover:text-gray-900 font-medium transition-colors duration-200 relative group whitespace-nowrap"
               >
@@ -270,6 +278,14 @@ const Navigation: React.FC = () => {
             onClick={() => setMobileMenuOpen(false)}
           >
             Contact
+          </Link>
+
+          <Link
+            href="/products"
+            className="block text-lg text-gray-700 hover:text-gray-900 font-medium py-3 border-b border-gray-100 transition-colors"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            Products
           </Link>
 
           <Link
