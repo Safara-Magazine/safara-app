@@ -17,8 +17,6 @@ import FeatureComponent from "@/components/components.feature";
 // }
 
 export default async function ArticlePage() {
-//   const articles = await getArticles(); USE WHEN API IS READY
-  
   return (
     <main>
       {/* <ArticleFeature articles={articles} /> */}

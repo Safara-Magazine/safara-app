@@ -1,11 +1,10 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useAuthStore } from '@/auth';
 
-
-export default function AuthSuccessPage() {
+function AuthSuccessContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { setUser, setError } = useAuthStore();
@@ -28,6 +27,7 @@ export default function AuthSuccessPage() {
         try {
           const base64Url = token.split('.')[1];
           const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+
           const jsonPayload = decodeURIComponent(
             atob(base64)
               .split('')
@@ -164,5 +164,13 @@ export default function AuthSuccessPage() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function AuthSuccessPage() {
+  return (
+    <Suspense>
+      <AuthSuccessContent />
+    </Suspense>
   );
 }

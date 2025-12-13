@@ -40,7 +40,20 @@ export const CACHE_TIME = {
 /**
  * Format Strapi API response to match our Article interface
  */
-export const formatStrapiArticle = (data: Record<string, unknown>) => ({
+interface StrapiArticleData {
+  id?: string;
+  documentId?: string;
+  title?: string;
+  slug?: string;
+  content?: string;
+  excerpt?: string;
+  category?: string;
+  featured_image?: { url?: string };
+  publishedAt?: string;
+  author?: { name?: string };
+}
+
+export const formatStrapiArticle = (data: StrapiArticleData) => ({
   id: data.id || data.documentId,
   title: data.title,
   slug: data.slug,
@@ -55,7 +68,17 @@ export const formatStrapiArticle = (data: Record<string, unknown>) => ({
 /**
  * Handle API errors consistently
  */
-export const handleApiError = (error: Error & { response?: unknown }): string => {
+interface ApiError extends Error {
+  response?: {
+    data?: {
+      error?: {
+        message?: string;
+      };
+    };
+  };
+}
+
+export const handleApiError = (error: ApiError): string => {
   if (error.response?.data?.error?.message) {
     return error.response.data.error.message;
   }

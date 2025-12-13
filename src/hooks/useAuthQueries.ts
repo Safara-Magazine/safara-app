@@ -125,9 +125,9 @@ export const useGoogleCallback = () => {
       // Invalidate user query
       queryClient.invalidateQueries({ queryKey: ["current-user"] });
     },
-    onError: (error: Error) => {
+    onError: (error: Error & { response?: { data?: { message?: string } } }) => {
       const errorMessage =
-        error.response?.data?.message ||
+        ((error as unknown) as { response?: { data?: { message?: string } } }).response?.data?.message ||
         error.message ||
         "Authentication failed";
 

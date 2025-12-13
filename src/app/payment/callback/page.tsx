@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { CheckCircle, AlertCircle, Loader, Home, ShoppingBag } from 'lucide-react';
@@ -18,7 +18,7 @@ interface PaymentVerification {
   };
 }
 
-export default function PaymentCallbackPage() {
+function PaymentCallbackContent() {
   const searchParams = useSearchParams();
   const reference = searchParams.get('reference');
 
@@ -197,5 +197,13 @@ export default function PaymentCallbackPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function PaymentCallbackPage() {
+  return (
+    <Suspense>
+      <PaymentCallbackContent />
+    </Suspense>
   );
 }
