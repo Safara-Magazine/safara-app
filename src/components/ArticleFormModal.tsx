@@ -374,6 +374,7 @@ export default function ArticleFormModal({
               <div className="grid grid-cols-2 gap-3">
                 {formData.images.map((image, index) => (
                   <div key={index} className="bg-gray-100 p-3 rounded-lg relative">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={image.url}
                       alt={image.altText}

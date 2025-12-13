@@ -177,6 +177,7 @@ export default function ProductsPage() {
                   <tr key={product.id} className="hover:bg-gray-50 transition">
                     <td className="px-6 py-4 whitespace-nowrap">
                       {product.image ? (
+                        // eslint-disable-next-line @next/next/no-img-element
                         <img
                           src={product.image}
                           alt={product.title}

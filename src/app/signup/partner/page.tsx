@@ -72,7 +72,7 @@ export default function PartnerSignUpPage() {
           // Redirect to OTP verification page
           router.push('/auth/verify-otp');
         },
-        onError: (error: any) => {
+        onError: (error: Error) => {
           setError(error.message || 'Failed to sign up');
         },
       }

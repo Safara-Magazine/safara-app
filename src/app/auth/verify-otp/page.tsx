@@ -69,7 +69,7 @@ export default function VerifyOtpPage() {
           // Redirect to success page
           router.push('/');
         },
-        onError: (error: any) => {
+        onError: (error: Error) => {
           setError(error.message || 'Failed to verify OTP');
         },
       }
@@ -86,7 +86,7 @@ export default function VerifyOtpPage() {
         setOtp(''); // Clear OTP input
         setError('');
       },
-      onError: (error: any) => {
+      onError: (error: Error) => {
         setError(error.message || 'Failed to resend OTP');
       },
     });
@@ -133,7 +133,7 @@ export default function VerifyOtpPage() {
               </div>
               <h1 className="text-3xl font-bold text-gray-900 mb-2">Verify Your Email</h1>
               <p className="text-gray-600">
-                We've sent a 6-digit code to <br />
+                We&apos;ve sent a 6-digit code to <br />
                 <span className="font-semibold text-gray-900">{email}</span>
               </p>
             </div>
@@ -200,7 +200,7 @@ export default function VerifyOtpPage() {
                 </button>
               ) : (
                 <p className="text-sm text-gray-600">
-                  Didn't receive the code?{' '}
+                  Didn&apos;t receive the code?{' '}
                   <button
                     type="button"
                     disabled

@@ -88,6 +88,7 @@ export default function ProductsPage() {
               {/* Image */}
               <div className="relative h-48 sm:h-64 bg-gray-200 overflow-hidden">
                 {product.image ? (
+                  // eslint-disable-next-line @next/next/no-img-element
                   <img
                     src={product.image}
                     alt={product.title}

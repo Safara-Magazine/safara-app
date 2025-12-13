@@ -36,7 +36,7 @@ export default function AdminLoginPage() {
           // Redirect to admin verification page
           router.push('/admin/login/verify');
         },
-        onError: (error: any) => {
+        onError: (error: Error) => {
           setError(error.message || 'Failed to initiate admin login');
         },
       }
@@ -139,7 +139,7 @@ export default function AdminLoginPage() {
             <div className="mt-8 p-4 bg-gray-50 rounded-lg">
               <h3 className="font-semibold text-gray-900 mb-2">What happens next?</h3>
               <ol className="text-sm text-gray-600 space-y-1 list-decimal list-inside">
-                <li>We'll send you a verification code</li>
+                <li>We&apos;ll send you a verification code</li>
                 <li>Check your email (valid for 5 minutes)</li>
                 <li>Enter the code to access your dashboard</li>
               </ol>

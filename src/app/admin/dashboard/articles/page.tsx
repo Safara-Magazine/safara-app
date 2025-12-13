@@ -196,6 +196,7 @@ export default function ArticlesPage() {
                   <tr key={article.id} className="hover:bg-gray-50 transition">
                     <td className="px-6 py-4 whitespace-nowrap">
                       {article.images && article.images.length > 0 && article.images[0]?.url ? (
+                        // eslint-disable-next-line @next/next/no-img-element
                         <img
                           src={article.images[0].url}
                           alt={article.images[0].altText || article.title}

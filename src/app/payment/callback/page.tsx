@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useSearchParams, useRouter } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { CheckCircle, AlertCircle, Loader, Home, ShoppingBag } from 'lucide-react';
 import axios from 'axios';
@@ -20,7 +20,6 @@ interface PaymentVerification {
 
 export default function PaymentCallbackPage() {
   const searchParams = useSearchParams();
-  const router = useRouter();
   const reference = searchParams.get('reference');
 
   const [verificationStatus, setVerificationStatus] = useState<'loading' | 'success' | 'error'>('loading');

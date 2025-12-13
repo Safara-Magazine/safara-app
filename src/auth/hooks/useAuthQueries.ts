@@ -9,11 +9,6 @@ import {
   resendOtp,
   adminLogin,
   adminVerify,
-  type ExplorerSignupRequest,
-  type PartnerSignupRequest,
-  type OtpVerificationRequest,
-  type AdminLoginRequest,
-  type AdminVerifyRequest,
 } from "../lib/manualAuthService";
 
 export interface GoogleAuthResponse {
@@ -167,11 +162,9 @@ export const useGoogleCallback = () => {
       // Invalidate user query
       queryClient.invalidateQueries({ queryKey: ["current-user"] });
     },
-    onError: (error: any) => {
+    onError: (error: Error) => {
       const errorMessage =
-        error.response?.data?.message ||
-        error.message ||
-        "Authentication failed";
+        error.message || "Authentication failed";
 
       setError(errorMessage);
       setLoading(false);
@@ -224,7 +217,7 @@ export const useExplorerSignup = () => {
       // Store email for OTP verification
       localStorage.setItem("signupEmail", data.data.email);
     },
-    onError: (error: any) => {
+    onError: (error: Error) => {
       const errorMessage =
         error.message || "Failed to sign up as explorer";
       setError(errorMessage);
@@ -251,7 +244,7 @@ export const usePartnerSignup = () => {
       localStorage.setItem("signupEmail", data.data.email);
       localStorage.setItem("typeOfService", data.data.typeOfService || "");
     },
-    onError: (error: any) => {
+    onError: (error: Error) => {
       const errorMessage =
         error.message || "Failed to sign up as partner";
       setError(errorMessage);
@@ -294,7 +287,7 @@ export const useVerifyOtp = () => {
       // Invalidate user query
       queryClient.invalidateQueries({ queryKey: ["current-user"] });
     },
-    onError: (error: any) => {
+    onError: (error: Error) => {
       const errorMessage = error.message || "Failed to verify OTP";
       setError(errorMessage);
       setLoading(false);
@@ -317,7 +310,7 @@ export const useResendOtp = () => {
       setError(null);
       setLoading(false);
     },
-    onError: (error: any) => {
+    onError: (error: Error) => {
       const errorMessage = error.message || "Failed to resend OTP";
       setError(errorMessage);
       setLoading(false);
@@ -342,7 +335,7 @@ export const useAdminLogin = () => {
       // Store admin email for verification step
       localStorage.setItem("adminEmail", data.data.email);
     },
-    onError: (error: any) => {
+    onError: (error: Error) => {
       const errorMessage = error.message || "Failed to initiate admin login";
       setError(errorMessage);
       setLoading(false);
@@ -388,7 +381,7 @@ export const useAdminVerify = () => {
       // Invalidate user query
       queryClient.invalidateQueries({ queryKey: ["current-user"] });
     },
-    onError: (error: any) => {
+    onError: (error: Error) => {
       const errorMessage =
         error.message || "Failed to verify admin credentials";
       setError(errorMessage);

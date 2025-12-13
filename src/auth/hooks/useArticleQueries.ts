@@ -11,9 +11,6 @@ import {
   createArticle,
   updateArticle,
   deleteArticle,
-  type ArticleStats,
-  type Article,
-  type CreateArticleRequest,
   type UpdateArticleRequest,
 } from "@/lib/services/articleService";
 import { useAuthStore } from "@/auth/store/useAuthStore";
@@ -84,7 +81,7 @@ export const useCreateArticle = () => {
       queryClient.invalidateQueries({ queryKey: ["articles"] });
       queryClient.invalidateQueries({ queryKey: ["articles", "stats"] });
     },
-    onError: (error: any) => {
+    onError: (error: Error) => {
       console.error("[useCreateArticle] Error:", error);
       const errorMessage = error.message || "Failed to create article";
       setError(errorMessage);
@@ -114,7 +111,7 @@ export const useUpdateArticle = () => {
       queryClient.invalidateQueries({ queryKey: ["articles", "stats"] });
       queryClient.invalidateQueries({ queryKey: ["articles", data.id] });
     },
-    onError: (error: any) => {
+    onError: (error: Error) => {
       console.error("[useUpdateArticle] Error:", error);
       const errorMessage = error.message || "Failed to update article";
       setError(errorMessage);
@@ -142,7 +139,7 @@ export const useDeleteArticle = () => {
       queryClient.invalidateQueries({ queryKey: ["articles"] });
       queryClient.invalidateQueries({ queryKey: ["articles", "stats"] });
     },
-    onError: (error: any) => {
+    onError: (error: Error) => {
       console.error("[useDeleteArticle] Error:", error);
       const errorMessage = error.message || "Failed to delete article";
       setError(errorMessage);

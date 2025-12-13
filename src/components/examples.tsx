@@ -7,7 +7,7 @@
 
 import { useArticles, useArticlesByCategory} from "@/hooks";
 import { useArticleStore, useUIStore } from "@/store";
-import { ReactNode } from "react";
+import Link from "next/link";
 
 // Example: Articles List Component
 export function ArticlesListExample() {
@@ -55,7 +55,6 @@ export function ArticlesListExample() {
 
 // Example: Category Filter Component
 export function CategoryFilterExample() {
-  const selectedCategory = useUIStore((state) => state.theme); // Can store selected category similarly
   const { data: articles, isLoading } = useArticlesByCategory("tech");
 
   if (isLoading) return <div>Loading category articles...</div>;
@@ -101,15 +100,15 @@ export function HeaderExample() {
       {isSidebarOpen && (
         <div className="fixed left-0 top-16 w-64 bg-gray-50 h-screen border-r">
           <nav className="p-4 space-y-2">
-            <a href="/" className="block p-2 hover:bg-gray-200 rounded">
+            <Link href="/" className="block p-2 hover:bg-gray-200 rounded">
               Home
-            </a>
-            <a href="/tech" className="block p-2 hover:bg-gray-200 rounded">
+            </Link>
+            <Link href="/tech" className="block p-2 hover:bg-gray-200 rounded">
               Tech
-            </a>
-            <a href="/business" className="block p-2 hover:bg-gray-200 rounded">
+            </Link>
+            <Link href="/business" className="block p-2 hover:bg-gray-200 rounded">
               Business
-            </a>
+            </Link>
           </nav>
         </div>
       )}

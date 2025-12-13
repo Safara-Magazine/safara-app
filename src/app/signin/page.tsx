@@ -18,7 +18,7 @@ export default function SignInPage() {
 
     try {
       alert('Email sign-in coming soon!');
-    } catch (err) {
+    } catch {
       setError('Failed to sign in. Please try again.');
     } finally {
       setIsLoading(false);
@@ -135,7 +135,7 @@ export default function SignInPage() {
 
             {/* Sign Up Link */}
             <p className="mt-8 text-center text-gray-600">
-              Don't have an account?{' '}
+              Don&apos;t have an account?{' '}
               <Link
                 href="/signup"
                 className="text-[#B59157] font-semibold hover:text-[#EBB659] transition-colors"

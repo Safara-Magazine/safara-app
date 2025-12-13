@@ -61,7 +61,7 @@ export default function AdminDashboard() {
       <div className="bg-gradient-to-r from-[#B59157] to-[#EBB659] rounded-lg p-6 text-white">
         <h2 className="text-3xl font-bold mb-2">Welcome back, {user?.name}!</h2>
         <p className="text-blue-100">
-          You're logged in as Super Admin. Manage articles, users, transactions, and more from here.
+          You&apos;re logged in as Super Admin. Manage articles, users, transactions, and more from here.
         </p>
       </div>
 

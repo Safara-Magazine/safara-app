@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Search, Mail, Phone, Clock, MoreVertical } from 'lucide-react';
+import { Search, Mail, Clock, MoreVertical } from 'lucide-react';
 
 interface Explorer {
   id: string;

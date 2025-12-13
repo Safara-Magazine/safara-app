@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useAuthStore } from '@/auth';
-import { Mail, Phone, MapPin, Save, Edit2, Eye, EyeOff } from 'lucide-react';
+import { Mail, Save, Edit2, Eye, EyeOff } from 'lucide-react';
 
 export default function ProfilePage() {
   const { user } = useAuthStore();

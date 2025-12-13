@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { ChevronLeft, Loader, ShoppingCart } from 'lucide-react';
 import CheckoutModal from '@/components/CheckoutModal';
@@ -9,7 +9,6 @@ import { getProductById, type Product } from '@/lib/services/productService';
 
 export default function ProductDetailPage() {
   const params = useParams();
-  const router = useRouter();
   const productId = params.productId as string;
 
   const [product, setProduct] = useState<Product | null>(null);
@@ -96,6 +95,7 @@ export default function ProductDetailPage() {
         {/* Image */}
         <div className="flex items-center justify-center bg-gray-100 rounded-lg overflow-hidden min-h-96">
           {product?.image ? (
+            // eslint-disable-next-line @next/next/no-img-element
             <img
               src={product.image}
               alt={product.title}

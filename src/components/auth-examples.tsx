@@ -8,7 +8,6 @@
 import { useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
-import { getAuthCodeFromUrl, redirectToGoogleLogin, isAuthenticated } from "@/lib/googleAuthService";
 import { useGoogleAuthUrl, useGoogleCallback, useAuthStore, useLogout } from "@/auth";
 
 /**

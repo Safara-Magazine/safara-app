@@ -49,7 +49,7 @@ export default function AdminVerifyPage() {
             router.push('/admin/dashboard');
           }, 500);
         },
-        onError: (error: any) => {
+        onError: (error: Error) => {
           console.log("[AdminVerifyPage] Verification failed:", error);
           setError(error.message || 'Failed to verify credentials');
         },
@@ -179,7 +179,7 @@ export default function AdminVerifyPage() {
               </div>
 
               <div className="text-center text-sm text-gray-600">
-                <p>Didn't receive the code?</p>
+                <p>Didn&apos;t receive the code?</p>
                 <Link
                   href="/admin/login"
                   className="text-[#B59157] hover:text-[#EBB659] font-semibold transition-colors"

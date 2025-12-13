@@ -3,12 +3,12 @@
 import { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useAuthStore } from '@/auth';
-import Image from 'next/image';
+
 
 export default function AuthSuccessPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { setUser, setLoading, setError } = useAuthStore();
+  const { setUser, setError } = useAuthStore();
   const [isProcessing, setIsProcessing] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -112,7 +112,7 @@ export default function AuthSuccessPage() {
             </div>
 
             <p className="text-sm text-gray-500">
-              If you're not redirected, click below
+              If you&apos;re not redirected, click below
             </p>
           </div>
         )}

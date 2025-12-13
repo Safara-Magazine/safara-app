@@ -40,7 +40,7 @@ export const CACHE_TIME = {
 /**
  * Format Strapi API response to match our Article interface
  */
-export const formatStrapiArticle = (data: any) => ({
+export const formatStrapiArticle = (data: Record<string, unknown>) => ({
   id: data.id || data.documentId,
   title: data.title,
   slug: data.slug,
@@ -55,7 +55,7 @@ export const formatStrapiArticle = (data: any) => ({
 /**
  * Handle API errors consistently
  */
-export const handleApiError = (error: any): string => {
+export const handleApiError = (error: Error & { response?: unknown }): string => {
   if (error.response?.data?.error?.message) {
     return error.response.data.error.message;
   }
