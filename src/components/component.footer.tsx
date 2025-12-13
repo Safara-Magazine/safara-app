@@ -49,7 +49,7 @@ export default function Footer() {
           <div className="md:col-span-1">
             <div className="mb-6">
               <div className="w-12 h-12 bg-[#d4af8f] rounded flex items-center justify-center font-bold text-[#4a2c5e] text-sm">
-                SAFARI
+                SAFARA
               </div>
             </div>
             <p className="text-sm text-gray-300 mb-4">Be the first to hear about new deals and promotions</p>
@@ -121,7 +121,7 @@ export default function Footer() {
         <hr className="border-t border-[#B59157]" />
         <div className="pt-6">
           <p className="text-center text-gray-400 text-xs">
-            COPYRIGHT 2025 SAFARI TOURISM & TRAVELS. ALL RIGHTS RESERVED
+            COPYRIGHT 2025 SAFARA TOURISM & TRAVELS. ALL RIGHTS RESERVED
           </p>
         </div>
       </div>

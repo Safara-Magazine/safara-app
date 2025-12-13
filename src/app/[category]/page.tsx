@@ -1,11 +1,13 @@
 "use client";
 
+// Might have to change to /content-feed?cat='interviews'
+
 import HeroSlider, { HeroSlide } from "@/components/component.heroslider";
 import FeatureComponent from "@/components/components.feature";
 import SubCategoryHeader from "@/components/layout/Header/SubCategoryHeader";
 import SubCategorySidebar from "@/components/layout/Sidebar/SubCategorySidebar";
 import DividerLine from "@/components/molecules/DividerLine/page";
-import ThreeCardDisplay from "@/components/templates/ThreeCardDisplay/page";
+import ContentFeedDisplay from "@/components/templates/component.contentfeed";
 // import { useQuery } from "@tanstack/react-query";
 // import axios from "axios";
 // import { usePathname } from "next/navigation";
@@ -32,8 +34,6 @@ const heroSlides1: HeroSlide[] = [
 const Category = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  
-  
   // Data fetching snippet
   // const pathname = usePathname();
 
@@ -55,15 +55,15 @@ const Category = () => {
         setIsSidebarOpen={setIsSidebarOpen}
       />
       <SubCategorySidebar
-        isOpen={isSidebarOpen}
+        isSidebarOpen={isSidebarOpen}
         setIsSidebarOpen={setIsSidebarOpen}
       />
       <HeroSlider slides={heroSlides1} />
       <main className="px-8">
         <DividerLine title="features" />
         <FeatureComponent />
-        <ThreeCardDisplay title="regular section" />
-        <ThreeCardDisplay title="special reports" />
+        <ContentFeedDisplay title="regular section" paginationPresent={false} />
+        <ContentFeedDisplay title="special reports" paginationPresent={false} />
       </main>
     </>
   );
