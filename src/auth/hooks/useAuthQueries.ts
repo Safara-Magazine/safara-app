@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
-import { useAuthStore } from "@/store/useAuthStore";
+import { useAuthStore } from "@/auth/store/useAuthStore";
 import { BACKEND_ENDPOINTS } from "../lib";
 import {
   explorerSignup,
@@ -363,16 +363,21 @@ export const useAdminVerify = () => {
       setLoading(true);
     },
     onSuccess: (data) => {
+      console.log("[useAdminVerify] Login successful, data:", data);
+      
       // Save token to localStorage
       localStorage.setItem("authToken", data.access_token);
 
       // Update auth store with admin user data
-      setUser({
+      const userData = {
         id: data.user.user_id,
         email: data.user.email,
         name: data.user.name,
         role: data.user.role,
-      });
+      };
+      
+      console.log("[useAdminVerify] Setting user in store:", userData);
+      setUser(userData);
 
       setError(null);
       setLoading(false);

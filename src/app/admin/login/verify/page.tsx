@@ -34,16 +34,23 @@ export default function AdminVerifyPage() {
       return;
     }
 
+    console.log("[AdminVerifyPage] Starting admin verification for:", email);
+
     adminVerify(
       { email, password },
       {
-        onSuccess: () => {
+        onSuccess: (data) => {
+          console.log("[AdminVerifyPage] Verification succeeded, data:", data);
           // Clear admin email from localStorage
           localStorage.removeItem('adminEmail');
-          // Redirect to admin dashboard
-          router.push('/admin/dashboard');
+          // Add a small delay to allow Zustand store to update
+          setTimeout(() => {
+            console.log("[AdminVerifyPage] Redirecting to dashboard");
+            router.push('/admin/dashboard');
+          }, 500);
         },
         onError: (error: any) => {
+          console.log("[AdminVerifyPage] Verification failed:", error);
           setError(error.message || 'Failed to verify credentials');
         },
       }

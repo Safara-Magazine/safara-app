@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
-import { useAuthStore } from "@/store/useAuthStore";
+import { useAuthStore } from "@/auth/store/useAuthStore";
 import { BACKEND_ENDPOINTS } from "@/lib/backendConfig";
 
 export interface GoogleAuthResponse {
