@@ -13,12 +13,12 @@ import ArticlePage from "./article/page";
 
 const Page = () => {
   return (
-    <>
+    <div className="overflow-x-hidden w-full">
       <ArticlePage />
       <Navigation />
       <HomePage />
       <HighlightsComponent />
-      <div className="max-w-[1400px] mx-auto flex flex-col justify-center px-4 md:px-6 lg:px-8">
+      <div className="max-w-[1400px] mx-auto flex flex-col justify-center px-4 md:px-6 lg:px-8 w-full">
         <LandingPageNews />
         <LandingPageFeatureComponent />
         <LandingPageNews2 />
@@ -26,7 +26,7 @@ const Page = () => {
         <ContentFeedDisplay title={"explore"} titleAlignment="right" />
         <AdsComponent />
       </div>
-    </>
+    </div>
   );
 };
 

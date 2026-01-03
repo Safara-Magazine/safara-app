@@ -17,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${afacad.className}  antialiased `}>
+      <body className={`${afacad.className} antialiased overflow-x-hidden`}>
         <RootLayoutContent>{children}</RootLayoutContent>
       </body>
     </html>

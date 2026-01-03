@@ -86,7 +86,7 @@ const HeroSlider: React.FC<HeroSliderProps> = ({
   }
 
   return (
-    <div className={`relative w-full rounded-br-4xl rounded-bl-4xl ${height} overflow-hidden ${className}`}>
+    <div className={`relative w-full max-w-full rounded-br-4xl rounded-bl-4xl ${height} overflow-hidden ${className}`}>
       {/* Background Images */}
       {slides.map((slide, index) => (
         <div
