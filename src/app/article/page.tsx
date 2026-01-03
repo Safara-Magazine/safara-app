@@ -33,10 +33,10 @@
 //  Add this page to src/app/article/page.tsx
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export default function ArticlePage() {
-  const [articles, setArticles] = useState([]);
+  // const [articles, setArticles] = useState([]);
 
   useEffect(() => {
     async function fetchArticles() {
@@ -54,7 +54,7 @@ export default function ArticlePage() {
 
         console.log("Articles fetched:", json);
         console.log("Article data:", json.data);
-        setArticles(json.data || []);
+        // setArticles(json.data || []);
       } catch (err) {
         console.error("Error fetching articles:", err);
       }

@@ -16,6 +16,7 @@ import {
   LogOut,
   Home,
   Package,
+  UsersRound,
 } from 'lucide-react';
 
 interface NavItem {
@@ -28,6 +29,7 @@ const navItems: NavItem[] = [
   { name: 'Dashboard', href: '/admin/dashboard', icon: <Home className="w-5 h-5" /> },
   { name: 'Articles', href: '/admin/dashboard/articles', icon: <FileText className="w-5 h-5" /> },
   { name: 'Products', href: '/admin/dashboard/products', icon: <Package className="w-5 h-5" /> },
+  { name: 'Team Members', href: '/admin/dashboard/team-members', icon: <UsersRound className="w-5 h-5" /> },
   { name: 'Explorers', href: '/admin/dashboard/explorers', icon: <Users className="w-5 h-5" /> },
   { name: 'Partners', href: '/admin/dashboard/partners', icon: <Briefcase className="w-5 h-5" /> },
   { name: 'Transactions', href: '/admin/dashboard/transactions', icon: <CreditCard className="w-5 h-5" /> },
