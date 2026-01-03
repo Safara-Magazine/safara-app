@@ -1,6 +1,7 @@
 // Re-export all stores for convenient importing
 export { useUIStore } from "./useUIStore";
 export { useArticleStore, type Article } from "./useArticleStore";
+export { useTeamMemberStore } from "./useTeamMemberStore";
 
 // Note: useAuthStore is now in src/auth/store/useAuthStore.ts
 // Import it directly from the auth module:
