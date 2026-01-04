@@ -26,8 +26,8 @@ export interface GoogleAuthResponse {
  */
 const getGoogleAuthUrl = async (): Promise<{ url: string }> => {
   try {
-    console.log("Fetching OAuth URL from:", BACKEND_ENDPOINTS.GOOGLE_AUTH);
-    const response = await axios.get(BACKEND_ENDPOINTS.GOOGLE_AUTH);
+    console.log("Fetching OAuth URL from:", BACKEND_ENDPOINTS.AUTH.GOOGLE_AUTH);
+    const response = await axios.get(BACKEND_ENDPOINTS.AUTH.GOOGLE_AUTH);
     console.log("OAuth URL fetched successfully:", response.data);
     
     // Backend returns google_auth_url, map it to url for consistency
@@ -44,7 +44,7 @@ const getGoogleAuthUrl = async (): Promise<{ url: string }> => {
     if (axios.isAxiosError(error)) {
       if (error.code === 'ERR_NETWORK' || !error.response) {
         throw new Error(
-          `Cannot reach backend at ${BACKEND_ENDPOINTS.GOOGLE_AUTH}. Is your backend running?`
+          `Cannot reach backend at ${BACKEND_ENDPOINTS.AUTH.GOOGLE_AUTH}. Is your backend running?`
         );
       }
       throw new Error(
@@ -59,7 +59,7 @@ const getGoogleAuthUrl = async (): Promise<{ url: string }> => {
  * Handle Google OAuth callback - GET request with code parameter
  */
 const handleGoogleCallback = async (code: string): Promise<GoogleAuthResponse> => {
-  const response = await axios.get(BACKEND_ENDPOINTS.GOOGLE_CALLBACK, {
+  const response = await axios.get(BACKEND_ENDPOINTS.AUTH.GOOGLE_CALLBACK, {
     params: { code },
   });
   return response.data;
@@ -72,7 +72,7 @@ const getCurrentUser = async (): Promise<GoogleAuthResponse["user"]> => {
   const token = localStorage.getItem("authToken");
   if (!token) throw new Error("No auth token");
 
-  const response = await axios.get(BACKEND_ENDPOINTS.ME, {
+  const response = await axios.get(BACKEND_ENDPOINTS.AUTH.ME, {
     headers: { Authorization: `Bearer ${token}` },
   });
   return response.data.user;
@@ -86,7 +86,7 @@ const logout = async (): Promise<void> => {
   if (token) {
     try {
       await axios.post(
-        BACKEND_ENDPOINTS.LOGOUT,
+        BACKEND_ENDPOINTS.AUTH.LOGOUT,
         {},
         {
           headers: { Authorization: `Bearer ${token}` },
