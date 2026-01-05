@@ -88,12 +88,12 @@ export default function ArticlePage() {
 
   return (
     <main className="px-6 py-8 max-w-7xl mx-auto">
-      {loading && <p>Loading articles...</p>}
+      {/* {loading && <p>Loading articles...</p>}
       {error && <p className="text-red-500">Error: {error}</p>}
 
       {!loading && !error && (
         <FeatureComponent articles={articles} maxArticles={6} />
-      )}
+      )} */}
     </main>
   );
 }

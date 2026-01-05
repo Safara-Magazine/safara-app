@@ -2,6 +2,10 @@
 import Image from "@/components/Image";
 import { getContentBySlug, getAllSlugs } from '@/lib/omniContents';
 import ComingSoon from '@/components/component.comingsoon';
+import { BACKEND_ENDPOINTS } from "@/auth/lib/backendConfig";
+// import axios from "axios";
+// import { useState, useEffect } from "react";
+
 
 interface ArticlePageProps {
   params: {
@@ -25,6 +29,28 @@ interface ArticlePageProps {
 //   }
 // }
 
+
+// testing this 
+async function getArticleBySlug(slug: string) {
+  try {
+    const res = await fetch(BACKEND_ENDPOINTS.ARTICLES.BY_IDENTIFIER(slug), {
+      next: { revalidate: 3600 }
+    });
+
+    // checking and receiving an article not found value --- good 
+     console.log('Response status:', res.status);
+    const data = await res.json();
+    console.log('Response data:', data);
+    
+    if (!res.ok) return null;
+    return res.json();
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
+
+
 export default async function ArticlePage({ params }: ArticlePageProps) {
   // For now: using local data
   // const article = getContentBySlug(params.slug);
@@ -32,7 +58,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
    const { slug } = await params;
   // console.log(' Looking for slug:', slug);
 
-  const article = getContentBySlug(slug);
+  const article = await getArticleBySlug(slug);
   // console.log(' Found article:', article);
   
   // delay i added to simulate loading

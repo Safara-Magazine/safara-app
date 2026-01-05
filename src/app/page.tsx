@@ -14,7 +14,7 @@ import ArticlePage from "./article/page";
 const Page = () => {
   return (
     <div className="overflow-x-hidden w-full">
-      <ArticlePage />
+      {/* <ArticlePage /> */}
       <Navigation />
       <HomePage />
       <HighlightsComponent />
