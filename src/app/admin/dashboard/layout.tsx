@@ -55,23 +55,13 @@ export default function AdminLayout({
 
   useEffect(() => {
     if (!isMounted) return;
-
-    console.log("[AdminLayout] Checking auth - user:", user, "role:", user?.role);
-
-    // Check if user is admin
     if (user?.role === 'SUPER_ADMIN') {
-      console.log("[AdminLayout] User is SUPER_ADMIN, allowing access");
       setIsAuthorized(true);
     } else if (user !== null && user?.role !== 'SUPER_ADMIN') {
-      // User is logged in but not admin
-      console.log("[AdminLayout] User is not SUPER_ADMIN, redirecting to home");
       setIsAuthorized(false);
       router.push('/');
     } else {
-      // User is not logged in, wait a moment for auth store to populate
-      console.log("[AdminLayout] No user yet, waiting for store to populate");
       const timer = setTimeout(() => {
-        console.log("[AdminLayout] After timeout - user:", user, "role:", user?.role);
         if (!user || user?.role !== 'SUPER_ADMIN') {
           setIsAuthorized(false);
           router.push('/');
