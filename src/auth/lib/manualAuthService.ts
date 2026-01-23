@@ -4,7 +4,7 @@
  */
 
 import axios from "axios";
-import { BACKEND_BASE_URL } from "./backendConfig";
+import { BACKEND_BASE_URL, BACKEND_ENDPOINTS } from "./backendConfig";
 
 // ============================================================================
 // TYPES
@@ -12,6 +12,11 @@ import { BACKEND_BASE_URL } from "./backendConfig";
 
 export interface ExplorerSignupRequest {
   name: string;
+  email: string;
+  password: string;
+}
+
+export interface SignIn {
   email: string;
   password: string;
 }
@@ -88,13 +93,13 @@ export interface AdminVerifyResponse {
 // ============================================================================
 
 export const explorerSignup = async (
-  payload: ExplorerSignupRequest
+  payload: ExplorerSignupRequest,
 ): Promise<SignupResponse> => {
   try {
     console.log("Signing up explorer:", payload.email);
     const response = await axios.post(
       `${BACKEND_BASE_URL}/api/auth/signup/explorer`,
-      payload
+      payload,
     );
     console.log("Explorer signup response:", response.data);
     return response.data;
@@ -104,7 +109,7 @@ export const explorerSignup = async (
       throw new Error(
         error.response?.data?.message ||
           error.message ||
-          "Failed to sign up as explorer"
+          "Failed to sign up as explorer",
       );
     }
     throw error;
@@ -116,13 +121,13 @@ export const explorerSignup = async (
 // ============================================================================
 
 export const partnerSignup = async (
-  payload: PartnerSignupRequest
+  payload: PartnerSignupRequest,
 ): Promise<SignupResponse> => {
   try {
     console.log("Signing up partner:", payload.email);
     const response = await axios.post(
       `${BACKEND_BASE_URL}/api/auth/signup/partner`,
-      payload
+      payload,
     );
     console.log("Partner signup response:", response.data);
     return response.data;
@@ -132,7 +137,7 @@ export const partnerSignup = async (
       throw new Error(
         error.response?.data?.message ||
           error.message ||
-          "Failed to sign up as partner"
+          "Failed to sign up as partner",
       );
     }
     throw error;
@@ -144,13 +149,13 @@ export const partnerSignup = async (
 // ============================================================================
 
 export const verifyOtp = async (
-  payload: OtpVerificationRequest
+  payload: OtpVerificationRequest,
 ): Promise<OtpVerificationResponse> => {
   try {
     console.log("Verifying OTP for:", payload.email);
     const response = await axios.post(
       `${BACKEND_BASE_URL}/api/auth/verify-otp`,
-      payload
+      payload,
     );
     console.log("OTP verification response:", response.data);
     return response.data;
@@ -160,7 +165,7 @@ export const verifyOtp = async (
       throw new Error(
         error.response?.data?.message ||
           error.message ||
-          "Failed to verify OTP"
+          "Failed to verify OTP",
       );
     }
     throw error;
@@ -176,7 +181,7 @@ export const resendOtp = async (email: string): Promise<SignupResponse> => {
     console.log("Resending OTP to:", email);
     const response = await axios.post(
       `${BACKEND_BASE_URL}/api/auth/resend-otp`,
-      { email }
+      { email },
     );
     console.log("Resend OTP response:", response.data);
     return response.data;
@@ -186,7 +191,7 @@ export const resendOtp = async (email: string): Promise<SignupResponse> => {
       throw new Error(
         error.response?.data?.message ||
           error.message ||
-          "Failed to resend OTP"
+          "Failed to resend OTP",
       );
     }
     throw error;
@@ -198,13 +203,13 @@ export const resendOtp = async (email: string): Promise<SignupResponse> => {
 // ============================================================================
 
 export const adminLogin = async (
-  payload: AdminLoginRequest
+  payload: AdminLoginRequest,
 ): Promise<AdminLoginResponse> => {
   try {
     console.log("Admin login request for:", payload.email);
     const response = await axios.post(
       `${BACKEND_BASE_URL}/api/admin/login`,
-      payload
+      payload,
     );
     console.log("Admin login response:", response.data);
     return response.data;
@@ -214,7 +219,7 @@ export const adminLogin = async (
       throw new Error(
         error.response?.data?.message ||
           error.message ||
-          "Failed to initiate admin login"
+          "Failed to initiate admin login",
       );
     }
     throw error;
@@ -226,13 +231,13 @@ export const adminLogin = async (
 // ============================================================================
 
 export const adminVerify = async (
-  payload: AdminVerifyRequest
+  payload: AdminVerifyRequest,
 ): Promise<AdminVerifyResponse> => {
   try {
     console.log("Admin verification for:", payload.email);
     const response = await axios.post(
       `${BACKEND_BASE_URL}/api/admin/login/verify`,
-      payload
+      payload,
     );
     console.log("Admin verification response:", response.data);
     return response.data;
@@ -242,7 +247,32 @@ export const adminVerify = async (
       throw new Error(
         error.response?.data?.message ||
           error.message ||
-          "Failed to verify admin credentials"
+          "Failed to verify admin credentials",
+      );
+    }
+    throw error;
+  }
+};
+
+// ============================================================================
+// MANUAL LOGIN
+// ============================================================================
+
+export const login = async (
+  payload: SignIn,
+): Promise<OtpVerificationResponse> => {
+  try {
+    console.log("Logging in user:", payload.email);
+    const response = await axios.post(BACKEND_ENDPOINTS.AUTH.LOGIN, payload, {
+      withCredentials: true,
+    });
+    console.log("Login response:", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Login error:", error);
+    if (axios.isAxiosError(error)) {
+      throw new Error(
+        error.response?.data?.message || error.message || "Failed to sign in",
       );
     }
     throw error;

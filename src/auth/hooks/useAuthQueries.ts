@@ -9,6 +9,7 @@ import {
   resendOtp,
   adminLogin,
   adminVerify,
+  login
 } from "../lib/manualAuthService";
 
 export interface GoogleAuthResponse {
@@ -384,6 +385,43 @@ export const useAdminVerify = () => {
     onError: (error: Error) => {
       const errorMessage =
         error.message || "Failed to verify admin credentials";
+      setError(errorMessage);
+      setLoading(false);
+    },
+  });
+};
+
+
+// manual login mutation
+export const useLogin = () => {
+  const queryClient = useQueryClient();
+  const { setUser, setLoading, setError } = useAuthStore();
+
+  return useMutation({
+    mutationFn: login,
+    onMutate: () => {
+      setLoading(true);
+    },
+    onSuccess: (data) => {
+      // Save token to localStorage
+      localStorage.setItem("authToken", data.access_token);
+
+      // Update auth store
+      setUser({
+        id: data.user.user_id,
+        email: data.user.email,
+        name: data.user.name,
+        role: data.user.role,
+      });
+
+      setError(null);
+      setLoading(false);
+
+      // Invalidate user query
+      queryClient.invalidateQueries({ queryKey: ["current-user"] });
+    },
+    onError: (error: Error) => {
+      const errorMessage = error.message || "Failed to sign in";
       setError(errorMessage);
       setLoading(false);
     },
