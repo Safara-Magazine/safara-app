@@ -12,6 +12,12 @@ export const BACKEND_ROUTES = {
     GOOGLE_CALLBACK: "/api/auth/google/callback",
     LOGOUT: "/api/auth/logout",
     ME: "/api/auth/me",
+    LOGIN: "/api/auth/login",
+    PARTNER: "/api/auth/signup/partner",
+    EXPLORER: "/api/auth/signup/explorer",
+    VERIFY: "/api/auth/verify-otp",
+    FGTPASS: "/api/auth/forgot-password",
+    RESETPASS: "/api/auth/reset-password"
   },
 
   ARTICLES: {
@@ -30,6 +36,12 @@ export const BACKEND_ENDPOINTS = {
     GOOGLE_CALLBACK: `${BACKEND_BASE_URL}${BACKEND_ROUTES.AUTH.GOOGLE_CALLBACK}`,
     LOGOUT: `${BACKEND_BASE_URL}${BACKEND_ROUTES.AUTH.LOGOUT}`,
     ME: `${BACKEND_BASE_URL}${BACKEND_ROUTES.AUTH.ME}`,
+    LOGIN: `${BACKEND_BASE_URL}/api/auth/login`,
+    PARTNER: `${BACKEND_BASE_URL}/api/auth/signup/partner`,
+    EXPLORER: `${BACKEND_BASE_URL}/api/auth/signup/explorer`,
+    VERIFY: `${BACKEND_BASE_URL}/api/auth/verify-otp`,
+    FGTPASS: `${BACKEND_BASE_URL}/api/auth/forgot-password`,
+    RESETPASS: `${BACKEND_BASE_URL}/api/auth/reset-password`,
   },
 
   ARTICLES: {
@@ -48,7 +60,7 @@ export const BACKEND_ENDPOINTS = {
 // Debug logging
 if (typeof window !== "undefined") {
   console.log("Backend Configuration:", {
-    BACKEND_BASE_URL,
-    BACKEND_ENDPOINTS,
+    // BACKEND_BASE_URL,
+    // BACKEND_ENDPOINTS,
   });
 }

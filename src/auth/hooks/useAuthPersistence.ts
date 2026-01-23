@@ -5,7 +5,7 @@
 
 import { useEffect } from 'react';
 import { useAuthStore } from '@/auth/store/useAuthStore';
-
+import { BACKEND_BASE_URL } from '../lib';
 export const useAuthPersistence = () => {
   const { user, setUser } = useAuthStore();
 
@@ -19,7 +19,7 @@ export const useAuthPersistence = () => {
         
         // Try to validate the token with the backend
         try {
-          const response = await fetch('http://localhost:4000/api/auth/me', {
+          const response = await fetch(`${BACKEND_BASE_URL}/api/auth/me`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
