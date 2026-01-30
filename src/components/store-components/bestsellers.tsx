@@ -1,6 +1,7 @@
 import React from "react";
 import products from "./products";
 import Link from "next/link";
+import { Heart } from "lucide-react";
 
 export default function BestSellers() {
   return (
@@ -24,27 +25,20 @@ export default function BestSellers() {
         {/* Products Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {products.map((product) => (
-            <div key={product.id} className="group cursor-pointer ">
+            <div key={product.id} className="group cursor-pointer h-[508px] rounded-[20px] border overflow-hidden">
               {/* Product Image */}
               <div
-                className="h-[365px] relative mb-4 rounded-lg overflow-hidden bg-cover bg-center hover:scale-105  duration-300 "
+                className="h-[365px] relative mb-4 rounded-lg overflow-hidden bg-cover bg-center hover:scale-105 transition duration-300"
                 style={{ backgroundImage: `url(${product.image})` }}
               >
-                <button className="absolute top-3 left-3 z-10 p-2 bg-white rounded-full shadow-md hover:bg-gray-50 transition-colors">
-                  <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
-                    <path
-                      d="M10 18s-8-5.5-8-10a4 4 0 0 1 8-3 4 4 0 0 1 8 3c0 4.5-8 10-8 10z"
-                      stroke="#333"
-                      strokeWidth="1.5"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
+                <button className="absolute top-3 left-3 z-10 p-2 bg-white rounded-md  shadow-md hover:bg-gray-50 transition-colors ">
+                  <Heart className="text-gray-800 w-5 h-5 hover:scale-105  duration-300 " />
                 </button>
               </div>
 
               {/* Product Info */}
-              <div>
-                <p className="text-[16px] text-[#6A6661] font-semibold mb-1">{product.category}</p>
+              <div className="p-[10px]">
+                <p className="text-[16px] text-[#6A6661] font-semibold  mb-1">{product.category}</p>
                 <h3 className="text-[18px] font-bold text-gray-800 mb-1">
                   {product.name}
                 </h3>
@@ -60,4 +54,4 @@ export default function BestSellers() {
   );
 }
 
-// export default BestSellers;
+
