@@ -1,5 +1,5 @@
 import React from "react";
-import {products} from "./products";
+import { products } from "./products";
 import Link from "next/link";
 import { Heart } from "lucide-react";
 
@@ -25,20 +25,32 @@ export default function BestSellers() {
         {/* Products Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {products.map((product) => (
-            <div key={product.id} className="group cursor-pointer h-[508px] rounded-[20px] border overflow-hidden">
+            <div
+              key={product.id}
+              className="group cursor-pointer  rounded-[20px] border overflow-hidden"
+            >
               {/* Product Image */}
-              <div
-                className="h-[365px] relative mb-4 rounded-lg overflow-hidden bg-cover bg-center hover:scale-105 transition duration-300"
-                style={{ backgroundImage: `url(${product.image})` }}
-              >
-                <button className="absolute top-3 left-3 z-10 p-2 bg-white rounded-md  shadow-md hover:bg-gray-50 transition-colors ">
+              <div className="relative mb-4 rounded-lg overflow-hidden">
+                {/* i'll be back to integrate endpoints and state changes  */}
+                <button className="absolute top-3 left-3 z-10 p-2 bg-white rounded-full shadow-md">
+                  {/* <svg width="18" height="18" viewBox="0 0 20 20">
+                    <path d="M10 18s-8-5.5-8-10a4 4 0 0 1 8-3 4 4 0 0 1 8 3c0 4.5-8 10-8 10z" 
+                      fill="#e74c3c" stroke="#e74c3c" strokeWidth="1.5" strokeLinejoin="round"/>
+                  </svg> */}
+
                   <Heart className="text-gray-800 w-5 h-5 hover:scale-105  duration-300 " />
                 </button>
-              </div>
 
+                <div
+                  className="h-64 flex items-center justify-center transition-transform duration-300 group-hover:scale-105 bg-cover bg-center"
+                  style={{ backgroundImage: `url(${product.image})` }}
+                ></div>
+              </div>
               {/* Product Info */}
               <div className="p-[10px]">
-                <p className="text-[16px] text-[#6A6661] font-semibold  mb-1">{product.category}</p>
+                <p className="text-[16px] text-[#6A6661] font-semibold  mb-1">
+                  {product.category}
+                </p>
                 <h3 className="text-[18px] font-bold text-gray-800 mb-1">
                   {product.name}
                 </h3>
@@ -53,5 +65,3 @@ export default function BestSellers() {
     </section>
   );
 }
-
-

@@ -61,7 +61,7 @@ export const newProducts: Product[] = [
     },
     {
       id: 4,
-      name: 'Safara magazine Issue 20',
+      name: 'Safara Magazine Issue 20',
       category: 'ENTERTAINMENT',
       price: '₦2,000',
       image: '/images/safara-pack.png'
