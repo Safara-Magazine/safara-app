@@ -1,5 +1,5 @@
 import React from "react";
-import products from "./products";
+import {products} from "./products";
 import Link from "next/link";
 import { Heart } from "lucide-react";
 

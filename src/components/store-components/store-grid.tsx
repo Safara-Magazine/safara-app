@@ -36,7 +36,7 @@ export default function DealsSection() {
           <div className="flex flex-col text-white md:gap-2 gap-0">
             {/* 1 */}
 
-            <div className=" bg-[url('/images/store-grid-2.png')] bg-center bg-cover md:rounded-xl   md:p-8 p-4 flex-1 relative flex flex-col justify-center hover:shadow-lg transition-shadow cursor-pointer overflow-hidden">
+            <div className=" bg-[url('/images/store-grid-2.png')] bg-center bg-cover md:rounded-xl   md:p-8 p-4 flex-1 relative flex flex-col justify-center hover:shadow-lg transition-shadow  overflow-hidden">
 
               {/* small screen */}
             <div className='md:hidden items-end justify-end flex block h-[189px]  z-20'>
@@ -55,14 +55,14 @@ export default function DealsSection() {
               </p>
 
 
-              <button className="hidden md:block md:text-[14px] bg-white text-[#2F1C32] h-[26px] w-[118px] rounded-full font-medium text-sm hover:bg-[#2F1C32] hover:text-white transition-colors ">
+              <button className="hidden md:block md:text-[14px] bg-white text-[#2F1C32] h-[26px] w-[118px] rounded-full font-medium text-sm hover:bg-[#2F1C32] hover:text-white transition-colors transition-transform duration-300 hover:scale-105 cursor-pointer">
                 Shop Now
               </button>
             </div>
             </div>
 
             {/* 2 */}
-            <div className="bg-[url('/images/store-grid-3.png')] md:rounded-xl md:p-8 p-4 flex-1 flex flex-col justify-center hover:shadow-lg transition-shadow cursor-pointer bg-cover bg-center relative overflow-hidden">
+            <div className="bg-[url('/images/store-grid-3.png')] md:rounded-xl md:p-8 p-4 flex-1 flex flex-col justify-center hover:shadow-lg transition-shadow  bg-cover bg-center relative overflow-hidden">
 
               {/* small screen */}
             <div className='md:hidden block h-[189px] justify-end flex flex-col max-w-[152px] z-20'>
@@ -70,7 +70,7 @@ export default function DealsSection() {
 
                    {/* btn */}
 
-              <button className="bg-white text-[#2F1C32] px-6 py-2.5 rounded-full font-medium text-sm hover:bg-[#2F1C32]  hover:text-white transition- colors ">
+              <button className="bg-white text-[#2F1C32] px-6 py-2.5 rounded-full font-medium text-sm hover:bg-[#2F1C32]  hover:text-white transition- colors transition-transform duration-300 hover:scale-105 ">
                 Start Shopping
               </button>
             </div>
@@ -84,7 +84,7 @@ export default function DealsSection() {
               <p className=" text-sm md:text-[18px] mb-6">
                 Explore the world with Safara’s exclusive packages.
               </p>
-              <button className="bg-white text-[#2F1C32] px-6 py-2.5 rounded-full font-medium text-sm hover:bg-[#2F1C32]  hover:text-white transition-colors ">
+              <button className="bg-white text-[#2F1C32] px-6 py-2.5 rounded-full font-medium text-sm hover:bg-[#2F1C32]  hover:text-white transition-colors transition-transform duration-300 hover:scale-105 cursor-pointer">
                 Explore Our Exclusive Packages
               </button>
 

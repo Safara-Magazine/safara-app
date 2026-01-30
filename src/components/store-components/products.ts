@@ -6,7 +6,7 @@ export interface Product {
   image: string;
 }
 
-const products: Product[] = [
+ export const products: Product[] = [
   {
     id: 1,
     name: "White T-Shirt",
@@ -37,4 +37,33 @@ const products: Product[] = [
   },
 ];
 
-export default products;
+export const newProducts: Product[] = [
+     {
+    id: 1,
+    name: "White T-Shirt",
+    category: "APPAREL",
+    price: "₦6,600",
+    image: "/images/safara-shirt.png",
+  },
+    {
+      id: 2,
+      name: 'Safara Ball-Point Pen',
+      category: 'STATIONERY',
+      price: '₦700',
+      image: '/images/pen-image.png'
+    },
+    {
+      id: 3,
+      name: 'Safara Premium Tote Bag',
+      category: 'APPAREL',
+      price: '₦4,500',
+      image: '/images/tote-bag.png'
+    },
+    {
+      id: 4,
+      name: 'Safara magazine Issue 20',
+      category: 'ENTERTAINMENT',
+      price: '₦2,000',
+      image: '/images/safara-pack.png'
+    }
+  ];
