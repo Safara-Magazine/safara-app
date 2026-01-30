@@ -52,6 +52,38 @@ export const landingPageHighLights: HighlightsImages[] = [
     category: "culture",
   },
 ];
+export const storeHighLights: HighlightsImages[] = [
+  {
+    slug: "apparels",
+    img: "/images/apparel.png",
+    text: "Apparels",
+    category: "apparels",
+  },
+  {
+    slug: "home-and-living",
+    img: "/images/home-living.png",
+    text: "Home & Living",
+    category: "home-and-living",
+  },
+  {
+    slug: "stationery",
+    img: "/images/stationary.png",
+    text: "Stationaries",
+    category: "stationery",
+  },
+  {
+    slug: "travel-packages",
+    img: "/images/travel-packages.png",
+    text: "Travel Packages",
+    category: "travel-packages",
+  },
+  {
+    slug: "consultations",
+    img: "/images/consultations.png",
+    text: "Consultations",
+    category: "consultations",
+  },
+];
 
 export const landingPageNews: LandingPageNews[] = [
   {
