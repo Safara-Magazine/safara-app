@@ -5,7 +5,7 @@ import { Heart } from "lucide-react";
 
 export default function BestSellers() {
   return (
-    <section className="py-16 bg-white">
+    <section id="best-sellers" className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-5">
         {/* Section Header */}
         <div className="flex justify-between items-center mb-8">
