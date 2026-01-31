@@ -18,8 +18,8 @@ const Navigation: React.FC = () => {
   const categoriesRef = useRef<HTMLDivElement>(null);
 
   const storeItems: DropdownItem[] = [
-    { label: 'New Arrivals', href: '/store/new' },
-    { label: 'Best Sellers', href: '/store/best-sellers' },
+    { label: 'New Arrivals', href: '/store?section=new' },
+    { label: 'Best Sellers', href: '/store?section=best-sellers' },
     { label: 'Sale', href: '/store/sale' },
     { label: 'Collections', href: '/store/collections' },
   ];
@@ -113,6 +113,7 @@ const Navigation: React.FC = () => {
                 About
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#B59157] to-[#EBB659] transition-all duration-300 group-hover:w-full"></span>
               </Link>
+              
               {/* Store Dropdown */}
               <div className="relative" ref={storeRef}>
                 <button
@@ -135,6 +136,7 @@ const Navigation: React.FC = () => {
                         key={index}
                         href={item.href}
                         className="block px-5 py-3 text-gray-700 hover:bg-gradient-to-r hover:from-[#B59157]/10 hover:to-[#EBB659]/10 hover:text-gray-900 transition-all duration-150"
+                        scroll
                       >
                         {item.label}
                       </Link>

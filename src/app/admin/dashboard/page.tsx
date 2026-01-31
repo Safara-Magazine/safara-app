@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { useAuthStore } from '@/auth';
+import { useArticleStats } from '@/auth/hooks/useArticleQueries';
+
 import {
   FileText,
   Users,
@@ -22,39 +24,44 @@ export default function AdminDashboard() {
   const { user } = useAuthStore();
   const [isMounted, setIsMounted] = useState(false);
 
+  // real time stats 
+  const { data: articleStats, isLoading: statsLoading } = useArticleStats();
+
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
   if (!isMounted) return null;
 
-  const stats: StatCard[] = [
+   const stats: StatCard[] = [
     {
       title: 'Total Articles',
-      value: '1,234',
-      change: '+12% from last month',
+      value: statsLoading ? '...' : articleStats?.total.toString() || '0',
+      change: statsLoading 
+        ? 'Loading...' 
+        : `${articleStats?.published || 0} published, ${articleStats?.draft || 0} drafts`,
       icon: <FileText className="w-8 h-8 text-blue-600" />,
     },
     {
+      title: 'Total Views',
+      value: statsLoading ? '...' : articleStats?.totalViews.toLocaleString() || '0',
+      change: 'Across all articles',
+      icon: <TrendingUp className="w-8 h-8 text-green-600" />,
+    },
+    {
       title: 'Active Explorers',
-      value: '5,678',
+      value: '5,678', // TODO: Replace when user stats endpoint is ready
       change: '+8% from last month',
       icon: <Users className="w-8 h-8 text-green-600" />,
     },
     {
       title: 'Active Partners',
-      value: '234',
+      value: '234', // TODO: Replace when partner stats endpoint is ready
       change: '+5% from last month',
       icon: <Briefcase className="w-8 h-8 text-purple-600" />,
     },
-    {
-      title: 'Total Transactions',
-      value: '₦2.4M',
-      change: '+18% from last month',
-      icon: <CreditCard className="w-8 h-8 text-orange-600" />,
-    },
   ];
-
+  
   return (
     <div className="space-y-8">
       {/* Welcome Section */}

@@ -1,28 +1,40 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import Link from 'next/link';
-import { GoogleLoginButton } from '@/auth';
-import Image from 'next/image';
+import { useState } from "react";
+import Link from "next/link";
+import { GoogleLoginButton } from "@/auth";
+import Image from "next/image";
+import { BACKEND_ENDPOINTS } from "@/auth/lib/backendConfig";
+import { useLogin } from "@/auth/hooks/useAuthQueries";
+import { useRouter } from "next/navigation";
 
 export default function SignInPage() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+  const { mutate: loginUser, isPending } = useLogin();
 
   const handleEmailSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
-    setIsLoading(true);
+    setError("");
 
-    try {
-      alert('Email sign-in coming soon!');
-    } catch {
-      setError('Failed to sign in. Please try again.');
-    } finally {
-      setIsLoading(false);
-    }
+    loginUser(
+      {
+        email,
+        password,
+      },
+      {
+        onSuccess: () => {
+          // Redirect to home page
+          router.push("/");
+        },
+        onError: (error: Error) => {
+          setError(error.message || "Failed to sign in");
+        },
+      },
+    );
   };
 
   return (
@@ -57,7 +69,7 @@ export default function SignInPage() {
 
             {/* Error Message */}
             {error && (
-              <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm">
+              <div className="mb-6 text-center p-4 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm">
                 {error}
               </div>
             )}
@@ -75,7 +87,9 @@ export default function SignInPage() {
             {/* Divider */}
             <div className="flex items-center my-8">
               <div className="flex-1 border-t border-gray-300"></div>
-              <span className="px-4 text-sm text-gray-600">Or continue with email</span>
+              <span className="px-4 text-sm text-gray-600">
+                Or continue with email
+              </span>
               <div className="flex-1 border-t border-gray-300"></div>
             </div>
 
@@ -83,7 +97,10 @@ export default function SignInPage() {
             <form onSubmit={handleEmailSignIn} className="space-y-4">
               {/* Email Input */}
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-gray-700 mb-2"
+                >
                   Email Address
                 </label>
                 <input
@@ -99,7 +116,10 @@ export default function SignInPage() {
 
               {/* Password Input */}
               <div>
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium text-gray-700 mb-2"
+                >
                   Password
                 </label>
                 <input
@@ -129,13 +149,13 @@ export default function SignInPage() {
                 disabled={isLoading}
                 className="w-full py-2.5 bg-gradient-to-r from-[#B59157] to-[#EBB659] text-white rounded-lg hover:shadow-lg font-medium transition-all duration-200 disabled:opacity-50"
               >
-                {isLoading ? 'Signing in...' : 'Sign In'}
+                {isLoading ? "Signing in..." : "Sign In"}
               </button>
             </form>
 
             {/* Sign Up Link */}
             <p className="mt-8 text-center text-gray-600">
-              Don&apos;t have an account?{' '}
+              Don&apos;t have an account?{" "}
               <Link
                 href="/signup"
                 className="text-[#B59157] font-semibold hover:text-[#EBB659] transition-colors"
@@ -148,11 +168,17 @@ export default function SignInPage() {
           {/* Footer Links */}
           <div className="mt-8 text-center text-sm text-gray-600 space-y-2">
             <p>
-              <Link href="/privacy" className="hover:text-gray-900 transition-colors">
+              <Link
+                href="/privacy"
+                className="hover:text-gray-900 transition-colors"
+              >
                 Privacy Policy
               </Link>
-              {' · '}
-              <Link href="/terms" className="hover:text-gray-900 transition-colors">
+              {" · "}
+              <Link
+                href="/terms"
+                className="hover:text-gray-900 transition-colors"
+              >
                 Terms of Service
               </Link>
             </p>
