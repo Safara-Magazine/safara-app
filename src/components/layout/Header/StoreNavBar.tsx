@@ -1,12 +1,63 @@
 "use client"
 
-import React, { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { ChevronDown, Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 
+interface DropdownItem {
+  label: string;
+  href: string;
+}
+
 const StoreNavigation: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [storeOpen, setStoreOpen] = useState(false);
+const storeRef = useRef<HTMLDivElement>(null);
+
+
+const storeItems: DropdownItem[] = [
+    { label: 'Merch', href: '/store?section=merch' },
+    { label: 'Bookings', href: '/store?section=bookings' },
+  ];
+
+  useEffect(() => {
+      const handleClickOutside = (event: MouseEvent) => {
+        if (storeRef.current && !storeRef.current.contains(event.target as Node)) {
+          setStoreOpen(false);
+        }
+      
+      };
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => {
+        document.removeEventListener('mousedown', handleClickOutside);
+      };
+    }, [storeRef]);
+
+  
+    useEffect(() => {
+      if (typeof window !== 'undefined' && window.gsap) {
+        const gsap = window.gsap;
+  
+        if (storeOpen && storeRef.current) {
+          const dropdown = storeRef.current.querySelector('.dropdown-menu');
+          gsap.fromTo(
+            dropdown,
+            { opacity: 0, y: -10 },
+            { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' }
+          );
+        }
+        else if (storeRef.current) {
+          const dropdown = storeRef.current.querySelector('.dropdown-menu');
+          gsap.to(dropdown, {
+            opacity: 0,
+            y: -10,
+            duration: 0.2,
+            ease: 'power2.in',
+          });
+        }
+      }
+    }, [storeOpen]);
 
   useEffect(() => {
     if (mobileMenuOpen) {
@@ -48,15 +99,156 @@ const StoreNavigation: React.FC = () => {
       {/* Mobile Menu Overlay */}
       {mobileMenuOpen && (
         <div 
-          className="fixed inset-0 bg-black/50 z-40 top-[200px] sm:top-[65px]"
+          className="fixed inset-0 bg-black/50 z-40"
           onClick={() => setMobileMenuOpen(false)}
         />
       )}
 
-      {/* Mobile Menu - Slides from Left */}
-      <div className={`fixed left-0 top-[57px] sm:top-[65px] bottom-0 w-72 bg-white z-50 overflow-y-auto shadow-2xl transition-transform duration-300 ease-in-out ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
-        <div className="px-4 py-6 space-y-4">
-          {/* Add your menu items here */}
+      {/* Mobile Menu  */}
+      <div className={`fixed left-0 top-0 h-screen w-80 bg-white z-50 overflow-y-auto shadow-2xl transition-transform duration-300 ease-in-out ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+        <div className="py-6">
+
+          {/* Home */}
+          <Link
+            href="/"
+            className="block px-6 py-4 text-gray-800 hover:bg-gray-50 transition-colors text-base"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            Home
+          </Link>
+
+          {/* About */}
+          <Link
+            href="/about"
+            className="block px-6 py-4 text-gray-800 hover:bg-gray-50 transition-colors text-base border-t border-gray-100"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            About
+          </Link>
+
+       
+          
+              {/* Store Dropdown */}
+              <div className="border-t border-gray-100" ref={storeRef}>
+                <button
+                  onClick={() => setStoreOpen(!storeOpen)}
+                  className="flex items-center justify-between w-full px-6 py-4 text-gray-800 hover:bg-gray-50 transition-colors text-base"
+                >
+                  <span>Store</span>
+                  <ChevronDown
+                    className={`w-5 h-5 transition-transform duration-200 ${
+                  storeOpen ? 'rotate-180' : ''
+                }`}
+                  />
+
+                  
+                </button>
+
+                {storeOpen && (
+                  <div className="">
+                    {storeItems.map((item, index) => (
+                      <Link
+                        key={index}
+                        href={item.href}
+                        className="block px-12 py-3 text-gray-500 hover:text-gray-800 transition-colors text-sm"
+                        scroll
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+          {/* Contact us */}
+          <Link
+            href="/contact"
+            className="block px-6 py-4 text-gray-800 hover:bg-gray-50 transition-colors text-base border-t border-gray-100"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            Contact us
+          </Link>
+
+          {/* Destination Highlights */}
+          <Link
+            href="/destination-highlights"
+            className="block px-6 py-4 text-gray-800 hover:bg-gray-50 transition-colors text-base border-t border-gray-100"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            Destination Highlights
+          </Link>
+
+          {/* Taste of Naija */}
+          <Link
+            href="/taste-of-naija"
+            className="block px-6 py-4 text-gray-800 hover:bg-gray-50 transition-colors text-base border-t border-gray-100"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            Taste of Naija
+          </Link>
+
+          {/* Lifestyle */}
+          <Link
+            href="/lifestyle"
+            className="block px-6 py-4 text-gray-800 hover:bg-gray-50 transition-colors text-base border-t border-gray-100"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            Lifestyle
+          </Link>
+
+          {/* Fashion */}
+          <Link
+            href="/fashion"
+            className="block px-6 py-4 text-gray-800 hover:bg-gray-50 transition-colors text-base border-t border-gray-100"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            Fashion
+          </Link>
+
+          {/* Interviews */}
+          <Link
+            href="/interviews"
+            className="block px-6 py-4 text-gray-800 hover:bg-gray-50 transition-colors text-base border-t border-gray-100"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            Interviews
+          </Link>
+
+          {/* Events */}
+          <Link
+            href="/events"
+            className="block px-6 py-4 text-gray-800 hover:bg-gray-50 transition-colors text-base border-t border-gray-100"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            Events
+          </Link>
+
+          {/* Culture */}
+          <Link
+            href="/culture"
+            className="block px-6 py-4 text-gray-800 hover:bg-gray-50 transition-colors text-base border-t border-gray-100"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            Culture
+          </Link>
+
+          {/* Original Content */}
+          <Link
+            href="/original-content"
+            className="block px-6 py-4 text-gray-800 hover:bg-gray-50 transition-colors text-base border-t border-gray-100"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            Original Content
+          </Link>
+
+          {/* Travel tips & Guides */}
+          <Link
+            href="/travel-tips"
+            className="block px-6 py-4 text-gray-800 hover:bg-gray-50 transition-colors text-base border-t border-gray-100"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            Travel tips & Guides
+          </Link>
         </div>
       </div>
     </>

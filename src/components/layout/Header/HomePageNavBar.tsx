@@ -113,6 +113,7 @@ const Navigation: React.FC = () => {
                 About
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#B59157] to-[#EBB659] transition-all duration-300 group-hover:w-full"></span>
               </Link>
+              
               {/* Store Dropdown */}
               <div className="relative" ref={storeRef}>
                 <button

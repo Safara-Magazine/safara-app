@@ -8,7 +8,7 @@ import NewArrivals from "@/components/store-components/new-arrivals";
 import StoreNavigation from "@/components/layout/Header/StoreNavBar";
 
 import { useSearchParams } from "next/navigation";
-import { use, useEffect } from "react";
+import { useEffect } from "react";
 
 export default function Store() {
 
