@@ -10,7 +10,7 @@ import { BACKEND_ENDPOINTS } from "@/auth/lib/backendConfig";
  */
 export const initGoogleAuth = async (): Promise<string> => {
   try {
-    const response = await fetch(BACKEND_ENDPOINTS.GOOGLE_AUTH);
+    const response = await fetch(BACKEND_ENDPOINTS.AUTH.GOOGLE_AUTH);
     if (!response.ok) {
       throw new Error("Failed to get Google auth URL");
     }
@@ -29,7 +29,7 @@ export const initGoogleAuth = async (): Promise<string> => {
 export const handleGoogleOAuthCallback = async (code: string) => {
   try {
     const response = await fetch(
-      `${BACKEND_ENDPOINTS.GOOGLE_CALLBACK}?code=${encodeURIComponent(code)}`
+      `${BACKEND_ENDPOINTS.AUTH.GOOGLE_CALLBACK}?code=${encodeURIComponent(code)}`
     );
 
     if (!response.ok) {

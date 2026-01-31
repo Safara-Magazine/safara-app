@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState, useEffect, useRef } from 'react';
-import { ChevronDown, Menu, X } from 'lucide-react';
+import { ChevronDown, Menu, X, Search, User, Heart, ShoppingCart } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -86,12 +86,39 @@ const storeItems: DropdownItem[] = [
             </div>
 
             {/* mobile menu btn */}
+            <div className='flex'>
+
+              {/* search */}
+             <button className='hidden md:block z-50 p-2 text-gray-700 hover:text-gray-900 transition-colors'>
+               <Search className="w-6 h-6" />
+            </button>
+
+              {/* user */}
+             <button className='hidden md:block z-50 p-2 text-gray-700 hover:text-gray-900 transition-colors'>
+               <User className="w-6 h-6" />
+            </button>
+
+              {/* wishlist */}
+             <button className='hidden md:block z-50 p-2 text-gray-700 hover:text-gray-900 transition-colors'>
+               <Heart className="w-6 h-6" />
+            </button>
+
+              {/* cart */}
+             <button className='hidden md:block z-50 p-2 text-gray-700 hover:text-gray-900 transition-colors'>
+               <ShoppingCart className="w-6 h-6" />
+            </button>
+
+           
+
+            {/* hamburger icon */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="z-50 p-2 text-gray-700 hover:text-gray-900 transition-colors"
-            >
+              >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
+
+            </div>
           </div>
         </nav>
       </header>
