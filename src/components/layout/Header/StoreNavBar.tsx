@@ -69,9 +69,9 @@ const storeItems: DropdownItem[] = [
 
   return (
     <>
-      <header className="bg-white/80 md:px-[44px] backdrop-blur-md border-b border-gray-200 fixed top-0 left-0 right-0 z-50 shadow-sm">
-        <nav className="px-10 sm:px-6 lg:px-8 py-3 lg:py-3">
-          <div className="flex items-center justify-between">
+      <header className="bg-white  md:px-[44px] backdrop-blur-md border-b border-gray-200 fixed top-0 left-0 right-0 z-50 shadow-sm">
+        <nav className="px-10 max-w-7xl mx-auto  sm:px-6 lg:px-8 py-3 lg:py-3">
+          <div className="flex items-center justify-between ">
             {/* Logo */}
             <div className="flex-shrink-0 z-50">
               <Link href="/" className="flex items-center">
@@ -105,13 +105,13 @@ const storeItems: DropdownItem[] = [
       )}
 
       {/* Mobile Menu  */}
-      <div className={`fixed left-0 top-0 h-screen w-80 bg-white z-50 overflow-y-auto shadow-2xl transition-transform duration-300 ease-in-out ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
-        <div className="py-6">
+      <div className={`fixed scrollbar-hide left-0 top-0 h-screen md:w-90 w-70 bg-white z-50 overflow-y-auto shadow-2xl transition-transform duration-300  font-semibold ease-in-out ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+        <div className="p-[24px] ">
 
           {/* Home */}
           <Link
             href="/"
-            className="block px-6 py-4 text-gray-800 hover:bg-gray-50 transition-colors text-base"
+            className="block px-6 py-4 text-[#262320] hover:bg-gray-50 transition-colors text-[16px]"
             onClick={() => setMobileMenuOpen(false)}
           >
             Home
@@ -120,7 +120,7 @@ const storeItems: DropdownItem[] = [
           {/* About */}
           <Link
             href="/about"
-            className="block px-6 py-4 text-gray-800 hover:bg-gray-50 transition-colors text-base border-t border-gray-100"
+            className="block px-6 py-4 text-[#262320] hover:bg-gray-50 transition-colors text-[16px] border-t border-gray-100"
             onClick={() => setMobileMenuOpen(false)}
           >
             About
@@ -132,7 +132,7 @@ const storeItems: DropdownItem[] = [
               <div className="border-t border-gray-100" ref={storeRef}>
                 <button
                   onClick={() => setStoreOpen(!storeOpen)}
-                  className="flex items-center justify-between w-full px-6 py-4 text-gray-800 hover:bg-gray-50 transition-colors text-base"
+                  className="flex items-center justify-between w-full px-6 py-4 text-[#262320] hover:bg-gray-50 transition-colors text-[16px]"
                 >
                   <span>Store</span>
                   <ChevronDown
@@ -150,7 +150,7 @@ const storeItems: DropdownItem[] = [
                       <Link
                         key={index}
                         href={item.href}
-                        className="block px-12 py-3 text-gray-500 hover:text-gray-800 transition-colors text-sm"
+                        className="block px-12 py-3 text-gray-500 hover:text-[#262320] transition-colors text-sm"
                         scroll
                       >
                         {item.label}
@@ -163,7 +163,7 @@ const storeItems: DropdownItem[] = [
           {/* Contact us */}
           <Link
             href="/contact"
-            className="block px-6 py-4 text-gray-800 hover:bg-gray-50 transition-colors text-base border-t border-gray-100"
+            className="block px-6 py-4 text-[#262320] hover:bg-gray-50 transition-colors text-[16px] border-t border-gray-100"
             onClick={() => setMobileMenuOpen(false)}
           >
             Contact us
@@ -172,7 +172,7 @@ const storeItems: DropdownItem[] = [
           {/* Destination Highlights */}
           <Link
             href="/destination-highlights"
-            className="block px-6 py-4 text-gray-800 hover:bg-gray-50 transition-colors text-base border-t border-gray-100"
+            className="block px-6 py-4 text-[#262320] hover:bg-gray-50 transition-colors text-[16px] border-t border-gray-100"
             onClick={() => setMobileMenuOpen(false)}
           >
             Destination Highlights
@@ -181,7 +181,7 @@ const storeItems: DropdownItem[] = [
           {/* Taste of Naija */}
           <Link
             href="/taste-of-naija"
-            className="block px-6 py-4 text-gray-800 hover:bg-gray-50 transition-colors text-base border-t border-gray-100"
+            className="block px-6 py-4 text-[#262320] hover:bg-gray-50 transition-colors text-[16px] border-t border-gray-100"
             onClick={() => setMobileMenuOpen(false)}
           >
             Taste of Naija
@@ -190,7 +190,7 @@ const storeItems: DropdownItem[] = [
           {/* Lifestyle */}
           <Link
             href="/lifestyle"
-            className="block px-6 py-4 text-gray-800 hover:bg-gray-50 transition-colors text-base border-t border-gray-100"
+            className="block px-6 py-4 text-[#262320] hover:bg-gray-50 transition-colors text-[16px] border-t border-gray-100"
             onClick={() => setMobileMenuOpen(false)}
           >
             Lifestyle
@@ -199,7 +199,7 @@ const storeItems: DropdownItem[] = [
           {/* Fashion */}
           <Link
             href="/fashion"
-            className="block px-6 py-4 text-gray-800 hover:bg-gray-50 transition-colors text-base border-t border-gray-100"
+            className="block px-6 py-4 text-[#262320] hover:bg-gray-50 transition-colors text-[16px] border-t border-gray-100"
             onClick={() => setMobileMenuOpen(false)}
           >
             Fashion
@@ -208,7 +208,7 @@ const storeItems: DropdownItem[] = [
           {/* Interviews */}
           <Link
             href="/interviews"
-            className="block px-6 py-4 text-gray-800 hover:bg-gray-50 transition-colors text-base border-t border-gray-100"
+            className="block px-6 py-4 text-[#262320] hover:bg-gray-50 transition-colors text-[16px] border-t border-gray-100"
             onClick={() => setMobileMenuOpen(false)}
           >
             Interviews
@@ -217,7 +217,7 @@ const storeItems: DropdownItem[] = [
           {/* Events */}
           <Link
             href="/events"
-            className="block px-6 py-4 text-gray-800 hover:bg-gray-50 transition-colors text-base border-t border-gray-100"
+            className="block px-6 py-4 text-[#262320] hover:bg-gray-50 transition-colors text-[16px] border-t border-gray-100"
             onClick={() => setMobileMenuOpen(false)}
           >
             Events
@@ -226,7 +226,7 @@ const storeItems: DropdownItem[] = [
           {/* Culture */}
           <Link
             href="/culture"
-            className="block px-6 py-4 text-gray-800 hover:bg-gray-50 transition-colors text-base border-t border-gray-100"
+            className="block px-6 py-4 text-[#262320] hover:bg-gray-50 transition-colors text-[16px] border-t border-gray-100"
             onClick={() => setMobileMenuOpen(false)}
           >
             Culture
@@ -235,7 +235,7 @@ const storeItems: DropdownItem[] = [
           {/* Original Content */}
           <Link
             href="/original-content"
-            className="block px-6 py-4 text-gray-800 hover:bg-gray-50 transition-colors text-base border-t border-gray-100"
+            className="block px-6 py-4 text-[#262320] hover:bg-gray-50 transition-colors text-[16px] border-t border-gray-100"
             onClick={() => setMobileMenuOpen(false)}
           >
             Original Content
@@ -244,10 +244,10 @@ const storeItems: DropdownItem[] = [
           {/* Travel tips & Guides */}
           <Link
             href="/travel-tips"
-            className="block px-6 py-4 text-gray-800 hover:bg-gray-50 transition-colors text-base border-t border-gray-100"
+            className="block px-6 py-4 text-[#262320] hover:bg-gray-50 transition-colors text-[16px] border-t border-gray-100"
             onClick={() => setMobileMenuOpen(false)}
           >
-            Travel tips & Guides
+            Travel Tips & Guides
           </Link>
         </div>
       </div>

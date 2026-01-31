@@ -31,7 +31,7 @@ export default function Store() {
   }, [section]);
 
   return (
-    <section>
+    <section className="">
       <StoreNavigation />
       <Hero />
       <HighlightsSection />
