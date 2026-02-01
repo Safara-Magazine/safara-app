@@ -18,7 +18,7 @@ const storeRef = useRef<HTMLDivElement>(null);
 
 const storeItems: DropdownItem[] = [
     { label: 'Merch', href: '/store?section=merch' },
-    { label: 'Bookings', href: '/store?section=bookings' },
+    { label: 'Bookings', href: '/store' },
   ];
 
   useEffect(() => {
