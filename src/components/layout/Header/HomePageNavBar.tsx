@@ -14,6 +14,9 @@ const Navigation: React.FC = () => {
   const [storeOpen, setStoreOpen] = useState(false);
   const [categoriesOpen, setCategoriesOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileStoreOpen, setMobileStoreOpen] = useState(false);
+  const [mobileCategoriesOpen, setMobileCategoriesOpen] = useState(false);
+  
   const storeRef = useRef<HTMLDivElement>(null);
   const categoriesRef = useRef<HTMLDivElement>(null);
 
@@ -31,6 +34,7 @@ const Navigation: React.FC = () => {
     { label: 'Culture', href: '/categories/culture' },
   ];
 
+  
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (storeRef.current && !storeRef.current.contains(event.target as Node)) {
@@ -114,7 +118,7 @@ const Navigation: React.FC = () => {
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#B59157] to-[#EBB659] transition-all duration-300 group-hover:w-full"></span>
               </Link>
               
-              {/* Store Dropdown */}
+              {/* Desktop Store Dropdown */}
               <div className="relative" ref={storeRef}>
                 <button
                   onClick={() => setStoreOpen(!storeOpen)}
@@ -169,7 +173,7 @@ const Navigation: React.FC = () => {
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#B59157] to-[#EBB659] transition-all duration-300 group-hover:w-full"></span>
               </Link>
 
-              {/* Categories Dropdown */}
+              {/* Desktop Categories Dropdown */}
               <div className="relative" ref={categoriesRef}>
                 <button
                   onClick={() => setCategoriesOpen(!categoriesOpen)}
@@ -221,13 +225,13 @@ const Navigation: React.FC = () => {
       {/* Mobile Menu Overlay */}
       {mobileMenuOpen && (
         <div 
-          className="lg:hidden fixed inset-0 bg-black/50 z-40 top-[57px] sm:top-[65px]"
+          className="fixed inset-0 bg-black/50 z-40"
           onClick={() => setMobileMenuOpen(false)}
         />
       )}
 
       {/* Mobile Menu - Slides from Left */}
-      <div className={`lg:hidden fixed left-0 top-[57px] sm:top-[65px] bottom-0 w-72 bg-white z-50 overflow-y-auto shadow-2xl transition-transform duration-300 ease-in-out ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+      <div className={`fixed left-0 top-0 h-screen w-72 bg-white z-50 overflow-y-auto shadow-2xl transition-transform duration-300 ease-in-out ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         <div className="px-4 py-6 space-y-4">
           <Link
             href="/"
@@ -246,26 +250,27 @@ const Navigation: React.FC = () => {
           </Link>
 
           {/* Mobile Store Dropdown */}
-        Link<div className="border-b border-gray-100">
+          <div className="border-b border-gray-100">
             <button
-              onClick={() => setStoreOpen(!storeOpen)}
+              onClick={() => setMobileStoreOpen(!mobileStoreOpen)}
               className="flex items-center justify-between w-full text-lg text-gray-700 hover:text-gray-900 font-medium py-3 transition-colors"
             >
               <span>Store</span>
               <ChevronDown
                 className={`w-5 h-5 transition-transform duration-200 ${
-                  storeOpen ? 'rotate-180' : ''
+                  mobileStoreOpen ? 'rotate-180' : ''
                 }`}
               />
             </button>
-            {storeOpen && (
-              <div className="pl-4 pb-3 space-y-2">
+
+            {mobileStoreOpen && (
+              <div className="">
                 {storeItems.map((item, index) => (
                   <Link
                     key={index}
                     href={item.href}
-                    className="block text-base text-gray-600 hover:text-gray-900 py-2 transition-colors"
-                    onClick={() => setMobileMenuOpen(false)}
+                    className="block px-4 py-3 text-base text-gray-600 hover:text-gray-900 transition-colors"
+                    scroll
                   >
                     {item.label}
                   </Link>
@@ -301,23 +306,23 @@ const Navigation: React.FC = () => {
           {/* Mobile Categories Dropdown */}
           <div className="border-b border-gray-100">
             <button
-              onClick={() => setCategoriesOpen(!categoriesOpen)}
+              onClick={() => setMobileCategoriesOpen(!mobileCategoriesOpen)}
               className="flex items-center justify-between w-full text-lg text-gray-700 hover:text-gray-900 font-medium py-3 transition-colors"
             >
               <span>Categories</span>
               <ChevronDown
                 className={`w-5 h-5 transition-transform duration-200 ${
-                  categoriesOpen ? 'rotate-180' : ''
+                  mobileCategoriesOpen ? 'rotate-180' : ''
                 }`}
               />
             </button>
-            {categoriesOpen && (
-              <div className="pl-4 pb-3 space-y-2">
+            {mobileCategoriesOpen && (
+              <div className="">
                 {categoryItems.map((item, index) => (
                   <Link
                     key={index}
                     href={item.href}
-                    className="block text-base text-gray-600 hover:text-gray-900 py-2 transition-colors"
+                    className="block px-4 py-3 text-base text-gray-600 hover:text-gray-900 transition-colors"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {item.label}
