@@ -8,6 +8,7 @@ import {
   relatedProducts,
   type ProductII,
 } from "@/components/store-components/products";
+import StoreNavigation from "@/components/layout/Header/StoreNavBar";
 
 import ProductGallery from "@/components/product-view/product-gallery";
 import ProductInfo from "@/components/product-view/product-info";
@@ -108,7 +109,9 @@ export default async function ProductPage({ params }: PageProps) {
     .slice(0, 3);
 
   return (
-    <main className="min-h-screen bg-neutral-50">
+    <>
+    <StoreNavigation />
+    <main className="min-h-screen mt-20 bg-neutral-50">
       <div className="mx-auto max-w-6xl px-4 pb-20 pt-8">
         {/* Breadcrumb */}
         <BackButton
@@ -137,5 +140,6 @@ export default async function ProductPage({ params }: PageProps) {
         <RelatedProducts products={related} />
       </div>
     </main>
+    </>
   );
 }
