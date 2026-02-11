@@ -12,7 +12,7 @@ interface RelatedProductsProps {
 export default function RelatedProducts({ products }: RelatedProductsProps) {
   return (
     <div className="mt-12">
-      <p className="mb-4 text-[11px] font-semibold uppercase tracking-widest text-neutral-400">
+      <p className="mb-4 text-[28px] font-semibold uppercase tracking-widest text-black">
         You might also like
       </p>
 
@@ -53,9 +53,9 @@ export default function RelatedProducts({ products }: RelatedProductsProps) {
               <button
                 onClick={(e) => {
                   e.preventDefault();
-                  // TODO: wire to cart store
+                  //  wire to cart store later
                 }}
-                className="rounded bg-amber-500 px-3 py-1.5 text-[11px] font-bold uppercase tracking-wide text-white transition-colors hover:bg-amber-600 whitespace-nowrap"
+                className="rounded bg-amber-500 px-3 py-1.5 text-[11px] font-bold uppercase bg-gradient-to-r from-[#B59157] to-[#EBB659] text-white rounded-lg hover:shadow-lg transition disabled:opacity-50 active:scale-[.99]"
               >
                 Add to cart
               </button>

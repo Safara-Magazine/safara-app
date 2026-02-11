@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { BACKEND_BASE_URL } from "@/auth/lib/backendConfig";
 import BackButton from "@/components/ui/back-btn";
+import RatingReview from "@/components/product-view/rating-review";
 import {
   allProductsMap,
   relatedProducts,
@@ -120,7 +121,7 @@ export default async function ProductPage({ params }: PageProps) {
 
         {/* Product grid */}
           
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 border border-red-300">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 ">
 
           <ProductGallery
             images={product.images}
@@ -128,6 +129,9 @@ export default async function ProductPage({ params }: PageProps) {
           />
           <ProductInfo product={product} />
         </div>
+
+        {/* rating-review component */}
+        <RatingReview product={product} />
 
         {/* Related products */}
         <RelatedProducts products={related} />

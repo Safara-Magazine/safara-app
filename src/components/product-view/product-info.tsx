@@ -16,9 +16,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
   const [selectedSize, setSelectedSize] = useState(product.sizes[0]);
   const [selectedColor, setSelectedColor] = useState(product.colors[0]);
   const [cartAdded, setCartAdded] = useState(false);
-  const [reviewsOpen, setReviewsOpen] = useState(true);
-
-  const maxBar = Math.max(...Object.values(product.ratingBreakdown));
+  
 
   const handleAddToCart = () => {
     setCartAdded(true);
@@ -118,7 +116,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
       {/* Delivery + Shipping */}
       <div className="mt-5 border-t border-neutral-200">
         <AccordionItem title="Delivery" defaultOpen>
-          <div className="space-y-1">
+          <div className="space-y-2">
             <p>
               Lagos –{' '}
               <span className="font-semibold text-neutral-800">{product.delivery.lagos}</span>
@@ -134,76 +132,8 @@ export default function ProductInfo({ product }: ProductInfoProps) {
         </AccordionItem>
       </div>
 
-      {/* ── RATINGS ── */}
-      <div className="mt-10">
-        <h2 className="mb-4 font-serif text-xl font-medium text-neutral-900">Ratings</h2>
-        <div className="flex items-start gap-8">
-          {/* Big number */}
-          <div className="flex flex-col items-center">
-            <span className="font-serif text-5xl font-light leading-none text-neutral-900">
-              {product.rating}
-            </span>
-            <span className="mt-1 text-xs text-neutral-400">/5</span>
-          </div>
 
-          {/* Bars */}
-          <div className="flex flex-1 flex-col gap-2">
-            {[5, 4, 3, 2, 1].map((n) => (
-              <div key={n} className="flex items-center gap-2.5">
-                <span className="text-xs text-amber-400">★</span>
-                <span className="w-2 text-right text-xs text-neutral-400">{n}</span>
-                <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-neutral-100">
-                  <div
-                    className="h-full rounded-full bg-amber-400 transition-all duration-700"
-                    style={{
-                      width: `${Math.round(
-                        ((product.ratingBreakdown[n] ?? 0) / maxBar) * 100
-                      )}%`,
-                    }}
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* ── REVIEWS ── */}
-      <div className="mt-8 overflow-hidden rounded-lg border border-neutral-200">
-        {/* Header toggle */}
-        <button
-          onClick={() => setReviewsOpen((o) => !o)}
-          className="flex w-full items-center justify-between bg-white px-4 py-3.5"
-        >
-          <span className="text-xs font-semibold uppercase tracking-widest text-neutral-800">
-            Reviews
-          </span>
-          <ChevronDown
-            size={16}
-            className={cn(
-              'text-neutral-400 transition-transform duration-250',
-              reviewsOpen && 'rotate-180'
-            )}
-          />
-        </button>
-
-        <div
-          className={cn(
-            'grid transition-all duration-300 ease-in-out',
-            reviewsOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
-          )}
-        >
-          <div className="overflow-hidden divide-y divide-neutral-100 bg-white">
-            {product.reviews.map((review, i) => (
-              <div key={i} className="px-4 py-3.5">
-                <p className="mb-1 text-[13px] font-semibold text-neutral-900">{review.name}</p>
-                <Stars count={review.stars} />
-                <p className="mt-1.5 text-[13px] leading-relaxed text-neutral-500">{review.text}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+      
     </div>
   );
 }

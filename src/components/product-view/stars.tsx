@@ -14,7 +14,7 @@ export default function Stars({ count, max = 5, size = 'sm' }: StarsProps) {
           key={i}
           className={cn(
             size === 'sm' ? 'text-sm' : 'text-base',
-            i < count ? 'text-amber-400' : 'text-neutral-200'
+            i < count ? 'text-[#D5A34C]' : 'text-neutral-200'
           )}
         >
           ★
