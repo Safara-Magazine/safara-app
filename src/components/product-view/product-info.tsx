@@ -27,7 +27,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
     <div className="flex flex-col">
       {/* category */}
       <div className='flex justify-between items-center py-4'>
-      <p className="mb-1 border text-[16px] border-neutral-400 w-[127px] text-center rounded-full  font-semibold uppercase tracking-widest text-neutral-400">
+      <p className="mb-1 border text-[12px] border-neutral-400 px-2 py-1  text-center rounded-full  font-semibold uppercase tracking-widest text-neutral-400">
         {product.category}
       </p>
 
@@ -65,10 +65,10 @@ export default function ProductInfo({ product }: ProductInfoProps) {
               key={size}
               onClick={() => setSelectedSize(size)}
               className={cn(
-                'h-9 w-9 rounded border text-xs font-medium transition-colors duration-150',
+                'h-9 w-9 rounded border text-xs text-center font-medium transition-colors duration-150',
                 selectedSize === size
                   ? 'border-neutral-900 bg-neutral-900 text-white'
-                  : 'border-neutral-200 bg-white text-neutral-800 hover:border-neutral-400'
+                  : 'border-neutral-200 bg-white px-2 text-neutral-800 hover:border-neutral-400'
               )}
             >
               {size}

@@ -111,7 +111,7 @@ export default async function ProductPage({ params }: PageProps) {
   return (
     <>
     <StoreNavigation />
-    <main className="min-h-screen mt-20 bg-neutral-50">
+    <main className="min-h-screen pt-20 bg-neutral-50">
       <div className="mx-auto max-w-6xl px-4 pb-20 pt-8">
         {/* Breadcrumb */}
         <BackButton

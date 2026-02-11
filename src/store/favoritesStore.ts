@@ -2,7 +2,9 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
 interface FavoritesState {
-  favorites: Set<string>;
+  favorites: string[];
+  _hasHydrated: boolean; // Add this
+  setHasHydrated: (state: boolean) => void; // Add this
   toggleFavorite: (id: string) => void;
   isFavorite: (id: string) => boolean;
 }
@@ -10,49 +12,30 @@ interface FavoritesState {
 export const useFavoritesStore = create<FavoritesState>()(
   persist(
     (set, get) => ({
-      favorites: new Set<string>(),
+      favorites: [],
+      _hasHydrated: false, // Add this
 
-      toggleFavorite: (id: string) => {
-        set((state) => {
-          const next = new Set(state.favorites);
-          if (next.has(id)) {
-            next.delete(id);
-          } else {
-            next.add(id);
-          }
-          return { favorites: next };
-        });
+      setHasHydrated: (state) => {
+        set({ _hasHydrated: state });
       },
 
-      isFavorite: (id: string) => get().favorites.has(id),
+      toggleFavorite: (id: string) => {
+        const current = get().favorites;
+        const exists = current.includes(id);
+        
+        const newFavorites = exists 
+          ? current.filter(fav => fav !== id)
+          : [...current, id];
+        
+        set({ favorites: newFavorites });
+      },
+
+      isFavorite: (id: string) => get().favorites.includes(id),
     }),
     {
       name: 'safara-favorites',
-      // Zustand persist doesn't natively handle Set — serialize/deserialize manually
-      storage: {
-        getItem: (name) => {
-          const str = localStorage.getItem(name);
-          if (!str) return null;
-          const parsed = JSON.parse(str);
-          return {
-            ...parsed,
-            state: {
-              ...parsed.state,
-              favorites: new Set<string>(parsed.state.favorites ?? []),
-            },
-          };
-        },
-        setItem: (name, value) => {
-          const serialized = {
-            ...value,
-            state: {
-              ...value.state,
-              favorites: Array.from(value.state.favorites),
-            },
-          };
-          localStorage.setItem(name, JSON.stringify(serialized));
-        },
-        removeItem: (name) => localStorage.removeItem(name),
+      onRehydrateStorage: () => (state) => {
+        state?.setHasHydrated(true);
       },
     }
   )

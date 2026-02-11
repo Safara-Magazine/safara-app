@@ -19,7 +19,7 @@ export default function RelatedProducts({ products }: RelatedProductsProps) {
       <div className="grid grid-cols-3 gap-4 sm:grid-cols-3">
         {products.map((item) => (
           <div key={item.id} className="group relative">
-            <Link href={`/product/${item.id}`} className="block">
+            <Link href={`/store-product/${item.id}`} className="block">
               {/* Image */}
               <div className="relative mb-3 aspect-square overflow-hidden rounded-lg bg-neutral-100">
                 <Image

@@ -4,7 +4,10 @@ import Link from "next/link";
 // import { Heart } from "lucide-react";
 import HeartButton from "../product-view/heart-btn";
 
+import AddToCartButton from "../cart/add-to-cart";
+
 export default function BestSellers() {
+   
   return (
     <section id="best-sellers" className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-5">
@@ -61,9 +64,7 @@ export default function BestSellers() {
                 </p>
 
                 {/* add to cart btn */}
-                <button className=" text-white px-4 py-2 rounded-sm text-sm hover:bg-opacity-80  transition-transform duration-300 hover:scale-105 cursor-pointer bg-gradient-to-r from-[#B59157] to-[#EBB659]">
-                    Add to Cart
-                </button>
+                <AddToCartButton product={product} />
 
                 </div>
                 
