@@ -46,7 +46,7 @@ export default function ProductGallery({ images, productName }: ProductGalleryPr
             key={i}
             onClick={() => switchImage(i)}
             className={cn(
-              'relative h-[72px] w-[72px] flex-shrink-0 overflow-hidden rounded-md border-2 transition-colors duration-150',
+              'relative h-[150px] w-[150px] flex-shrink-0 overflow-hidden rounded-md border-2 transition-colors duration-150',
               i === selected ? 'border-neutral-900' : 'border-transparent hover:border-neutral-300'
             )}
           >

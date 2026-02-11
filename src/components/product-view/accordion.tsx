@@ -14,7 +14,7 @@ export function AccordionItem({ title, children, defaultOpen = false }: Accordio
   const [open, setOpen] = useState(defaultOpen);
 
   return (
-    <div className="border-b border-neutral-200">
+    <div className="">
       <button
         onClick={() => setOpen((o) => !o)}
         className="flex w-full items-center justify-between py-3.5 text-left"
