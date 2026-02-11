@@ -27,22 +27,31 @@ export default function ProductInfo({ product }: ProductInfoProps) {
 
   return (
     <div className="flex flex-col">
-      {/* Name + Heart */}
+      {/* category */}
+      <div className='flex justify-between items-center py-4'>
+      <p className="mb-1 border text-[16px] border-neutral-400 w-[127px] text-center rounded-full  font-semibold uppercase tracking-widest text-neutral-400">
+        {product.category}
+      </p>
+
+      <HeartButton productId={product.id} className=" flex-shrink-0" size={22} />
+      </div>
+
+      {/* Name */}
       <div className="mb-1.5 flex items-start justify-between gap-4">
-        <h1 className="font-serif text-2xl font-medium leading-tight text-neutral-900">
+        <h1 className=" text-[28px] font-bold leading-tight text-neutral-900">
           {product.name}
         </h1>
-        <HeartButton productId={product.id} className="mt-0.5 flex-shrink-0" size={22} />
+        
       </div>
 
       {/* Price */}
-      <p className="mb-5 text-xl font-semibold tracking-tight text-neutral-900">
+      <p className="mb-5 text-[32px] font-semibold tracking-tight text-neutral-900">
         {product.price}
       </p>
 
       {/* Description accordion */}
-      <div className="border-t border-neutral-200">
-        <AccordionItem title="Description" defaultOpen>
+      <div className="border border-neutral-200 rounded-md">
+        <AccordionItem  title="Description" defaultOpen>
           {product.description}
         </AccordionItem>
       </div>

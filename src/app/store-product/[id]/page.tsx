@@ -115,11 +115,13 @@ export default async function ProductPage({ params }: PageProps) {
           className="mb-7 inline-flex items-center gap-1.5 rounded-full border border-neutral-200 bg-neutral-100 px-3.5 py-1.5 text-xs text-neutral-500 transition-colors hover:bg-neutral-200"
         >
           <span>←</span>
-          <span>{product.category}</span>
+          <span>Back</span>
         </BackButton>
 
         {/* Product grid */}
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
+          
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 border border-red-300">
+
           <ProductGallery
             images={product.images}
             productName={product.name}
