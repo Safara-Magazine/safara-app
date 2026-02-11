@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useAuthStore } from "@/auth/store/useAuthStore";
+import { useRouter } from "next/navigation";
 import { BACKEND_ENDPOINTS } from "../lib";
 import {
   explorerSignup,
@@ -333,7 +334,7 @@ export const useAdminLogin = () => {
     onSuccess: (data) => {
       setError(null);
       setLoading(false);
-      // Store admin email for verification step
+      // Store admin email temporarily for the verify step
       localStorage.setItem("adminEmail", data.data.email);
     },
     onError: (error: Error) => {
@@ -348,8 +349,11 @@ export const useAdminLogin = () => {
  * Admin verify mutation (verify password)
  */
 export const useAdminVerify = () => {
+  const router = useRouter();
   const queryClient = useQueryClient();
-  const { setUser, setLoading, setError } = useAuthStore();
+
+  // ✅ pull setToken in alongside setUser
+  const { setUser, setToken, setLoading, setError } = useAuthStore();
 
   return useMutation({
     mutationFn: adminVerify,
@@ -358,9 +362,11 @@ export const useAdminVerify = () => {
     },
     onSuccess: (data) => {
       console.log("[useAdminVerify] Login successful, data:", data);
-      
-      // Save token to localStorage
-      localStorage.setItem("authToken", data.access_token);
+
+      // ✅ Save token into Zustand (persisted to localStorage via auth-store key)
+      // Previously this was localStorage.setItem("authToken", ...) which used
+      // a different key than Zustand — so the interceptor could never find it.
+      setToken(data.access_token);
 
       // Update auth store with admin user data
       const userData = {
@@ -369,18 +375,20 @@ export const useAdminVerify = () => {
         name: data.user.name,
         role: data.user.role,
       };
-      
+
       console.log("[useAdminVerify] Setting user in store:", userData);
       setUser(userData);
 
       setError(null);
       setLoading(false);
 
-      // Clear admin email from localStorage
+      // Clean up temporary email from localStorage
       localStorage.removeItem("adminEmail");
 
       // Invalidate user query
       queryClient.invalidateQueries({ queryKey: ["current-user"] });
+
+      router.push("/admin/dashboard");
     },
     onError: (error: Error) => {
       const errorMessage =

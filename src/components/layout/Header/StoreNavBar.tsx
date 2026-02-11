@@ -18,6 +18,7 @@ const storeRef = useRef<HTMLDivElement>(null);
 
 const storeItems: DropdownItem[] = [
     { label: 'Merch', href: '/store?section=merch' },
+    // will make it inline later sha
     { label: 'Bookings', href: '/store' },
   ];
 

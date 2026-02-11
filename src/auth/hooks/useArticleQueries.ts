@@ -23,12 +23,20 @@ import { useAuthStore } from "@/auth/store/useAuthStore";
  * Get article statistics
  */
 export const useArticleStats = () => {
+  const { user } = useAuthStore();
+  
+  // clarifying conditions for fetching stats
+  const canFetch = typeof window !== 'undefined' && 
+                   !!user && 
+                   !!localStorage.getItem('authToken');
+
   return useQuery({
     queryKey: ["articles", "stats"],
     queryFn: getArticleStats,
     staleTime: 1000 * 60 * 5, // 5 minutes
     refetchOnWindowFocus: false,
-    retry: 2,
+    enabled: canFetch, // will run when we have both user and token
+    retry: false,
   });
 };
 

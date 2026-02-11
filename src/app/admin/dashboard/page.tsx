@@ -36,7 +36,7 @@ export default function AdminDashboard() {
    const stats: StatCard[] = [
     {
       title: 'Total Articles',
-      value: statsLoading ? '...' : articleStats?.total.toString() || '0',
+      value: statsLoading ? '...' : (articleStats?.total?.toString() ?? '0'),
       change: statsLoading 
         ? 'Loading...' 
         : `${articleStats?.published || 0} published, ${articleStats?.draft || 0} drafts`,
@@ -44,7 +44,7 @@ export default function AdminDashboard() {
     },
     {
       title: 'Total Views',
-      value: statsLoading ? '...' : articleStats?.totalViews.toLocaleString() || '0',
+      value: statsLoading ? '...' : (articleStats?.totalViews?.toString() ?? '0'),
       change: 'Across all articles',
       icon: <TrendingUp className="w-8 h-8 text-green-600" />,
     },
