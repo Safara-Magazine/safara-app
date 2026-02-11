@@ -31,7 +31,7 @@ export default function BestSellers() {
               className="group cursor-pointer  rounded-[20px] border overflow-hidden"
             >
 
-                 <Link href={`/products/${product.id}`} className="block">
+                 <Link href={`/store-product/${product.id}`} className="block">
 
               {/* Product Image */}
               <div className="relative mb-4 rounded-lg overflow-hidden">
