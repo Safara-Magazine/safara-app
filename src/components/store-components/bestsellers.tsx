@@ -1,9 +1,13 @@
 import React from "react";
 import { products } from "./products";
 import Link from "next/link";
-import { Heart } from "lucide-react";
+// import { Heart } from "lucide-react";
+import HeartButton from "../product-view/heart-btn";
+
+import AddToCartButton from "../cart/add-to-cart";
 
 export default function BestSellers() {
+   
   return (
     <section id="best-sellers" className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-5">
@@ -29,17 +33,16 @@ export default function BestSellers() {
               key={product.id}
               className="group cursor-pointer  rounded-[20px] border overflow-hidden"
             >
+
+                 <Link href={`/store-product/${product.id}`} className="block">
+
               {/* Product Image */}
               <div className="relative mb-4 rounded-lg overflow-hidden">
                 {/* i'll be back to integrate endpoints and state changes  */}
-                <button className="absolute top-3 left-3 z-10 p-2 bg-white rounded-full shadow-md">
-                  {/* <svg width="18" height="18" viewBox="0 0 20 20">
-                    <path d="M10 18s-8-5.5-8-10a4 4 0 0 1 8-3 4 4 0 0 1 8 3c0 4.5-8 10-8 10z" 
-                      fill="#e74c3c" stroke="#e74c3c" strokeWidth="1.5" strokeLinejoin="round"/>
-                  </svg> */}
 
-                  <Heart className="text-gray-800 w-5 h-5 hover:scale-105  duration-300 " />
-                </button>
+               <div className="absolute h-10 top-3 left-3 z-10 p-2 items-center bg-white rounded-md shadow-md">
+                <HeartButton productId={product.id} size={23} />
+              </div>
 
                 <div
                   className="h-64 flex items-center justify-center transition-transform duration-300 group-hover:scale-105 bg-cover bg-center"
@@ -61,13 +64,12 @@ export default function BestSellers() {
                 </p>
 
                 {/* add to cart btn */}
-                <button className=" text-white px-4 py-2 rounded-sm text-sm hover:bg-opacity-80  transition-transform duration-300 hover:scale-105 cursor-pointer bg-gradient-to-r from-[#B59157] to-[#EBB659]">
-                    Add to Cart
-                </button>
+                <AddToCartButton product={product} />
 
                 </div>
                 
               </div>
+              </Link>
             </div>
           ))}
         </div>

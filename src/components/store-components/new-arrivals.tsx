@@ -23,6 +23,8 @@ export default function NewArrivals() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4  gap-4">
           {newProducts.map((product) => (
             <div key={product.id} className="group cursor-pointer border rounded-[24px]">
+
+              <Link href={`/store-product/${product.id}`} className="block">
               {/* Product Image */}
               <div className="relative mb-4 rounded-lg overflow-hidden">
                 {/* i'll be back to integrate endpoints and state changes  */}
@@ -62,6 +64,7 @@ export default function NewArrivals() {
 
                 </div>
               </div>
+              </Link>
             </div>
           ))}
         </div>

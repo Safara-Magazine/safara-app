@@ -1,9 +1,18 @@
-"use client"
+"use client";
 
-import React, { useState, useEffect, useRef } from 'react';
-import { ChevronDown, Menu, X, Search, User, Heart, ShoppingCart } from 'lucide-react';
-import Link from 'next/link';
-import Image from 'next/image';
+
+import React, { useState, useEffect, useRef } from "react";
+import {
+  ChevronDown,
+  Menu,
+  X,
+  Search,
+  User,
+} from "lucide-react";
+import Link from "next/link";
+import Image from "next/image";
+import CartIndicator from "@/components/cart/cart-indicator";
+import FavoritesIndicator from "@/components/favorites/favorites-indicator";
 
 interface DropdownItem {
   label: string;
@@ -13,57 +22,58 @@ interface DropdownItem {
 const StoreNavigation: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [storeOpen, setStoreOpen] = useState(false);
-const storeRef = useRef<HTMLDivElement>(null);
+  const storeRef = useRef<HTMLDivElement>(null);
 
-
-const storeItems: DropdownItem[] = [
-    { label: 'Merch', href: '/store?section=merch' },
-    { label: 'Bookings', href: '/store' },
+  
+  const storeItems: DropdownItem[] = [
+    { label: "Merch", href: "/store?section=merch" },
+    // will make it inline later sha
+    { label: "Bookings", href: "/store" },
   ];
 
   useEffect(() => {
-      const handleClickOutside = (event: MouseEvent) => {
-        if (storeRef.current && !storeRef.current.contains(event.target as Node)) {
-          setStoreOpen(false);
-        }
-      
-      };
-      document.addEventListener('mousedown', handleClickOutside);
-      return () => {
-        document.removeEventListener('mousedown', handleClickOutside);
-      };
-    }, [storeRef]);
-
-  
-    useEffect(() => {
-      if (typeof window !== 'undefined' && window.gsap) {
-        const gsap = window.gsap;
-  
-        if (storeOpen && storeRef.current) {
-          const dropdown = storeRef.current.querySelector('.dropdown-menu');
-          gsap.fromTo(
-            dropdown,
-            { opacity: 0, y: -10 },
-            { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' }
-          );
-        }
-        else if (storeRef.current) {
-          const dropdown = storeRef.current.querySelector('.dropdown-menu');
-          gsap.to(dropdown, {
-            opacity: 0,
-            y: -10,
-            duration: 0.2,
-            ease: 'power2.in',
-          });
-        }
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        storeRef.current &&
+        !storeRef.current.contains(event.target as Node)
+      ) {
+        setStoreOpen(false);
       }
-    }, [storeOpen]);
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [storeRef]);
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.gsap) {
+      const gsap = window.gsap;
+
+      if (storeOpen && storeRef.current) {
+        const dropdown = storeRef.current.querySelector(".dropdown-menu");
+        gsap.fromTo(
+          dropdown,
+          { opacity: 0, y: -10 },
+          { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" },
+        );
+      } else if (storeRef.current) {
+        const dropdown = storeRef.current.querySelector(".dropdown-menu");
+        gsap.to(dropdown, {
+          opacity: 0,
+          y: -10,
+          duration: 0.2,
+          ease: "power2.in",
+        });
+      }
+    }
+  }, [storeOpen]);
 
   useEffect(() => {
     if (mobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     }
   }, [mobileMenuOpen]);
 
@@ -86,38 +96,38 @@ const storeItems: DropdownItem[] = [
             </div>
 
             {/* mobile menu btn */}
-            <div className='flex'>
-
+            <div className="flex">
               {/* search */}
-             <button className='hidden md:block z-50 p-2 text-gray-700 hover:text-gray-900 transition-colors'>
-               <Search className="w-6 h-6" />
-            </button>
+              <button className="hidden md:block z-50 p-2 text-gray-700 hover:text-gray-900 transition-colors">
+                <Search className="w-6 h-6" />
+              </button>
 
               {/* user */}
-             <button className='hidden md:block z-50 p-2 text-gray-700 hover:text-gray-900 transition-colors'>
-               <User className="w-6 h-6" />
-            </button>
+              <button className="hidden md:block z-50 p-2 text-gray-700 hover:text-gray-900 transition-colors">
+                <User className="w-6 h-6" />
+              </button>
 
               {/* wishlist */}
-             <button className='hidden md:block z-50 p-2 text-gray-700 hover:text-gray-900 transition-colors'>
-               <Heart className="w-6 h-6" />
-            </button>
+              <button className="hidden md:block z-50 p-2 text-gray-700 hover:text-gray-900 transition-colors relative">
+                 <FavoritesIndicator />
+              </button>
 
               {/* cart */}
-             <button className='hidden md:block z-50 p-2 text-gray-700 hover:text-gray-900 transition-colors'>
-               <ShoppingCart className="w-6 h-6" />
-            </button>
+              <button className="hidden md:block z-50 p-2 text-gray-700 hover:text-gray-900 transition-colors">
+                  <CartIndicator />
+              </button>
 
-           
-
-            {/* hamburger icon */}
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="z-50 p-2 text-gray-700 hover:text-gray-900 transition-colors"
+              {/* hamburger icon */}
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="z-50 p-2 text-gray-700 hover:text-gray-900 transition-colors"
               >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
-
+                {mobileMenuOpen ? (
+                  <X className="w-6 h-6" />
+                ) : (
+                  <Menu className="w-6 h-6" />
+                )}
+              </button>
             </div>
           </div>
         </nav>
@@ -125,16 +135,17 @@ const storeItems: DropdownItem[] = [
 
       {/* Mobile Menu Overlay */}
       {mobileMenuOpen && (
-        <div 
+        <div
           className="fixed inset-0 bg-black/50 z-40"
           onClick={() => setMobileMenuOpen(false)}
         />
       )}
 
       {/* Mobile Menu  */}
-      <div className={`fixed scrollbar-hide left-0 top-0 h-screen md:w-90 w-70 bg-white z-50 overflow-y-auto shadow-2xl transition-transform duration-300  font-semibold ease-in-out ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+      <div
+        className={`fixed scrollbar-hide left-0 top-0 h-screen md:w-90 w-70 bg-white z-50 overflow-y-auto shadow-2xl transition-transform duration-300  font-semibold ease-in-out ${mobileMenuOpen ? "translate-x-0" : "-translate-x-full"}`}
+      >
         <div className="p-[24px] ">
-
           {/* Home */}
           <Link
             href="/"
@@ -153,39 +164,35 @@ const storeItems: DropdownItem[] = [
             About
           </Link>
 
-       
-          
-              {/* Store Dropdown */}
-              <div className="border-t border-gray-100" ref={storeRef}>
-                <button
-                  onClick={() => setStoreOpen(!storeOpen)}
-                  className="flex items-center justify-between w-full px-6 py-4 text-[#262320] hover:bg-gray-50 transition-colors text-[16px]"
-                >
-                  <span>Store</span>
-                  <ChevronDown
-                    className={`w-5 h-5 transition-transform duration-200 ${
-                  storeOpen ? 'rotate-180' : ''
+          {/* Store Dropdown */}
+          <div className="border-t border-gray-100" ref={storeRef}>
+            <button
+              onClick={() => setStoreOpen(!storeOpen)}
+              className="flex items-center justify-between w-full px-6 py-4 text-[#262320] hover:bg-gray-50 transition-colors text-[16px]"
+            >
+              <span>Store</span>
+              <ChevronDown
+                className={`w-5 h-5 transition-transform duration-200 ${
+                  storeOpen ? "rotate-180" : ""
                 }`}
-                  />
+              />
+            </button>
 
-                  
-                </button>
-
-                {storeOpen && (
-                  <div className="">
-                    {storeItems.map((item, index) => (
-                      <Link
-                        key={index}
-                        href={item.href}
-                        className="block px-12 py-3 text-gray-500 hover:text-[#262320] transition-colors text-sm"
-                        scroll
-                      >
-                        {item.label}
-                      </Link>
-                    ))}
-                  </div>
-                )}
+            {storeOpen && (
+              <div className="">
+                {storeItems.map((item, index) => (
+                  <Link
+                    key={index}
+                    href={item.href}
+                    className="block px-12 py-3 text-gray-500 hover:text-[#262320] transition-colors text-sm"
+                    scroll
+                  >
+                    {item.label}
+                  </Link>
+                ))}
               </div>
+            )}
+          </div>
 
           {/* Contact us */}
           <Link
