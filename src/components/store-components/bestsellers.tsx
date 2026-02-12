@@ -31,13 +31,13 @@ export default function BestSellers() {
           {products.map((product) => (
             <div
               key={product.id}
-              className="group cursor-pointer  rounded-[20px] border overflow-hidden"
+              className=" cursor-pointer  rounded-[20px] border overflow-hidden"
             >
 
                  <Link href={`/store-product/${product.id}`} className="block">
 
               {/* Product Image */}
-              <div className="relative mb-4 rounded-lg overflow-hidden">
+              <div className="relative group mb-4 rounded-lg overflow-hidden">
                 {/* i'll be back to integrate endpoints and state changes  */}
 
                <div className="absolute h-10 top-3 left-3 z-10 p-2 items-center bg-white rounded-md shadow-md">
