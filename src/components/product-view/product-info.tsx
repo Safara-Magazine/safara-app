@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { ChevronDown } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { ProductII } from '@/components/store-components/products';
-import HeartButton from './heart-btn';
-import Stars from './stars';
-import { AccordionItem } from './accordion';
+import { useState } from "react";
+import { ChevronDown } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { ProductII } from "@/components/store-components/products";
+import HeartButton from "./heart-btn";
+import AddToCartButton from "../cart/add-to-cart";
+import { AccordionItem } from "./accordion";
 
 interface ProductInfoProps {
   product: ProductII;
@@ -15,23 +15,20 @@ interface ProductInfoProps {
 export default function ProductInfo({ product }: ProductInfoProps) {
   const [selectedSize, setSelectedSize] = useState(product.sizes[0]);
   const [selectedColor, setSelectedColor] = useState(product.colors[0]);
-  const [cartAdded, setCartAdded] = useState(false);
-  
-
-  const handleAddToCart = () => {
-    setCartAdded(true);
-    setTimeout(() => setCartAdded(false), 2200);
-  };
 
   return (
     <div className="flex flex-col">
       {/* category */}
-      <div className='flex justify-between items-center py-4'>
-      <p className="mb-1 border text-[12px] border-neutral-400 px-2 py-1  text-center rounded-full  font-semibold uppercase tracking-widest text-neutral-400">
-        {product.category}
-      </p>
+      <div className="flex justify-between items-center py-4">
+        <p className="mb-1 border text-[12px] border-neutral-400 px-2 py-1  text-center rounded-full  font-semibold uppercase tracking-widest text-neutral-400">
+          {product.category}
+        </p>
 
-      <HeartButton productId={product.id} className=" flex-shrink-0" size={22} />
+        <HeartButton
+          productId={product.id}
+          className=" flex-shrink-0"
+          size={22}
+        />
       </div>
 
       {/* Name */}
@@ -39,7 +36,6 @@ export default function ProductInfo({ product }: ProductInfoProps) {
         <h1 className=" text-[28px] font-bold leading-tight text-neutral-900">
           {product.name}
         </h1>
-        
       </div>
 
       {/* Price */}
@@ -49,7 +45,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
 
       {/* Description accordion */}
       <div className="border border-neutral-200 p-2 my-4 rounded-md">
-        <AccordionItem  title="Description" defaultOpen>
+        <AccordionItem title="Description" defaultOpen>
           {product.description}
         </AccordionItem>
       </div>
@@ -65,10 +61,10 @@ export default function ProductInfo({ product }: ProductInfoProps) {
               key={size}
               onClick={() => setSelectedSize(size)}
               className={cn(
-                'h-9 w-9 rounded border text-xs text-center font-medium transition-colors duration-150',
+                "h-9 w-9 rounded border text-xs text-center font-medium transition-colors duration-150",
                 selectedSize === size
-                  ? 'border-neutral-900 bg-neutral-900 text-white'
-                  : 'border-neutral-200 bg-white px-2 text-neutral-800 hover:border-neutral-400'
+                  ? "border-neutral-900 bg-neutral-900 text-white"
+                  : "border-neutral-200 bg-white px-2 text-neutral-800 hover:border-neutral-400",
               )}
             >
               {size}
@@ -88,10 +84,10 @@ export default function ProductInfo({ product }: ProductInfoProps) {
               key={color}
               onClick={() => setSelectedColor(color)}
               className={cn(
-                'rounded border px-3.5 py-1.5 text-xs font-medium transition-colors duration-150',
+                "rounded border px-3.5 py-1.5 text-xs font-medium transition-colors duration-150",
                 selectedColor === color
-                  ? 'border-neutral-900 bg-neutral-900 text-white'
-                  : 'border-neutral-200 bg-white text-neutral-800 hover:border-neutral-400'
+                  ? "border-neutral-900 bg-neutral-900 text-white"
+                  : "border-neutral-200 bg-white text-neutral-800 hover:border-neutral-400",
               )}
             >
               {color}
@@ -100,30 +96,31 @@ export default function ProductInfo({ product }: ProductInfoProps) {
         </div>
       </div>
 
-      {/* Add to Cart */}
-      <button
-        onClick={handleAddToCart}
+      {/* add to cart */}
+      <AddToCartButton
+        product={product}
         className={cn(
-          'mt-5 w-full rounded py-3.5 text-xs font-bold uppercase tracking-widest text-white transition-all duration-200',
-          cartAdded
-            ? 'bg-emerald-600 scale-[.99]'
-            : 'bg-gradient-to-r from-[#B59157] to-[#EBB659] text-white rounded-lg hover:shadow-lg transition disabled:opacity-50 active:scale-[.99]'
+          "mt-5 w-full py-3.5 text-xs font-bold uppercase tracking-widest text-white",
+          "rounded-lg bg-gradient-to-r from-[#B59157] to-[#EBB659]",
+          "transition-all duration-200 hover:shadow-lg active:scale-[.99] disabled:opacity-50",
         )}
-      >
-        {cartAdded ? '✓ Added to Cart' : 'Add to Cart'}
-      </button>
+      />
 
       {/* Delivery + Shipping */}
       <div className="mt-5 border-t border-neutral-200">
         <AccordionItem title="Delivery" defaultOpen>
           <div className="space-y-2">
             <p>
-              Lagos –{' '}
-              <span className="font-semibold text-neutral-800">{product.delivery.lagos}</span>
+              Lagos –{" "}
+              <span className="font-semibold text-neutral-800">
+                {product.delivery.lagos}
+              </span>
             </p>
             <p>
-              Outside Lagos –{' '}
-              <span className="font-semibold text-neutral-800">{product.delivery.outside}</span>
+              Outside Lagos –{" "}
+              <span className="font-semibold text-neutral-800">
+                {product.delivery.outside}
+              </span>
             </p>
           </div>
         </AccordionItem>
@@ -131,9 +128,6 @@ export default function ProductInfo({ product }: ProductInfoProps) {
           {product.shipping}
         </AccordionItem>
       </div>
-
-
-      
     </div>
   );
 }

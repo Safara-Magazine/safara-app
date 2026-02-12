@@ -17,7 +17,7 @@ interface AddToCartButtonProps {
 
 export default function AddToCartButton({ 
   product, 
-  className = "text-white px-4 py-2 rounded-sm text-sm hover:bg-opacity-80 transition-transform duration-300 hover:scale-105 cursor-pointer bg-gradient-to-r from-[#B59157] to-[#EBB659]",
+  className = "text-white md:px-4 md:py-2 px-2 py-1  rounded-sm md:text-[12px] text-[10px] hover:bg-opacity-80 transition-transform duration-300 hover:scale-105 cursor-pointer bg-gradient-to-r from-[#B59157] to-[#EBB659]",
   children = "Add to Cart"
 }: AddToCartButtonProps) {
   const addToCart = useCartStore((state) => state.addToCart);
