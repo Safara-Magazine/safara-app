@@ -108,14 +108,20 @@ const StoreNavigation: React.FC = () => {
               </button>
 
               {/* wishlist */}
+              <Link href="/favorites">
               <button className="hidden md:block z-50 p-2 text-gray-700 hover:text-gray-900 transition-colors relative">
                  <FavoritesIndicator />
               </button>
+              </Link>
 
               {/* cart */}
+              <Link href="/cart">
+
               <button className="hidden md:block z-50 p-2 text-gray-700 hover:text-gray-900 transition-colors">
                   <CartIndicator />
-              </button>
+                </button>
+
+              </Link>
 
               {/* hamburger icon */}
               <button

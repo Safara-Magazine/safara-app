@@ -61,7 +61,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
               key={size}
               onClick={() => setSelectedSize(size)}
               className={cn(
-                "h-9 w-9 rounded border text-xs text-center font-medium transition-colors duration-150",
+                "h-9 w-17 rounded border text-xs text-center font-medium transition-colors duration-150",
                 selectedSize === size
                   ? "border-neutral-900 bg-neutral-900 text-white"
                   : "border-neutral-200 bg-white px-2 text-neutral-800 hover:border-neutral-400",
