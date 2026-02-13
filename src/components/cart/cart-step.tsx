@@ -159,7 +159,7 @@ export default function CartStep() {
         </div>
         {discount > 0 && (
           <p className="text-sm text-green-600 mt-2">
-            ✓ Discount code &ldquo;{discountCode}&ldquo; applied!
+            Discount code &ldquo;{discountCode}&ldquo; applied!
           </p>
         )}
       </div>

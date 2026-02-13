@@ -6,7 +6,7 @@ import { Loader2 } from 'lucide-react';
 
 export default function PaymentStep() {
   const { nextStep, getTotal, deliveryInfo } = useCartStore();
-  const [isProcessing, setIsProcessing] = useState(true);
+  const [_isProcessing, setIsProcessing] = useState(true);
 
   useEffect(() => {
     // Simulate payment gateway redirect/processing

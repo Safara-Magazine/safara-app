@@ -1,7 +1,7 @@
 'use client';
 
 import { useCartStore, DeliveryInfo } from '@/store/cartStore';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { toast } from 'sonner';
 
 export default function DeliveryStep() {
