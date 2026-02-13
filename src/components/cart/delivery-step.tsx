@@ -70,7 +70,7 @@ export default function DeliveryStep() {
 
   const handleChange = (field: keyof DeliveryInfo, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
-    // Clear error for this field when user starts typing
+    
     if (errors[field]) {
       setErrors((prev) => ({ ...prev, [field]: undefined }));
     }
@@ -97,7 +97,7 @@ export default function DeliveryStep() {
   const total = getTotal();
 
   return (
-    <div className="max-w-2xl mx-auto px-4 py-8">
+    <div className="max-w-6xl mx-auto px-4 py-8">
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Form Fields */}
         <div className="bg-white rounded-lg border p-6 space-y-4">
@@ -224,12 +224,12 @@ export default function DeliveryStep() {
           {/* Save Details Checkbox */}
           <div className="flex items-center gap-2 pt-2">
             <input
-              type="checkbox"
-              id="saveDetails"
-              checked={saveDeliveryDetails}
-              onChange={(e) => setSaveDeliveryDetails(e.target.checked)}
-              className="w-4 h-4 text-[#B59157] border-gray-300 rounded focus:ring-[#B59157]"
-            />
+  type="checkbox"
+  id="saveDetails"
+  checked={saveDeliveryDetails}
+  onChange={(e) => setSaveDeliveryDetails(e.target.checked)}
+  className="w-4 h-4 accent-[#B59157] border-gray-300 rounded focus:ring-[#B59157] checked:bg-[#B59157]"
+/>
             <label htmlFor="saveDetails" className="text-sm text-gray-700">
               Save delivery details for later
             </label>

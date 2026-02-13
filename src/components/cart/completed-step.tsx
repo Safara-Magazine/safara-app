@@ -19,7 +19,7 @@ export default function CompleteStep() {
     // Clear cart and reset checkout state
     clearCart();
     resetCheckout();
-    router.push('/');
+    router.push('/store');
   };
 
   const handleViewOrders = () => {
@@ -31,7 +31,7 @@ export default function CompleteStep() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto px-4 py-8">
+    <div className="max-w-6xl mx-auto px-4 pt-30 pb-12">
       <div className="flex flex-col items-center justify-center min-h-[500px]">
         {/* Success Icon */}
         <div className="mb-6">

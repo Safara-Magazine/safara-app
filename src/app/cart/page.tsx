@@ -1,5 +1,9 @@
 'use client';
-
+import {
+  allProductsMap,
+  relatedProducts,
+  type ProductII,
+} from "@/components/store-components/products";
 import { useCartStore } from '@/store/cartStore';
 import StepIndicator from '@/components/cart/step-indicator';
 import CartStep from '@/components/cart/cart-step';
@@ -10,10 +14,24 @@ import CompleteStep from '@/components/cart/completed-step';
 import { useEffect, useState } from 'react';
 import GlobalLoader from '@/components/global-loader';
 import StoreNavigation from '@/components/layout/Header/StoreNavBar';
+import RelatedProducts from '@/components/product-view/related-products';
 
 export default function CartPage() {
   const [isHydrated, setIsHydrated] = useState(false);
+
+
+const getUniqueRandomProducts = (products: typeof relatedProducts, count: number) => {
+  // Remove duplicates first
+  const uniqueProducts = products.filter((product, index, self) => 
+    index === self.findIndex((p) => p.id === product.id)
+  );
   
+  // Then shuffle
+  const shuffled = [...uniqueProducts].sort(() => Math.random() - 0.5);
+  return shuffled.slice(0, count);
+};
+
+const related = getUniqueRandomProducts(relatedProducts, 3);
   // Get current step - but only after hydration
   const currentStep = useCartStore((state) => state.currentStep);
 
@@ -61,6 +79,10 @@ export default function CartPage() {
 
       {/* Step Content */}
       <main className="pb-12">{renderStep()}</main>
+
+      <div className="max-w-6xl mx-auto py-10 ">
+        <RelatedProducts products={related} />
+      </div>
     </div>
     </>
   );
