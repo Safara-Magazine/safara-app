@@ -10,6 +10,8 @@ interface AddToCartButtonProps {
     price: string; 
     image: string;
     category?: string;
+    color?:string;
+    size?:string;
   };
   className?: string;
   children?: React.ReactNode;
@@ -35,6 +37,8 @@ export default function AddToCartButton({
       price: numericPrice,
       image: product.image,
       category: product.category,
+      color: product.color,
+      size: product.size || "One Size",
     });
 
     toast.success(`${product.name} added to cart!`, {
