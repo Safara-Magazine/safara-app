@@ -9,7 +9,7 @@ import {
 import { NewsCard } from "@/components/landingpage/newsCard";
 import Navigation from "@/components/layout/Header/HomePageNavBar";
 import ContentFeedDisplay from "@/components/templates/component.contentfeed";
-import ArticlePage from "./article/page";
+// import ArticlePage from "./article/page";
 
 const Page = () => {
   return (

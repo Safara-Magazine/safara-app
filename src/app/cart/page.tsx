@@ -1,8 +1,8 @@
 'use client';
 import {
-  allProductsMap,
+  // allProductsMap,
   relatedProducts,
-  type ProductII,
+  // type ProductII,
 } from "@/components/store-components/products";
 import { useCartStore } from '@/store/cartStore';
 import StepIndicator from '@/components/cart/step-indicator';

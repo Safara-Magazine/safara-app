@@ -4,9 +4,9 @@ import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { ProductII } from '@/components/store-components/products';
-import HeartButton from './heart-btn';
+
 import Stars from './stars';
-import { AccordionItem } from './accordion';
+
       
  
 interface ProductInfoProps {

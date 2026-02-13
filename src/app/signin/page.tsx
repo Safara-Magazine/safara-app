@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { GoogleLoginButton } from "@/auth";
 import Image from "next/image";
-import { BACKEND_ENDPOINTS } from "@/auth/lib/backendConfig";
+// import { BACKEND_ENDPOINTS } from "@/auth/lib/backendConfig";
 import { useLogin } from "@/auth/hooks/useAuthQueries";
 import { useRouter } from "next/navigation";
 
@@ -12,9 +12,9 @@ export default function SignInPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading] = useState(false);
   const router = useRouter();
-  const { mutate: loginUser, isPending } = useLogin();
+  const { mutate: loginUser} = useLogin();
 
   const handleEmailSignIn = async (e: React.FormEvent) => {
     e.preventDefault();

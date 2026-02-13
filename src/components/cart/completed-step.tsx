@@ -1,10 +1,11 @@
 'use client';
 
 import { useCartStore } from '@/store/cartStore';
-import { CheckCircle2 } from 'lucide-react';
+import { CheckCircle2} from 'lucide-react';
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-
+import StepIndicator from './step-indicator';
+import Link from 'next/link';
 export default function CompleteStep() {
   const { clearCart, resetCheckout, deliveryInfo, getTotal } = useCartStore();
   const router = useRouter();
@@ -22,16 +23,39 @@ export default function CompleteStep() {
     router.push('/store');
   };
 
+  // no page for this atm
   const handleViewOrders = () => {
-    // Clear cart and reset checkout state
+  
     clearCart();
     resetCheckout();
-    // Navigate to orders page (create this route if needed)
+  
     router.push('/orders');
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-4 pt-30 pb-12">
+    <>
+   {/* breadcrumb */}
+
+        <div className="flex max-w-6xl mx-auto gap-2 mt-30 items-center  text-[16px] text-[#767572]">
+          <Link href="/">Home</Link>
+          <span>&gt;&gt;</span>
+          <Link href="/store">Store</Link>
+          <span>&gt;&gt;</span>
+          <Link href="/categories">Categories</Link>
+          <span>&gt;&gt;</span>
+          <Link href="/apparel">Apparel</Link>
+          <span>&gt;&gt;</span>
+          <Link href="/totebags">Tote Bags</Link>
+          <span>&gt;&gt;</span>
+          <Link href="/safara-tote-bag">Safara Tote Bag</Link>
+          <span>&gt;&gt;</span>
+          <span className="text-[#2F1C32] font-medium">Cart</span>
+        </div>
+
+    <div className='-pt-25'>
+    <StepIndicator currentStep={4} />
+    </div>
+    <div className="max-w-6xl mx-auto px-4 pt-10 pb-12">
       <div className="flex flex-col items-center justify-center min-h-[500px]">
         {/* Success Icon */}
         <div className="mb-6">
@@ -83,7 +107,7 @@ export default function CompleteStep() {
         {/* Info Message */}
         <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-8 max-w-md">
           <p className="text-sm text-blue-800 text-center">
-            📧 A confirmation email has been sent to{' '}
+             A confirmation email has been sent to{' '}
             <span className="font-semibold">{deliveryInfo?.email}</span>
           </p>
         </div>
@@ -115,5 +139,6 @@ export default function CompleteStep() {
         </div>
       </div>
     </div>
+            </>
   );
 }

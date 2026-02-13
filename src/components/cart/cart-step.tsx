@@ -2,7 +2,7 @@
 
 import { useCartStore } from '@/store/cartStore';
 import Image from 'next/image';
-import { Minus, Plus, X } from 'lucide-react';
+import { Minus, Plus } from 'lucide-react';
 import { useState } from 'react';
 import Link from 'next/link';
 
@@ -14,7 +14,7 @@ export default function CartStep() {
     getSubtotal,
     getDiscount,
     discountCode,
-    setDiscountCode,
+    // setDiscountCode,
     applyDiscount,
     nextStep,
   } = useCartStore();
@@ -184,12 +184,12 @@ export default function CartStep() {
 
       {/* Action Buttons */}
       <div className="mt-8 flex gap-4">
-        <a
+        <Link
           href="/"
           className="flex-1 px-6 py-3 border-2 border-[#B59157] text-[#B59157] rounded-md hover:bg-[#B59157] hover:text-white transition-colors text-center font-medium"
         >
           Back to home
-        </a>
+        </Link>
         <button
           onClick={nextStep}
           className="flex-1 px-6 py-3 bg-gradient-to-r from-[#B59157] to-[#EBB659] text-white rounded-md hover:opacity-90 transition-opacity font-medium"
