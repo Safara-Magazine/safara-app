@@ -8,7 +8,7 @@ import {
   FileText,
   Users,
   Briefcase,
-  CreditCard,
+  // CreditCard,
   ShoppingCart,
   TrendingUp,
 } from 'lucide-react';

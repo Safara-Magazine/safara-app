@@ -3,11 +3,13 @@
 import { Heart } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useFavoritesStore } from '@/store/favoritesStore';
+import { toast } from 'sonner';
 
 interface HeartButtonProps {
   productId: string;
   size?: number;
   className?: string;
+ 
 }
 
 export default function HeartButton({ productId, size = 24, className }: HeartButtonProps) {
@@ -33,10 +35,20 @@ export default function HeartButton({ productId, size = 24, className }: HeartBu
     <button
       aria-label={isLiked ? 'Remove from favorites' : 'Add to favorites'}
       onClick={(e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        toggleFavorite(productId);
-      }}
+  e.preventDefault();
+  e.stopPropagation();
+
+  const wasLiked = isLiked;   // capture previous state
+  toggleFavorite(productId);
+
+  if (wasLiked) {
+    toast(`Removed from Wishlist!`);
+  } else {
+    toast(`Added to Wishlist! `);
+  }
+}}
+
+      
       className={cn("transition-transform duration-150 hover:scale-110 active:scale-95", className)}
     >
       <Heart
@@ -47,6 +59,7 @@ export default function HeartButton({ productId, size = 24, className }: HeartBu
             ? 'fill-red-500 stroke-red-500'
             : 'stroke-gray-400'
         )}
+        
       />
     </button>
   );

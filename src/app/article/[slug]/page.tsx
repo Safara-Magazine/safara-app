@@ -1,6 +1,6 @@
 
 import Image from "@/components/Image";
-import { getContentBySlug, getAllSlugs } from '@/lib/omniContents';
+import {  getAllSlugs } from '@/lib/omniContents';
 import ComingSoon from '@/components/component.comingsoon';
 import { BACKEND_ENDPOINTS } from "@/auth/lib/backendConfig";
 // import axios from "axios";

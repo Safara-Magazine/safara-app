@@ -20,12 +20,12 @@ export default function FavoritesIndicator() {
     <div className="relative">
       <Heart
         className={`w-6 h-6 ${
-          count > 0 ? "fill-red-500 text-red-500" : "text-gray-700"
+          count > 0 ? "text-gray-700" : "text-gray-700"
         }`}
       />
 
       {count > 0 && (
-        <span className="absolute -top-3 -right-3 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+        <span className="absolute -top-3 -right-3 bg-[#422746] text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
           {count > 9 ? "9+" : count}
         </span>
       )}

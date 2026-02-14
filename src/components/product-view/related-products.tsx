@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { RelatedProduct } from '@/components/store-components/products';
 import HeartButton from './heart-btn';
+import AddToCartButton from '../cart/add-to-cart';
 
 interface RelatedProductsProps {
   products: RelatedProduct[];
@@ -50,15 +51,16 @@ export default function RelatedProducts({ products }: RelatedProductsProps) {
             {/* Price + Add to cart */}
             <div className="flex items-center justify-between gap-2">
               <span className="text-[13px] font-semibold text-neutral-900">{item.price}</span>
-              <button
+              {/* <button
                 onClick={(e) => {
                   e.preventDefault();
                   //  wire to cart store later
                 }}
-                className="rounded bg-amber-500 px-3 py-1.5 text-[11px] font-bold uppercase bg-gradient-to-r from-[#B59157] to-[#EBB659] text-white rounded-lg hover:shadow-lg transition disabled:opacity-50 active:scale-[.99]"
+                className="rounded-md  px-2 py-1 md:text-[12px] text-[10px] font-bold  bg-gradient-to-r from-[#B59157] to-[#EBB659] text-white  hover:shadow-lg uppercase"
               >
                 Add to cart
-              </button>
+              </button> */}
+              <AddToCartButton product={item} />
             </div>
           </div>
         ))}

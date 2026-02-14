@@ -25,7 +25,7 @@ export default function CartIndicator() {
       />
 
       {count > 0 && (
-        <span className="absolute -top-3 -right-3 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+        <span className="absolute -top-3 -right-3 bg-[#422746] text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
           {count > 9 ? "9+" : count}
         </span>
       )}

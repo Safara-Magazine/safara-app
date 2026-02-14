@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import Link from "next/link";
+// import Link from "next/link";
 import { BACKEND_BASE_URL } from "@/auth/lib/backendConfig";
 import BackButton from "@/components/ui/back-btn";
 import RatingReview from "@/components/product-view/rating-review";
