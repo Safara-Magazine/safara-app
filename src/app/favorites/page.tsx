@@ -185,7 +185,7 @@ const related = getUniqueRandomProducts(relatedProducts, 3);
 
 
       {/* related products */}
-      <div className="mt-12 max-w-6xl mx-auto px-4 py-8">
+      <div className="mt-13 mb-3 max-w-6xl mx-auto px-4 py-8">
       <RelatedProducts products={related} />
 
       </div>
