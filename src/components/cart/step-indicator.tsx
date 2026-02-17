@@ -16,7 +16,7 @@ export default function StepIndicator({ currentStep }: StepIndicatorProps) {
 
   return (
     <div className="w-full  bg-white pt-20 sm:pt-25  border-b">
-      <div className="max-w-6xl pl-10 mx-auto  py-6">
+      <div className="max-w-6xl pl-10 md:pl-35 mx-auto  py-6">
         <div className="flex items-center  justify-between">
           {steps.map((step, index) => {
             const Icon = step.icon;

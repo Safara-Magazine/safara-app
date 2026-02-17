@@ -66,7 +66,7 @@ export default function CartStep() {
   }
 
   return (
-    <div className="max-w-6xl border border-red-300 mx-auto px-4 py-8">
+    <div className="max-w-6xl mx-auto px-4 py-8">
       {/* Product Details Table Header */}
       <div className="grid grid-cols-12 gap-4 pb-4 border-b font-medium text-sm text-gray-700">
         <div className="col-span-6">Product Details</div>
