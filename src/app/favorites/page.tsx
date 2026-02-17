@@ -4,11 +4,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { useFavoritesStore } from "@/store/favoritesStore";
 import { useCartStore } from "@/store/cartStore";
-import { allProductsMap } from "../../components/store-components/products";
+import { allProductsMap, relatedProducts } from "../../components/store-components/products";
 import StoreNavigation from "@/components/layout/Header/StoreNavBar";
 import { HeartIcon } from "lucide-react";
 import HeartButton from "@/components/product-view/heart-btn";
 import AddToCartButton from "@/components/cart/add-to-cart";
+import RelatedProducts from "@/components/product-view/related-products";
 
 export default function FavouritesPage() {
   const { favorites, _hasHydrated, toggleFavorite } = useFavoritesStore();
@@ -18,19 +19,18 @@ export default function FavouritesPage() {
     .map((id) => allProductsMap[id])
     .filter(Boolean);
 
-  const handleAddToCart = (productId: string) => {
-    const product = allProductsMap[productId];
-    if (!product) return;
+  const getUniqueRandomProducts = (products: typeof relatedProducts, count: number) => {
+  // Remove duplicates first
+  const uniqueProducts = products.filter((product, index, self) => 
+    index === self.findIndex((p) => p.id === product.id)
+  );
+  
+  // Then shuffle
+  const shuffled = [...uniqueProducts].sort(() => Math.random() - 0.5);
+  return shuffled.slice(0, count);
+};
 
-    addToCart({
-      id: product.id,
-      name: product.name,
-      price: parseInt(product.price.replace(/[₦,]/g, ""), 10),
-      image: product.image,
-      category: product.category,
-    });
-  };
-
+const related = getUniqueRandomProducts(relatedProducts, 3);
   // Hydration guard
   if (!_hasHydrated || !cartHydrated) {
     return (
@@ -181,6 +181,13 @@ export default function FavouritesPage() {
             Continue Shopping
           </Link>
         </div>
+      </div>
+
+
+      {/* related products */}
+      <div className="mt-12 max-w-6xl mx-auto px-4 py-8">
+      <RelatedProducts products={related} />
+
       </div>
     </>
   );
