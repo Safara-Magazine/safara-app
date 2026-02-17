@@ -92,79 +92,82 @@ export default function FavouritesPage() {
       <StoreNavigation />
 
       {/* breadcrumbs */}
-       <div className="flex gap-2 mt-30 pl-[50px] max-w-6xl mx-auto items-center text-[#767572]">
-          <Link className="text-[16px]" href="/">Home</Link>
-          <span>&gt;&gt;</span>
-          <span className="text-[#2F1C32] font-bold text-[18px]">Favorites</span>
-        </div>
+      <div className="flex gap-2 mt-24 sm:mt-30 pl-4 sm:pl-[50px] max-w-6xl mx-auto items-center text-[#767572]">
+        <Link className="text-[16px]" href="/">Home</Link>
+        <span>&gt;&gt;</span>
+        <span className="text-[#2F1C32] font-bold text-[18px]">Favorites</span>
+      </div>
 
-      <div className="max-w-6xl  mx-auto  py-8">
+      <div className="max-w-6xl mx-auto px-4 py-8">
 
         {/* Favourite items */}
         <div className="space-y-4 py-6 border border-[#827F7B] rounded-md max-w-6xl">
           {favouriteItems.map((product) => (
             <div
               key={product.id}
-              className="grid grid-cols-12 mr-3 gap-4 items-center pb-4 border-b last:border-0"
-
+              className="flex flex-col sm:grid sm:grid-cols-12 mr-3 gap-3 sm:gap-4 items-start sm:items-center pb-4 border-b last:border-0 px-3 sm:px-0"
             >
 
-              {/* heart-btn */}
+              {/* Mobile: top row with heart + product info */}
+              <div className="flex w-full sm:contents gap-3 items-start">
 
-              <HeartButton className="ml-3"   productId={product.id} size={24} />
+                {/* heart-btn */}
+                <HeartButton className="ml-0 sm:ml-3 mt-1 flex-shrink-0" productId={product.id} size={24} />
 
-
-              {/* Product info */}
-              <div className="col-span-5 flex h-full  gap-3  ">
-                <Link href={`/product/${product.id}`} className="flex-shrink-0">
-                  <div className="relative w-20 h-20 bg-gray-100 overflow-hidden">
-                    <Image
-                      src={product.image}
-                      alt={product.name}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                </Link>
-
-                {/* ii */}
-                <div className="flex flex-col justify-between py-2 h-full">
-                  <Link href={`/product/${product.id}`}>
-                    <h3 className="font-medium text-gray-900 truncate hover:underline">
-                      {product.name}
-                    </h3>
+                {/* Product info */}
+                <div className="col-span-5 flex h-full gap-3 flex-1">
+                  <Link href={`/store-product/${product.id}`} className="flex-shrink-0">
+                    <div className="relative w-20 h-20 bg-gray-100 overflow-hidden">
+                      <Image
+                        src={product.image}
+                        alt={product.name}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
                   </Link>
-                  <div className="flex gap-4 text-[#6A6661] text-[18px]">
-                  <p className="text-xs text-gray-500 mt-1">
-                    Color: {product.colors}
-                  </p>
-                  <p className="text-xs text-gray-500 mt-1">
-                    Size: {product.sizes}
-                  </p>
 
+                  {/* ii */}
+                  <div className="flex flex-col justify-between py-2 h-full">
+                    <Link href={`/store-product/${product.id}`}>
+                      <h3 className="font-medium text-gray-900 truncate hover:underline">
+                        {product.name}
+                      </h3>
+                    </Link>
+                    <div className="flex gap-4 text-[#6A6661] text-[18px]">
+                      <p className="text-xs text-gray-500 mt-1">
+                        Color: {product.colors}
+                      </p>
+                      <p className="text-xs text-gray-500 mt-1">
+                        Size: {product.sizes}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              {/* Price */}
-              <div className="col-span-3 flex justify-center">
-                <span className="font-semibold text-gray-900">
-                  {product.price}
-                </span>
+              {/* Mobile: bottom row with price + add to cart */}
+              <div className="flex w-full sm:contents items-center justify-between pl-[calc(24px+0.75rem+0.75rem)] sm:pl-0">
+
+                {/* Price */}
+                <div className="sm:col-span-3 sm:flex sm:justify-center">
+                  <span className="font-semibold text-gray-900">
+                    {product.price}
+                  </span>
+                </div>
+
+                {/* Actions */}
+                <div className="sm:col-span-3 sm:flex sm:flex-col sm:items-end sm:gap-2">
+                  <AddToCartButton product={product} />
+                </div>
               </div>
 
-              {/* Actions */}
-              <div className="col-span-3 flex flex-col items-end gap-2">
-
-                <AddToCartButton product={product} />
-              
-              </div>
             </div>
           ))}
         </div>
 
         {/* Action buttons  */}
-        <div className="mt-8 flex gap-4">
+        <div className="mt-8 flex flex-col sm:flex-row gap-4">
           <Link
             href="/"
             className="flex-1 px-6 py-3 border-2 border-[#B59157] text-[#B59157] rounded-md hover:bg-[#B59157] hover:text-white transition-colors text-center font-medium"
