@@ -16,7 +16,7 @@ export default function StepIndicator({ currentStep }: StepIndicatorProps) {
 
   return (
     <div className="w-full bg-white pt-20 sm:pt-25 border-b">
-      <div className="max-w-6xl mx-auto px-4 py-6">
+      <div className="max-w-4xl mx-auto  py-6">
         <div className="flex items-center mx-auto justify-between">
           {steps.map((step, index) => {
             const Icon = step.icon;
@@ -24,9 +24,9 @@ export default function StepIndicator({ currentStep }: StepIndicatorProps) {
             const isCompleted = currentStep > step.number;
 
             return (
-              <div key={step.number} className="flex justify-center mx-auto items-center flex-1">
+              <div key={step.number} className="flex justify-center border border-red-400 mx-auto items-center flex-1">
                 {/* Step Circle */}
-                <div className="flex flex-col items-center flex-shrink-0">
+                <div className="flex flex-col justify-center items-center flex-shrink-0">
                   <div
                     className={`
                       w-9 h-9 sm:w-12 sm:h-12 rounded-full flex items-center justify-center transition-all
@@ -41,9 +41,10 @@ export default function StepIndicator({ currentStep }: StepIndicatorProps) {
                   >
                     <Icon className="w-4 h-4 sm:w-6 sm:h-6" />
                   </div>
+                  
                   <span
                     className={`
-                      mt-2 text-[10px] sm:text-xs font-medium
+                      mt-2 text-[10px] sm:text-xs text-center border border-red-300 font-medium
                       ${isActive || isCompleted ? 'text-[#B59157]' : 'text-gray-400'}
                     `}
                   >
@@ -55,12 +56,16 @@ export default function StepIndicator({ currentStep }: StepIndicatorProps) {
                 {index < steps.length - 1 && (
                   <div
                     className={`
-                      flex-1 h-0.5 -mt-4 mx-2 sm:mx-4 transition-all
+                      flex-1 h-0.5 -mt-4 mx-2  sm:mx-4 transition-all
                       ${isCompleted ? 'bg-gradient-to-r from-[#B59157] to-[#EBB659]' : 'bg-gray-200'}
                     `}
                   />
                 )}
               </div>
+
+
+
+
             );
           })}
         </div>
