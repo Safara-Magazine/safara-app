@@ -7,6 +7,8 @@ import { useCartStore } from "@/store/cartStore";
 import { allProductsMap } from "../../components/store-components/products";
 import StoreNavigation from "@/components/layout/Header/StoreNavBar";
 import { HeartIcon } from "lucide-react";
+import HeartButton from "@/components/product-view/heart-btn";
+import AddToCartButton from "@/components/cart/add-to-cart";
 
 export default function FavouritesPage() {
   const { favorites, _hasHydrated, toggleFavorite } = useFavoritesStore();
@@ -90,29 +92,30 @@ export default function FavouritesPage() {
       <StoreNavigation />
 
       {/* breadcrumbs */}
-       <div className="flex gap-2 mt-25 pl-[50px] max-w-6xl mx-auto py-4  font-bold items-center  text-[18px] text-[#767572]">
-          <Link href="/">Home</Link>
+       <div className="flex gap-2 mt-30 pl-[50px] max-w-6xl mx-auto items-center text-[#767572]">
+          <Link className="text-[16px]" href="/">Home</Link>
           <span>&gt;&gt;</span>
-          <span className="text-[#2F1C32] font-medium">Favorites</span>
+          <span className="text-[#2F1C32] font-bold text-[18px]">Favorites</span>
         </div>
 
       <div className="max-w-6xl  mx-auto  py-8">
-        {/* Table header 
-        <div className="grid grid-cols-12 gap-4 pb-4 border-b font-medium text-sm text-gray-700">
-          <div className="col-span-6">Product Details</div>
-          <div className="col-span-3 text-center">Price</div>
-          <div className="col-span-3 text-right"></div>
-        </div> */}
 
         {/* Favourite items */}
-        <div className="space-y-4 py-6">
+        <div className="space-y-4 py-6 border border-[#827F7B] rounded-md max-w-6xl">
           {favouriteItems.map((product) => (
             <div
               key={product.id}
-              className="grid grid-cols-12 gap-4 items-center pb-4 border-b last:border-0"
+              className="grid grid-cols-12 mr-3 gap-4 items-center pb-4 border-b last:border-0"
+
             >
+
+              {/* heart-btn */}
+
+              <HeartButton className="ml-3"   productId={product.id} size={24} />
+
+
               {/* Product info */}
-              <div className="col-span-6 flex items-start gap-3">
+              <div className="col-span-5 flex h-full  gap-3  ">
                 <Link href={`/product/${product.id}`} className="flex-shrink-0">
                   <div className="relative w-20 h-20 bg-gray-100 overflow-hidden">
                     <Image
@@ -125,15 +128,21 @@ export default function FavouritesPage() {
                 </Link>
 
                 {/* ii */}
-                <div className="flex flex-col justify-between border border-red-300 h-full">
+                <div className="flex flex-col justify-between py-2 h-full">
                   <Link href={`/product/${product.id}`}>
                     <h3 className="font-medium text-gray-900 truncate hover:underline">
                       {product.name}
                     </h3>
                   </Link>
+                  <div className="flex gap-4 text-[#6A6661] text-[18px]">
                   <p className="text-xs text-gray-500 mt-1">
-                    {product.category}
+                    Color: {product.colors}
                   </p>
+                  <p className="text-xs text-gray-500 mt-1">
+                    Size: {product.sizes}
+                  </p>
+
+                  </div>
                 </div>
               </div>
 
@@ -146,19 +155,9 @@ export default function FavouritesPage() {
 
               {/* Actions */}
               <div className="col-span-3 flex flex-col items-end gap-2">
-                <button
-                  onClick={() => handleAddToCart(product.id)}
-                  className="px-4 py-2 bg-gradient-to-r from-[#B59157] to-[#EBB659] text-white rounded-md hover:opacity-90 transition-opacity text-sm font-medium whitespace-nowrap"
-                >
-                  Add to Cart
-                </button>
-                <button
-                  onClick={() => toggleFavorite(product.id)}
-                  className="text-red-500 hover:text-red-600 transition-colors text-xs"
-                  aria-label="Remove from favourites"
-                >
-                  Remove
-                </button>
+
+                <AddToCartButton product={product} />
+              
               </div>
             </div>
           ))}
