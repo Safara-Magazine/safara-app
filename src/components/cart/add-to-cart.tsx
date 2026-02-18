@@ -10,8 +10,8 @@ interface AddToCartButtonProps {
     price: string; 
     image: string;
     category?: string;
-    color?:string;
-    size?:string;
+    color?: string;
+    size?: string;
   };
   className?: string;
   children?: React.ReactNode;
@@ -19,7 +19,19 @@ interface AddToCartButtonProps {
 
 export default function AddToCartButton({ 
   product, 
-  className = "text-white md:px-4 md:py-2 px-2 py-1  rounded-sm md:text-[12px] text-[10px] hover:bg-opacity-80 transition-transform duration-300 hover:scale-105 cursor-pointer bg-gradient-to-r from-[#B59157] to-[#EBB659]",
+  className = `
+    text-white 
+    px-3 py-2 
+    sm:px-4 sm:py-2 
+    md:px-5 md:py-3 
+    rounded-sm 
+    text-[10px] sm:text-[12px] md:text-[14px] 
+    hover:bg-opacity-80 
+    transition-transform duration-300 
+    hover:scale-105 
+    cursor-pointer 
+    bg-gradient-to-r from-[#B59157] to-[#EBB659]
+  `,
   children = "Add to Cart"
 }: AddToCartButtonProps) {
   const addToCart = useCartStore((state) => state.addToCart);
@@ -28,7 +40,6 @@ export default function AddToCartButton({
     e.preventDefault();
     e.stopPropagation();
 
-    // Extract numeric price from formatted string
     const numericPrice = parseFloat(product.price.replace(/[^0-9.-]+/g, ""));
 
     addToCart({

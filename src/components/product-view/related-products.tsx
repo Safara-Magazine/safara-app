@@ -13,11 +13,11 @@ interface RelatedProductsProps {
 export default function RelatedProducts({ products }: RelatedProductsProps) {
   return (
     <div className="mt-12">
-      <p className="mb-4 text-[28px] font-semibold uppercase tracking-widest text-black">
+      <p className="mb-4 text-[22px] sm:text-[26px] md:text-[28px] font-semibold uppercase tracking-widest text-black">
         You might also like
       </p>
 
-      <div className="grid grid-cols-3 gap-4 sm:grid-cols-3">
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {products.map((item) => (
           <div key={item.id} className="group relative">
             <Link href={`/store-product/${item.id}`} className="block">
@@ -27,39 +27,33 @@ export default function RelatedProducts({ products }: RelatedProductsProps) {
                   src={item.image}
                   alt={item.name}
                   fill
-                  className="object-cover transition-transform duration-350 group-hover:scale-105"
-                  sizes="(max-width: 640px) 50vw, 33vw"
+                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                  sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
                 />
 
                 {/* Heart */}
                 <div className="absolute right-2 top-2">
-                  <div className="flex h-7 w-7 items-center justify-center rounded-full bg-white shadow-sm">
-                    <HeartButton productId={item.id} size={14} />
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-sm">
+                    <HeartButton productId={item.id} />
                   </div>
                 </div>
               </div>
 
               {/* Info */}
-              <p className="mb-0.5 text-[10px] font-semibold uppercase tracking-widest text-neutral-400">
+              <p className="mb-0.5 text-[16px]  font-semibold uppercase tracking-widest text-neutral-400">
                 {item.tag}
               </p>
-              <p className="mb-2 text-[13px] font-medium leading-snug text-neutral-900">
+              <p className="mb-2 text-[18px] font-medium leading-snug text-neutral-900">
                 {item.name}
               </p>
             </Link>
 
             {/* Price + Add to cart */}
             <div className="flex items-center justify-between gap-2">
-              <span className="text-[13px] font-semibold text-neutral-900">{item.price}</span>
-              {/* <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  //  wire to cart store later
-                }}
-                className="rounded-md  px-2 py-1 md:text-[12px] text-[10px] font-bold  bg-gradient-to-r from-[#B59157] to-[#EBB659] text-white  hover:shadow-lg uppercase"
-              >
-                Add to cart
-              </button> */}
+              <span className="text-base font-semibold text-neutral-900">
+                {item.price}
+              </span>
+
               <AddToCartButton product={item} />
             </div>
           </div>

@@ -1,11 +1,18 @@
-'use client';
+"use client";
 
-import { useState, useEffect, Suspense } from 'react';
-import { useSearchParams } from 'next/navigation';
-import Link from 'next/link';
-import { CheckCircle, AlertCircle, Loader, Home, ShoppingBag } from 'lucide-react';
-import axios from 'axios';
-import { BACKEND_BASE_URL } from '@/auth/lib/backendConfig';
+import { useState, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
+import Link from "next/link";
+import {
+  CheckCircle,
+  AlertCircle,
+  Loader,
+  Home,
+  ShoppingBag,
+} from "lucide-react";
+import axios from "axios";
+import { BACKEND_BASE_URL } from "@/auth/lib/backendConfig";
+import { useCartStore } from "@/store/cartStore";
 
 interface PaymentVerification {
   status: string;
@@ -20,44 +27,63 @@ interface PaymentVerification {
 
 function PaymentCallbackContent() {
   const searchParams = useSearchParams();
-  const reference = searchParams.get('reference');
+  const reference = searchParams.get("reference");
+  const { clearCart, resetCheckout } = useCartStore();
 
-  const [verificationStatus, setVerificationStatus] = useState<'loading' | 'success' | 'error'>('loading');
-  const [paymentData, setPaymentData] = useState<PaymentVerification['data'] | null>(null);
-  const [errorMessage, setErrorMessage] = useState<string>('');
+  const [verificationStatus, setVerificationStatus] = useState<
+    "loading" | "success" | "error"
+  >("loading");
+  const [paymentData, setPaymentData] = useState<
+    PaymentVerification["data"] | null
+  >(null);
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   useEffect(() => {
     const verifyPayment = async () => {
       if (!reference) {
-        setVerificationStatus('error');
-        setErrorMessage('No payment reference provided');
+        setVerificationStatus("error");
+        setErrorMessage("No payment reference provided");
         return;
       }
 
       try {
-        console.log('[PaymentCallback] Verifying payment with reference:', reference);
-        
-        // Verify payment with backend
-        const response = await axios.get<PaymentVerification>(
-          `${BACKEND_BASE_URL}/api/orders/verify/${reference}`
+        console.log(
+          "[PaymentCallback] Verifying payment with reference:",
+          reference,
         );
 
-        console.log('[PaymentCallback] Verification response:', response.data);
+        // Verify payment with backend
+        const response = await axios.get<PaymentVerification>(
+          `${BACKEND_BASE_URL}/api/orders/verify/${reference}`,
+        );
 
-        if (response.data.status === 'success') {
+        console.log("[PaymentCallback] Verification response:", response.data);
+
+        if (response.data.status === "success") {
           setPaymentData(response.data.data);
-          setVerificationStatus('success');
+          setVerificationStatus("success");
+
+          if (response.data.status === "success") {
+            setPaymentData(response.data.data);
+            setVerificationStatus("success");
+
+            // sync frontend with paid order
+            clearCart();
+            resetCheckout();
+          }
         } else {
-          setVerificationStatus('error');
-          setErrorMessage(response.data.message || 'Payment verification failed');
+          setVerificationStatus("error");
+          setErrorMessage(
+            response.data.message || "Payment verification failed",
+          );
         }
       } catch (error) {
-        console.error('[PaymentCallback] Verification error:', error);
-        setVerificationStatus('error');
+        console.error("[PaymentCallback] Verification error:", error);
+        setVerificationStatus("error");
         setErrorMessage(
           error instanceof axios.AxiosError
-            ? error.response?.data?.message || 'Payment verification failed'
-            : 'An error occurred while verifying payment'
+            ? error.response?.data?.message || "Payment verification failed"
+            : "An error occurred while verifying payment",
         );
       }
     };
@@ -65,26 +91,30 @@ function PaymentCallbackContent() {
     verifyPayment();
   }, [reference]);
 
-  if (verificationStatus === 'loading') {
+  if (verificationStatus === "loading") {
     return (
       <div className="min-h-screen flex items-center justify-center px-4">
         <div className="text-center space-y-4">
           <Loader className="w-12 h-12 text-[#B59157] animate-spin mx-auto" />
-          <h1 className="text-2xl font-bold text-gray-900">Verifying Payment</h1>
-          <p className="text-gray-600">Please wait while we confirm your payment...</p>
+          <h1 className="text-2xl font-bold text-gray-900">
+            Verifying Payment
+          </h1>
+          <p className="text-gray-600">
+            Please wait while we confirm your payment...
+          </p>
         </div>
       </div>
     );
   }
 
-  if (verificationStatus === 'error') {
+  if (verificationStatus === "error") {
     return (
       <div className="min-h-screen flex items-center justify-center px-4">
         <div className="max-w-md w-full bg-white rounded-lg shadow-lg p-8 space-y-6">
           <div className="flex justify-center">
             <AlertCircle className="w-16 h-16 text-red-600" />
           </div>
-          
+
           <div className="space-y-2 text-center">
             <h1 className="text-2xl font-bold text-gray-900">Payment Failed</h1>
             <p className="text-gray-600">{errorMessage}</p>
@@ -97,7 +127,7 @@ function PaymentCallbackContent() {
                   <span className="font-semibold">Reference:</span> {reference}
                 </>
               )}
-              {!reference && 'No payment reference found'}
+              {!reference && "No payment reference found"}
             </p>
           </div>
 
@@ -130,7 +160,9 @@ function PaymentCallbackContent() {
         </div>
 
         <div className="space-y-2 text-center">
-          <h1 className="text-3xl font-bold text-gray-900">Payment Successful!</h1>
+          <h1 className="text-3xl font-bold text-gray-900">
+            Payment Successful!
+          </h1>
           <p className="text-gray-600">Your order has been confirmed</p>
         </div>
 
@@ -138,7 +170,9 @@ function PaymentCallbackContent() {
           <div className="bg-gradient-to-r from-[#B59157]/10 to-[#EBB659]/10 rounded-lg p-6 space-y-4">
             <div className="space-y-2">
               <p className="text-sm text-gray-600">Order ID</p>
-              <p className="font-mono font-bold text-gray-900">{paymentData.orderId}</p>
+              <p className="font-mono font-bold text-gray-900">
+                {paymentData.orderId}
+              </p>
             </div>
 
             <div className="h-px bg-gray-200"></div>
@@ -154,7 +188,9 @@ function PaymentCallbackContent() {
 
             <div className="space-y-2">
               <p className="text-sm text-gray-600">Reference</p>
-              <p className="font-mono text-xs text-gray-600 break-all">{paymentData.reference}</p>
+              <p className="font-mono text-xs text-gray-600 break-all">
+                {paymentData.reference}
+              </p>
             </div>
 
             <div className="h-px bg-gray-200"></div>
@@ -163,7 +199,9 @@ function PaymentCallbackContent() {
               <p className="text-sm text-gray-600">Status</p>
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-green-600 rounded-full"></div>
-                <p className="font-semibold text-green-600 capitalize">{paymentData.status}</p>
+                <p className="font-semibold text-green-600 capitalize">
+                  {paymentData.status}
+                </p>
               </div>
             </div>
           </div>
@@ -171,7 +209,8 @@ function PaymentCallbackContent() {
 
         <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
           <p className="text-sm text-blue-700">
-            A confirmation email has been sent to your email address with your order details.
+            A confirmation email has been sent to your email address with your
+            order details.
           </p>
         </div>
 

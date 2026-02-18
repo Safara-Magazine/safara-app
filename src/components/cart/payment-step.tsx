@@ -1,106 +1,92 @@
 'use client';
 
 import { useCartStore } from '@/store/cartStore';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { Loader2 } from 'lucide-react';
+import { useInitializeOrder } from '../../auth/hooks/useOrderQueries'; 
+import { toast } from 'sonner';
+
+
+// Normalize Nigerian numbers to international format
+const normalizePhone = (phone: string) => {
+  let cleaned = phone.replace(/\s+/g, '');
+
+  // If user entered 080...
+  if (cleaned.startsWith('0')) {
+    cleaned = '+234' + cleaned.slice(1);
+  }
+
+  // If user entered 234...
+  else if (cleaned.startsWith('234') && !cleaned.startsWith('+')) {
+    cleaned = '+' + cleaned;
+  }
+
+  // If already correct (+234...) leave it alone
+
+  return cleaned;
+};
 
 export default function PaymentStep() {
-  const { nextStep, getTotal, deliveryInfo } = useCartStore();
-  const [_isProcessing, setIsProcessing] = useState(true);
+  const { deliveryInfo, items, getTotal } = useCartStore();
 
-  useEffect(() => {
-    // Simulate payment gateway redirect/processing
-    // In production, this is where you'd integrate with Paystack, Flutterwave, etc.
-    const timer = setTimeout(() => {
-      // For demo purposes, we'll automatically proceed to complete step
-      // In production, this would be handled by payment gateway callback
-      handlePaymentSuccess();
-    }, 3000);
+  const hasStarted = useRef(false); 
+  const initializeOrderMutation = useInitializeOrder();
 
-    return () => clearTimeout(timer);
-  }, []);
+ useEffect(() => {
+  if (hasStarted.current) return;
+  hasStarted.current = true;
 
-  const handlePaymentSuccess = () => {
-    setIsProcessing(false);
-    nextStep();
+  if (!deliveryInfo) {
+    toast.error('Missing delivery information');
+    return;
+  }
+
+  if (!items.length) {
+    toast.error('Your cart is empty');
+    return;
+  }
+
+  // ✅ Add this log BEFORE calling mutate
+  const payload = {
+    email: deliveryInfo.email,
+    customerName: deliveryInfo.fullName,
+    phone: normalizePhone(deliveryInfo.phone),
+    items: items.map((item) => ({
+      productId: item.id,
+      quantity: item.quantity,
+    })),
   };
+  console.log('[PaymentStep] Payment payload:', payload);
 
-  // In a real implementation, you would:
-  // 1. Initialize payment with your gateway (Paystack, Flutterwave, etc.)
-  // 2. Redirect user to payment page or show embedded form
-  // 3. Handle callback/webhook
-  // 4. Verify payment
-  // 5. Move to next step
+  initializeOrderMutation.mutate(payload);
+}, [deliveryInfo, items, initializeOrderMutation]);
 
-  /* Example Paystack Integration (commented out):
-  
+  // Handle mutation error UI fallback
   useEffect(() => {
-    const handler = PaystackPop.setup({
-      key: 'your-public-key',
-      email: deliveryInfo?.email || '',
-      amount: getTotal() * 100, // Amount in kobo
-      currency: 'NGN',
-      ref: 'safara_' + Math.floor(Math.random() * 1000000000 + 1),
-      callback: function(response) {
-        // Payment complete! Reference: response.reference
-        nextStep();
-      },
-      onClose: function() {
-        // User closed payment modal
-        alert('Payment cancelled');
-      }
-    });
-    
-    handler.openIframe();
-  }, []);
-  
-  */
+    if (initializeOrderMutation.isError) {
+      console.error('Payment initialization failed:', initializeOrderMutation.error);
+      toast.error('Unable to start payment. Please try again.');
+    }
+  }, [initializeOrderMutation.isError, initializeOrderMutation.error]);
 
   return (
     <div className="max-w-2xl mx-auto px-4 py-8">
-      <div className="flex flex-col items-center justify-center min-h-[400px]">
-        <div className="text-center">
-          <div className="mb-6">
-            <Loader2 className="w-16 h-16 text-[#B59157] animate-spin mx-auto" />
-          </div>
-          <h2 className="text-2xl font-semibold text-gray-900 mb-2">
-            Processing Payment
-          </h2>
-          <p className="text-gray-600 mb-8">
-            You are being redirected to payment. Please wait...
+      <div className="flex flex-col items-center justify-center min-h-[400px] text-center">
+        <Loader2 className="w-16 h-16 text-[#B59157] animate-spin mb-6" />
+
+        <h2 className="text-2xl font-semibold text-gray-900 mb-2">
+          Redirecting to Secure Payment
+        </h2>
+
+        <p className="text-gray-600 mb-6">
+          Please wait while we connect you to the payment gateway...
+        </p>
+
+        <div className="bg-gray-50 rounded-lg p-6">
+          <p className="text-sm text-gray-600">Amount to Pay</p>
+          <p className="text-xl font-semibold">
+            ₦{getTotal().toLocaleString()}
           </p>
-
-          {/* Payment Info Card */}
-          <div className="bg-gray-50 rounded-lg p-6 max-w-md mx-auto text-left">
-            <div className="space-y-3">
-              <div className="flex justify-between text-sm">
-                <span className="text-gray-600">Amount to pay:</span>
-                <span className="font-semibold text-gray-900">
-                  ₦{getTotal().toLocaleString()}
-                </span>
-              </div>
-              {deliveryInfo && (
-                <>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Email:</span>
-                    <span className="font-medium text-gray-900">
-                      {deliveryInfo.email}
-                    </span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Phone:</span>
-                    <span className="font-medium text-gray-900">
-                      {deliveryInfo.phone}
-                    </span>
-                  </div>
-                </>
-              )}
-            </div>
-          </div>
-
-          <div className="mt-8 text-xs text-gray-500">
-            <p>Your payment is secure and encrypted</p>
-          </div>
         </div>
       </div>
     </div>

@@ -1,5 +1,8 @@
 // ─── TYPES ────────────────────────────────────────────────────────────────────
 
+import { BACKEND_BASE_URL } from "@/auth/lib/backendConfig";
+import axios from "axios";
+
 export interface Review {
   name: string;
   stars: number;
@@ -35,6 +38,31 @@ export interface RelatedProduct {
   image: string;
 }
 
+export interface BackendProduct {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  amount: number;
+  quantity: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface ProductsResponse {
+  status: string;
+  data: {
+    products: BackendProduct[];
+    pagination: {
+      total: number;
+      page: number;
+      limit: number;
+      totalPages: number;
+    };
+  };
+}
+
+
 // ─── PRODUCTS ─────────────────────────────────────────────────────────────────
 
 export const products: ProductII[] = [
@@ -46,8 +74,9 @@ export const products: ProductII[] = [
     image: "/images/safara-shirt.png",
     images: [
       "/images/safara-shirt.png",
-      "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&q=80",
-      "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=600&q=80",
+      "/images/safara-shirt.png",
+      "/images/safara-shirt.png",
+      
     ],
     description:
       "A clean, minimal white tee crafted from 100% premium combed cotton. Lightweight, breathable, and built to last — the Safara White T-Shirt is a wardrobe essential that pairs effortlessly with anything.",
@@ -73,8 +102,9 @@ export const products: ProductII[] = [
     image: "/images/safara-cap.png",
     images: [
       "/images/safara-cap.png",
-      "https://images.unsplash.com/photo-1534215754734-18e55d13e346?w=600&q=80",
-      "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=600&q=80",
+      "/images/safara-cap.png",
+      "/images/safara-cap.png",
+      
     ],
     description:
       "The Safara White Facecap is a structured 6-panel cap with an embroidered Safara logo. Adjustable strap at the back for a comfortable, universal fit. Perfect for everyday wear.",
@@ -100,8 +130,11 @@ export const products: ProductII[] = [
     image: "/images/safara-mug.png",
     images: [
       "/images/safara-mug.png",
-      "https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=600&q=80",
-      "https://images.unsplash.com/photo-1572916118987-e1a03c4e7e3c?w=600&q=80",
+      "/images/safara-mug.png",
+      "/images/safara-mug.png",
+      
+      
+      
     ],
     description:
       "Start your mornings right with the Safara White Mug. Made from high-quality ceramic with a clean matte finish and the Safara logo printed in understated gold. Microwave and dishwasher safe. 350ml capacity.",
@@ -127,8 +160,9 @@ export const products: ProductII[] = [
     image: "/images/pen-image.png",
     images: [
       "/images/pen-image.png",
-      "https://images.unsplash.com/photo-1585336261022-680e295ce3fe?w=600&q=80",
-      "https://images.unsplash.com/photo-1456735190827-d1262f71b8a3?w=600&q=80",
+      "/images/pen-image.png",
+      "/images/pen-image.png",
+      
     ],
     description:
       "The Safara White Gold Inscribed Pen is a smooth-writing ballpoint pen with a sleek white barrel and gold Safara inscription. Ideal for the desk, meetings, or as a gift. Refillable ink cartridge included.",
@@ -156,8 +190,9 @@ export const newProducts: ProductII[] = [
     image: "/images/safara-shirt.png",
     images: [
       "/images/safara-shirt.png",
-      "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&q=80",
-      "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=600&q=80",
+      "/images/safara-shirt.png",
+      "/images/safara-shirt.png",
+      
     ],
     description:
       "A clean, minimal white tee crafted from 100% premium combed cotton. Lightweight, breathable, and built to last — the Safara White T-Shirt is a wardrobe essential that pairs effortlessly with anything.",
@@ -183,8 +218,9 @@ export const newProducts: ProductII[] = [
     image: "/images/pen-image.png",
     images: [
       "/images/pen-image.png",
-      "https://images.unsplash.com/photo-1585336261022-680e295ce3fe?w=600&q=80",
-      "https://images.unsplash.com/photo-1456735190827-d1262f71b8a3?w=600&q=80",
+      "/images/pen-image.png",
+      "/images/pen-image.png",
+     
     ],
     description:
       "The everyday Safara Ballpoint Pen. Smooth ink flow, comfortable grip, and a minimalist design that keeps your focus on the work. Sold individually or as part of a set.",
@@ -209,8 +245,9 @@ export const newProducts: ProductII[] = [
     image: "/images/tote-bag.png",
     images: [
       "/images/tote-bag.png",
-      "https://images.unsplash.com/photo-1554672408-17870faa2b98?w=600&q=80",
-      "https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?w=600&q=80",
+      "/images/tote-bag.png",
+      "/images/tote-bag.png",
+      
     ],
     description:
       "The Safara Premium Tote Bag is made from heavy-duty canvas with reinforced stitching and a natural cotton finish. Spacious interior with an inner zip pocket. Perfect for work, travel, or the market run.",
@@ -236,8 +273,9 @@ export const newProducts: ProductII[] = [
     image: "/images/safara-pack.png",
     images: [
       "/images/safara-pack.png",
-      "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=600&q=80",
-      "https://images.unsplash.com/photo-1603664454146-50b9bb1e7afa?w=600&q=80",
+      "/images/safara-pack.png",
+      "/images/safara-pack.png",
+      
     ],
     description:
       "Safara Magazine Issue 20 — our biggest edition yet. Featuring exclusive interviews, culture deep-dives, fashion editorials, and more. Printed on premium GSM paper with a full-colour glossy cover.",
@@ -274,3 +312,29 @@ export const relatedProducts: RelatedProduct[] = [...products, ...newProducts].m
   price: p.price,
   image: p.image,
 }));
+
+// export const fetchProducts = async (): Promise<BackendProduct[]> => {
+//   const response = await axios.get<ProductsResponse>(
+//     `${BACKEND_BASE_URL}/api/products`
+//   );
+//   return response.data.data.products;
+// };
+//   export function normalizeBackendProduct(bp: BackendProduct): ProductII {
+//   return {
+//     id: bp.id,
+//     name: bp.title,
+//     category: "APPAREL", // backend doesn't send category yet — default or extend later
+//     price: `₦${bp.amount.toLocaleString()}`,
+//     image: bp.image,
+//     images: [bp.image],
+//     description: bp.description,
+//     sizes: [],
+//     colors: [],
+//     delivery: { lagos: "₦2,300", outside: "₦4,000" },
+//     shipping: "Between 3–7 business days if order is placed now.",
+//     rating: 0,
+//     ratingCount: 0,
+//     ratingBreakdown: { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 },
+//     reviews: [],
+//   };
+// }
