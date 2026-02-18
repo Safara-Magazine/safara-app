@@ -26,10 +26,6 @@ export const useInitializeOrder = (): UseMutationResult<
     mutationFn: initializeOrder,
     onSuccess: (data) => {
       console.log("[useInitializeOrder] Order initialized successfully:", data);
-      // Redirect to Paystack payment page
-      if (data.authorizationUrl) {
-        window.location.href = data.authorizationUrl;
-      }
     },
     onError: (error) => {
       console.error("[useInitializeOrder] Mutation error:", error);

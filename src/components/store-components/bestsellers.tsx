@@ -1,13 +1,10 @@
-import React from "react";
-import { products } from "./products";
 import Link from "next/link";
-// import { Heart } from "lucide-react";
+import { products } from "./products";
 import HeartButton from "../product-view/heart-btn";
-
 import AddToCartButton from "../cart/add-to-cart";
 
 export default function BestSellers() {
-   
+
   return (
     <section id="best-sellers" className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-5">
