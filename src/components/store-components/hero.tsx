@@ -2,9 +2,9 @@ import Image from "../Image";
 
 export default function Hero() {
   return (
-    <section className="text-white mt-16 md:mt-0">
-      <div className=" md:pl-[44px]   md:pt-20  md:bg-[#2F1C32] bg-[#68526B] h-full md:h-screen">
-        <div className="grid md:max-w-7xl   mx-auto md:grid-cols-2 gap-12 md:gap-16 items-center">
+    <section className="text-white w-full mt-16 md:mt-0">
+      <div className=" md:pl-[44px]    md:pt-20  md:bg-[#2F1C32] bg-[#68526B] h-full md:h-screen">
+        <div className="grid    mx-auto md:grid-cols-2 gap-12 md:gap-16  items-center">
           {/* Hero Text */}
 
 
@@ -32,7 +32,7 @@ tracking-[1%]"
           </div>
 
           {/* Hero Images */}
-          <div className="flex md:mt-3 h-[100%]  md:items-end ">
+          <div className="flex md:mt-3 h-[100%] justify-end  md:items-end lg:items-end ">
             <Image
               src="/images/store-hero.png"
               alt="Safara Merch Users"
