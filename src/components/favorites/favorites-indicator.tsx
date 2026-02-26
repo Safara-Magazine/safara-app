@@ -11,7 +11,7 @@ export default function FavoritesIndicator() {
   if (!hasHydrated) {
     return (
       <div className="relative">
-        <Heart className="w-6 h-6 text-gray-700" />
+        <Heart className="w-6 h-6 hover:fill-red-500 hover:text-red-500 text-gray-700" />
       </div>
     );
   }
@@ -19,7 +19,7 @@ export default function FavoritesIndicator() {
   return (
     <div className="relative">
       <Heart
-        className={`w-6 h-6 ${
+        className={`w-6 h-6 hover:fill-red-500 hover:text-red-500 ${
           count > 0 ? "text-gray-700" : "text-gray-700"
         }`}
       />

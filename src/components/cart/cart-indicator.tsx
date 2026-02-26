@@ -11,7 +11,7 @@ export default function CartIndicator() {
   if (!hasHydrated) {
     return (
       <div className="relative">
-        <ShoppingCart className="w-6 h-6 text-gray-700" />
+        <ShoppingCart className="w-6 h-6 hover:fill-[#422746] hover:text-[#422746]  text-gray-700" />
       </div>
     );
   }
@@ -19,7 +19,7 @@ export default function CartIndicator() {
   return (
     <div className="relative">
       <ShoppingCart
-        className={`w-6 h-6 ${
+        className={`w-6 h-6 hover:fill-[#422746] hover:text-[#422746] ${
           count > 0 ? "text-gray-900" : "text-gray-700"
         }`}
       />
