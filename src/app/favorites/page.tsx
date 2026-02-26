@@ -4,12 +4,20 @@ import Image from "next/image";
 import Link from "next/link";
 import { useFavoritesStore } from "@/store/favoritesStore";
 import { useCartStore } from "@/store/cartStore";
-import { allProductsMap, relatedProducts } from "../../components/store-components/products";
+import {
+  allProductsMap,
+  relatedProducts,
+} from "../../components/store-components/products";
 import StoreNavigation from "@/components/layout/Header/StoreNavBar";
 import { HeartIcon } from "lucide-react";
 import HeartButton from "@/components/product-view/heart-btn";
 import AddToCartButton from "@/components/cart/add-to-cart";
 import RelatedProducts from "@/components/product-view/related-products";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 export default function FavouritesPage() {
   const { favorites, _hasHydrated, toggleFavorite } = useFavoritesStore();
@@ -19,18 +27,22 @@ export default function FavouritesPage() {
     .map((id) => allProductsMap[id])
     .filter(Boolean);
 
-  const getUniqueRandomProducts = (products: typeof relatedProducts, count: number) => {
-  // Remove duplicates first
-  const uniqueProducts = products.filter((product, index, self) => 
-    index === self.findIndex((p) => p.id === product.id)
-  );
-  
-  // Then shuffle
-  const shuffled = [...uniqueProducts].sort(() => Math.random() - 0.5);
-  return shuffled.slice(0, count);
-};
+  const getUniqueRandomProducts = (
+    products: typeof relatedProducts,
+    count: number,
+  ) => {
+    // Remove duplicates first
+    const uniqueProducts = products.filter(
+      (product, index, self) =>
+        index === self.findIndex((p) => p.id === product.id),
+    );
 
-const related = getUniqueRandomProducts(relatedProducts, 3);
+    // Then shuffle
+    const shuffled = [...uniqueProducts].sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, count);
+  };
+
+  const related = getUniqueRandomProducts(relatedProducts, 3);
   // Hydration guard
   if (!_hasHydrated || !cartHydrated) {
     return (
@@ -93,13 +105,14 @@ const related = getUniqueRandomProducts(relatedProducts, 3);
 
       {/* breadcrumbs */}
       <div className="flex gap-2 mt-24 sm:mt-30 pl-4 sm:pl-[50px] max-w-6xl mx-auto items-center text-[#767572]">
-        <Link className="text-[16px]" href="/">Home</Link>
+        <Link className="text-[16px]" href="/">
+          Home
+        </Link>
         <span>&gt;&gt;</span>
         <span className="text-[#2F1C32] font-bold text-[18px]">Favorites</span>
       </div>
 
       <div className="max-w-6xl mx-auto px-4 py-8">
-
         {/* Favourite items */}
         <div className="space-y-4 py-6 border border-[#827F7B] rounded-md max-w-6xl">
           {favouriteItems.map((product) => (
@@ -107,16 +120,28 @@ const related = getUniqueRandomProducts(relatedProducts, 3);
               key={product.id}
               className="flex flex-col sm:grid sm:grid-cols-12 mr-3 gap-3 sm:gap-4 items-start sm:items-center pb-4 border-b last:border-0 px-3 sm:px-0"
             >
-
               {/* Mobile: top row with heart + product info */}
               <div className="flex w-full sm:contents gap-3 items-start">
-
                 {/* heart-btn */}
-                <HeartButton className="ml-0 sm:ml-3 mt-1 flex-shrink-0" productId={product.id} size={24} />
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <HeartButton
+                      className="ml-0 sm:ml-3 mt-1 flex-shrink-0"
+                      productId={product.id}
+                      size={24}
+                    />
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Remove From Favorites</p>
+                  </TooltipContent>
+                </Tooltip>
 
                 {/* Product info */}
                 <div className="col-span-5 flex h-full gap-3 flex-1">
-                  <Link href={`/store-product/${product.id}`} className="flex-shrink-0">
+                  <Link
+                    href={`/store-product/${product.id}`}
+                    className="flex-shrink-0"
+                  >
                     <div className="relative w-20 h-20 bg-gray-100 overflow-hidden">
                       <Image
                         src={product.image}
@@ -148,7 +173,6 @@ const related = getUniqueRandomProducts(relatedProducts, 3);
 
               {/* Mobile: bottom row with price + add to cart */}
               <div className="flex w-full sm:contents items-center justify-between pl-[calc(24px+0.75rem+0.75rem)] sm:pl-0">
-
                 {/* Price */}
                 <div className="sm:col-span-3 sm:flex sm:justify-center">
                   <span className="font-semibold text-gray-900">
@@ -161,7 +185,6 @@ const related = getUniqueRandomProducts(relatedProducts, 3);
                   <AddToCartButton product={product} />
                 </div>
               </div>
-
             </div>
           ))}
         </div>
@@ -183,11 +206,9 @@ const related = getUniqueRandomProducts(relatedProducts, 3);
         </div>
       </div>
 
-
       {/* related products */}
       <div className="mt-13 mb-3 max-w-6xl mx-auto px-4 py-8">
-      <RelatedProducts products={related} />
-
+        <RelatedProducts products={related} />
       </div>
     </>
   );
