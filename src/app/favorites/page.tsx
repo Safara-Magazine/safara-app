@@ -109,6 +109,10 @@ export default function FavouritesPage() {
           Home
         </Link>
         <span>&gt;&gt;</span>
+        <Link className="text-[16px]" href="/store">
+          Store
+        </Link>
+        <span>&gt;&gt;</span>
         <span className="text-[#2F1C32] font-bold text-[18px]">Favorites</span>
       </div>
 

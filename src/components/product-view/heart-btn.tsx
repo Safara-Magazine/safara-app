@@ -24,9 +24,9 @@ const HeartButton = forwardRef<HTMLButtonElement, HeartButtonProps>(
       toggleFavorite(productId);
 
       if (wasLiked) {
-        toast("Removed from Wishlist!");
+        toast("Removed from Favorites!");
       } else {
-        toast("Added to Wishlist!");
+        toast("Added to Favorites!");
       }
 
       // allow Radix / parent handlers to still run
