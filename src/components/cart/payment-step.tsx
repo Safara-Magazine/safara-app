@@ -27,7 +27,7 @@ const normalizePhone = (phone: string) => {
 };
 
 export default function PaymentStep() {
-  const { deliveryInfo, items, getTotal } = useCartStore();
+  const { deliveryInfo, items, getTotal, prevStep } = useCartStore();
 
   const hasStarted = useRef(false);
   const initializeOrderMutation = useInitializeOrder();
@@ -46,7 +46,7 @@ export default function PaymentStep() {
       return;
     }
 
-    // ✅ Add this log BEFORE calling mutate
+    // Add this log BEFORE calling mutate
     const payload = {
       email: deliveryInfo.email,
       customerName: deliveryInfo.fullName,
@@ -74,13 +74,13 @@ export default function PaymentStep() {
 
   return (
     <div className="max-w-2xl mx-auto px-4 py-8">
-      <BackButton
-        href="/cart/delivery-step"
+       <button
+        onClick={prevStep}
         className="mb-7 inline-flex items-center gap-1.5 rounded-full border border-neutral-200 bg-neutral-100 px-3.5 py-1.5 text-xs text-neutral-500 transition-colors hover:bg-neutral-200"
       >
         <span>←</span>
         <span>Back</span>
-      </BackButton>
+      </button>
 
       
       <div className="flex flex-col items-center justify-center min-h-[400px] text-center">

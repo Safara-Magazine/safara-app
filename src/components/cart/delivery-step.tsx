@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useCartStore, DeliveryInfo } from '@/store/cartStore';
-import { useState } from 'react';
-import { toast } from 'sonner';
+import { useCartStore, DeliveryInfo } from "@/store/cartStore";
+import { useState } from "react";
+import { toast } from "sonner";
 
 export default function DeliveryStep() {
   const {
@@ -19,15 +19,17 @@ export default function DeliveryStep() {
   } = useCartStore();
 
   const [formData, setFormData] = useState<DeliveryInfo>({
-    fullName: deliveryInfo?.fullName || '',
-    email: deliveryInfo?.email || '',
-    phone: deliveryInfo?.phone || '',
-    streetAddress: deliveryInfo?.streetAddress || '',
-    city: deliveryInfo?.city || '',
-    country: deliveryInfo?.country || 'Nigeria',
+    fullName: deliveryInfo?.fullName || "",
+    email: deliveryInfo?.email || "",
+    phone: deliveryInfo?.phone || "",
+    streetAddress: deliveryInfo?.streetAddress || "",
+    city: deliveryInfo?.city || "",
+    country: deliveryInfo?.country || "Nigeria",
   });
 
-  const [errors, setErrors] = useState<Partial<Record<keyof DeliveryInfo, string>>>({});
+  const [errors, setErrors] = useState<
+    Partial<Record<keyof DeliveryInfo, string>>
+  >({});
 
   const formatPrice = (price: number) => {
     return `₦${price.toLocaleString()}`;
@@ -37,31 +39,31 @@ export default function DeliveryStep() {
     const newErrors: Partial<Record<keyof DeliveryInfo, string>> = {};
 
     if (!formData.fullName.trim()) {
-      newErrors.fullName = 'Full name is required';
+      newErrors.fullName = "Full name is required";
     }
 
     if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
+      newErrors.email = "Email is required";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email';
+      newErrors.email = "Please enter a valid email";
     }
 
     if (!formData.phone.trim()) {
-      newErrors.phone = 'Phone number is required';
-    } else if (!/^\d{10,15}$/.test(formData.phone.replace(/\s/g, ''))) {
-      newErrors.phone = 'Please enter a valid phone number';
+      newErrors.phone = "Phone number is required";
+    } else if (!/^\d{10,15}$/.test(formData.phone.replace(/\s/g, ""))) {
+      newErrors.phone = "Please enter a valid phone number";
     }
 
     if (!formData.streetAddress.trim()) {
-      newErrors.streetAddress = 'Street address is required';
+      newErrors.streetAddress = "Street address is required";
     }
 
     if (!formData.city.trim()) {
-      newErrors.city = 'City/State is required';
+      newErrors.city = "City/State is required";
     }
 
     if (!formData.country.trim()) {
-      newErrors.country = 'Country is required';
+      newErrors.country = "Country is required";
     }
 
     setErrors(newErrors);
@@ -70,7 +72,7 @@ export default function DeliveryStep() {
 
   const handleChange = (field: keyof DeliveryInfo, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
-    
+
     if (errors[field]) {
       setErrors((prev) => ({ ...prev, [field]: undefined }));
     }
@@ -82,9 +84,9 @@ export default function DeliveryStep() {
     if (validateForm()) {
       setDeliveryInfo(formData);
       nextStep();
-      toast.success('Delivery information saved!');
+      toast.success("Delivery information saved!");
     } else {
-      toast.error('Please fill in all required fields correctly');
+      toast.error("Please fill in all required fields correctly");
     }
   };
 
@@ -98,12 +100,24 @@ export default function DeliveryStep() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
+     
+      <button
+        onClick={prevStep}
+        className="mb-7 inline-flex items-center gap-1.5 rounded-full border border-neutral-200 bg-neutral-100 px-3.5 py-1.5 text-xs text-neutral-500 transition-colors hover:bg-neutral-200"
+      >
+        <span>←</span>
+        <span>Back</span>
+      </button>
+
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Form Fields */}
         <div className="bg-white rounded-lg border p-6 space-y-4">
           {/* Full Name */}
           <div>
-            <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 mb-1">
+            <label
+              htmlFor="fullName"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
               <span className="text-red-500">*</span> Full Name
             </label>
             <input
@@ -111,9 +125,9 @@ export default function DeliveryStep() {
               id="fullName"
               placeholder="John Doe"
               value={formData.fullName}
-              onChange={(e) => handleChange('fullName', e.target.value)}
+              onChange={(e) => handleChange("fullName", e.target.value)}
               className={`w-full px-4 py-2.5 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#B59157] focus:border-transparent ${
-                errors.fullName ? 'border-red-500' : 'border-gray-300'
+                errors.fullName ? "border-red-500" : "border-gray-300"
               }`}
             />
             {errors.fullName && (
@@ -123,7 +137,10 @@ export default function DeliveryStep() {
 
           {/* Email Address */}
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
               <span className="text-red-500">*</span> Email Address
             </label>
             <input
@@ -131,9 +148,9 @@ export default function DeliveryStep() {
               id="email"
               placeholder="johndoe@email.com"
               value={formData.email}
-              onChange={(e) => handleChange('email', e.target.value)}
+              onChange={(e) => handleChange("email", e.target.value)}
               className={`w-full px-4 py-2.5 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#B59157] focus:border-transparent ${
-                errors.email ? 'border-red-500' : 'border-gray-300'
+                errors.email ? "border-red-500" : "border-gray-300"
               }`}
             />
             {errors.email && (
@@ -143,7 +160,10 @@ export default function DeliveryStep() {
 
           {/* Phone Number */}
           <div>
-            <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+            <label
+              htmlFor="phone"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
               <span className="text-red-500">*</span> Phone Number
             </label>
             <input
@@ -151,9 +171,9 @@ export default function DeliveryStep() {
               id="phone"
               placeholder="08123456789"
               value={formData.phone}
-              onChange={(e) => handleChange('phone', e.target.value)}
+              onChange={(e) => handleChange("phone", e.target.value)}
               className={`w-full px-4 py-2.5 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#B59157] focus:border-transparent ${
-                errors.phone ? 'border-red-500' : 'border-gray-300'
+                errors.phone ? "border-red-500" : "border-gray-300"
               }`}
             />
             {errors.phone && (
@@ -163,7 +183,10 @@ export default function DeliveryStep() {
 
           {/* Street Address */}
           <div>
-            <label htmlFor="streetAddress" className="block text-sm font-medium text-gray-700 mb-1">
+            <label
+              htmlFor="streetAddress"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
               <span className="text-red-500">*</span> Street Address
             </label>
             <input
@@ -171,19 +194,24 @@ export default function DeliveryStep() {
               id="streetAddress"
               placeholder="123, Awolowo street, Ikeja"
               value={formData.streetAddress}
-              onChange={(e) => handleChange('streetAddress', e.target.value)}
+              onChange={(e) => handleChange("streetAddress", e.target.value)}
               className={`w-full px-4 py-2.5 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#B59157] focus:border-transparent ${
-                errors.streetAddress ? 'border-red-500' : 'border-gray-300'
+                errors.streetAddress ? "border-red-500" : "border-gray-300"
               }`}
             />
             {errors.streetAddress && (
-              <p className="mt-1 text-xs text-red-500">{errors.streetAddress}</p>
+              <p className="mt-1 text-xs text-red-500">
+                {errors.streetAddress}
+              </p>
             )}
           </div>
 
           {/* City/State */}
           <div>
-            <label htmlFor="city" className="block text-sm font-medium text-gray-700 mb-1">
+            <label
+              htmlFor="city"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
               <span className="text-red-500">*</span> City/State
             </label>
             <input
@@ -191,9 +219,9 @@ export default function DeliveryStep() {
               id="city"
               placeholder="Lagos"
               value={formData.city}
-              onChange={(e) => handleChange('city', e.target.value)}
+              onChange={(e) => handleChange("city", e.target.value)}
               className={`w-full px-4 py-2.5 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#B59157] focus:border-transparent ${
-                errors.city ? 'border-red-500' : 'border-gray-300'
+                errors.city ? "border-red-500" : "border-gray-300"
               }`}
             />
             {errors.city && (
@@ -203,7 +231,10 @@ export default function DeliveryStep() {
 
           {/* Country */}
           <div>
-            <label htmlFor="country" className="block text-sm font-medium text-gray-700 mb-1">
+            <label
+              htmlFor="country"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
               <span className="text-red-500">*</span> Country
             </label>
             <input
@@ -211,9 +242,9 @@ export default function DeliveryStep() {
               id="country"
               placeholder="Nigeria"
               value={formData.country}
-              onChange={(e) => handleChange('country', e.target.value)}
+              onChange={(e) => handleChange("country", e.target.value)}
               className={`w-full px-4 py-2.5 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#B59157] focus:border-transparent ${
-                errors.country ? 'border-red-500' : 'border-gray-300'
+                errors.country ? "border-red-500" : "border-gray-300"
               }`}
             />
             {errors.country && (
@@ -224,12 +255,12 @@ export default function DeliveryStep() {
           {/* Save Details Checkbox */}
           <div className="flex items-center gap-2 pt-2">
             <input
-  type="checkbox"
-  id="saveDetails"
-  checked={saveDeliveryDetails}
-  onChange={(e) => setSaveDeliveryDetails(e.target.checked)}
-  className="w-4 h-4 accent-[#B59157] border-gray-300 rounded focus:ring-[#B59157] checked:bg-[#B59157]"
-/>
+              type="checkbox"
+              id="saveDetails"
+              checked={saveDeliveryDetails}
+              onChange={(e) => setSaveDeliveryDetails(e.target.checked)}
+              className="w-4 h-4 accent-[#B59157] border-gray-300 rounded focus:ring-[#B59157] checked:bg-[#B59157]"
+            />
             <label htmlFor="saveDetails" className="text-sm text-gray-700">
               Save delivery details for later
             </label>
