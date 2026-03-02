@@ -5,7 +5,7 @@ import { useEffect, useRef } from "react";
 import { Loader2 } from "lucide-react";
 import { useInitializeOrder } from "../../auth/hooks/useOrderQueries";
 import { toast } from "sonner";
-import BackButton from "../ui/back-btn";
+
 
 // Normalize Nigerian numbers to international format
 const normalizePhone = (phone: string) => {
@@ -33,33 +33,34 @@ export default function PaymentStep() {
   const initializeOrderMutation = useInitializeOrder();
 
   useEffect(() => {
-    if (hasStarted.current) return;
-    hasStarted.current = true;
+  if (hasStarted.current) return;
+  hasStarted.current = true;
 
-    if (!deliveryInfo) {
-      toast.error("Missing delivery information");
-      return;
-    }
+  if (!deliveryInfo) {
+    toast.error("Missing delivery information");
+    prevStep(); // ✅ send them back if somehow they got here without delivery info
+    return;
+  }
 
-    if (!items.length) {
-      toast.error("Your cart is empty");
-      return;
-    }
+  if (!items.length) {
+    toast.error("Your cart is empty");
+    prevStep();
+    return;
+  }
 
-    // Add this log BEFORE calling mutate
-    const payload = {
-      email: deliveryInfo.email,
-      customerName: deliveryInfo.fullName,
-      phone: normalizePhone(deliveryInfo.phone),
-      items: items.map((item) => ({
-        productId: item.id,
-        quantity: item.quantity,
-      })),
-    };
-    console.log("[PaymentStep] Payment payload:", payload);
+  const payload = {
+    email: deliveryInfo.email,
+    customerName: deliveryInfo.fullName,
+    phone: normalizePhone(deliveryInfo.phone),
+    items: items.map((item) => ({
+      productId: item.id,
+      quantity: item.quantity,
+    })),
+  };
 
-    initializeOrderMutation.mutate(payload);
-  }, [deliveryInfo, items, initializeOrderMutation]);
+  console.log("[PaymentStep] Payment payload:", payload);
+  initializeOrderMutation.mutate(payload);
+}, []); 
 
   // Handle mutation error UI fallback
   useEffect(() => {
