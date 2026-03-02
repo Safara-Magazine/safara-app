@@ -20,12 +20,12 @@ const Navigation: React.FC = () => {
   const storeRef = useRef<HTMLDivElement>(null);
   const categoriesRef = useRef<HTMLDivElement>(null);
 
-  const storeItems: DropdownItem[] = [
-    { label: 'New Arrivals', href: '/store?section=new' },
-    { label: 'Best Sellers', href: '/store?section=best-sellers' },
-    { label: 'Sale', href: '/store/sale' },
-    { label: 'Collections', href: '/store/collections' },
-  ];
+  // const storeItems: DropdownItem[] = [
+  //   { label: 'New Arrivals', href: '/store?section=new' },
+  //   { label: 'Best Sellers', href: '/store?section=best-sellers' },
+  //   { label: 'Sale', href: '/store/sale' },
+  //   { label: 'Collections', href: '/store/collections' },
+  // ];
 
   const categoryItems: DropdownItem[] = [
     { label: 'Technology', href: '/categories/technology' },
@@ -117,23 +117,34 @@ const Navigation: React.FC = () => {
                 About
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#B59157] to-[#EBB659] transition-all duration-300 group-hover:w-full"></span>
               </Link>
+
+
+               <Link
+                href="/store"
+                className="text-base xl:text-lg text-gray-700 hover:text-gray-900 font-medium transition-colors duration-200 relative group"
+              >
+                Store
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#B59157] to-[#EBB659] transition-all duration-300 group-hover:w-full"></span>
+              </Link>
+
+
               
-              {/* Desktop Store Dropdown */}
+              {/* Desktop Store Dropdown
               <div className="relative" ref={storeRef}>
                 <button
                   onClick={() => setStoreOpen(!storeOpen)}
                   className="flex items-center space-x-1 text-base xl:text-lg text-gray-700 hover:text-gray-900 font-medium transition-colors duration-200 relative group"
                 >
                   <span>Store</span>
-                  <ChevronDown
+                  {/* <ChevronDown
                     className={`w-4 h-4 transition-transform duration-200 ${
                       storeOpen ? 'rotate-180' : ''
                     }`}
-                  />
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#B59157] to-[#EBB659] transition-all duration-300 group-hover:w-full"></span>
-                </button>
+                  /> */}
+                  {/* <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#B59157] to-[#EBB659] transition-all duration-300 group-hover:w-full"></span>
+                </button> */}
 
-                {storeOpen && (
+                {/* {storeOpen && (
                   <div className="dropdown-menu absolute top-full left-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-100 py-2 overflow-hidden">
                     {storeItems.map((item, index) => (
                       <Link
@@ -146,8 +157,8 @@ const Navigation: React.FC = () => {
                       </Link>
                     ))}
                   </div>
-                )}
-              </div>
+                )} */}
+              {/* </div> */}
 
               <Link
                 href="/contact"
@@ -157,13 +168,13 @@ const Navigation: React.FC = () => {
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#B59157] to-[#EBB659] transition-all duration-300 group-hover:w-full"></span>
               </Link>
 
-              <Link
+              {/* <Link
                 href="/products"
                 className="text-base xl:text-lg text-gray-700 hover:text-gray-900 font-medium transition-colors duration-200 relative group"
               >
                 Products
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#B59157] to-[#EBB659] transition-all duration-300 group-hover:w-full"></span>
-              </Link>
+              </Link> */}
 
               <Link
                 href="/editors-note"
@@ -249,8 +260,18 @@ const Navigation: React.FC = () => {
             About
           </Link>
 
+
+
+          <Link
+            href="/store"
+            className="block text-lg text-gray-700 hover:text-gray-900 font-medium py-3 border-b border-gray-100 transition-colors"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            Store
+          </Link>
+
           {/* Mobile Store Dropdown */}
-          <div className="border-b border-gray-100">
+          {/* <div className="border-b border-gray-100">
             <button
               onClick={() => setMobileStoreOpen(!mobileStoreOpen)}
               className="flex items-center justify-between w-full text-lg text-gray-700 hover:text-gray-900 font-medium py-3 transition-colors"
@@ -277,7 +298,7 @@ const Navigation: React.FC = () => {
                 ))}
               </div>
             )}
-          </div>
+          </div> */}
 
           <Link
             href="/contact"
@@ -287,13 +308,13 @@ const Navigation: React.FC = () => {
             Contact
           </Link>
 
-          <Link
+          {/* <Link
             href="/products"
             className="block text-lg text-gray-700 hover:text-gray-900 font-medium py-3 border-b border-gray-100 transition-colors"
             onClick={() => setMobileMenuOpen(false)}
           >
             Products
-          </Link>
+          </Link> */}
 
           <Link
             href="/editors-note"

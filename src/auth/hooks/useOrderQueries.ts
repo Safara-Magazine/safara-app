@@ -3,10 +3,7 @@
  * TanStack Query hooks for order operations
  */
 
-import {
-  useMutation,
-  UseMutationResult,
-} from "@tanstack/react-query";
+import { useMutation, UseMutationResult } from "@tanstack/react-query";
 import {
   initializeOrder,
   type InitializeOrderRequest,
@@ -26,7 +23,9 @@ export const useInitializeOrder = (): UseMutationResult<
     mutationFn: initializeOrder,
     onSuccess: (data) => {
       console.log("[useInitializeOrder] Order initialized successfully:", data);
+      window.location.href = data.authorizationUrl;
     },
+
     onError: (error) => {
       console.error("[useInitializeOrder] Mutation error:", error);
     },

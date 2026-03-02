@@ -97,14 +97,14 @@ const StoreNavigation: React.FC = () => {
 
             {/* mobile menu btn */}
             <div className="flex">
-              {/* search */}
+              {/* search
               <button className="hidden md:block z-50 p-2 text-gray-700 hover:text-gray-900 transition-colors">
                 <Search className="w-6 h-6" />
-              </button>
+              </button> */}
 
               {/* user */}
               <button className="hidden md:block z-50 p-2 text-gray-700 hover:text-gray-900 transition-colors">
-                <User className="w-6 h-6" />
+                <User className="w-6 h-6 hover:fill-[#422746] hover:text-[#422746]" />
               </button>
 
               {/* wishlist */}

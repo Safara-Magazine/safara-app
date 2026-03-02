@@ -80,7 +80,7 @@ const related = getUniqueRandomProducts(relatedProducts, 3);
       {/* Step Content */}
       <main className="pb-12">{renderStep()}</main>
 
-      <div className="max-w-6xl mx-auto py-10 ">
+      <div className="mt-13 mb-3 max-w-6xl mx-auto px-4 py-8">
         <RelatedProducts products={related} />
       </div>
     </div>

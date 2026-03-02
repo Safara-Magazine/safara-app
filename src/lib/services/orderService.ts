@@ -49,6 +49,7 @@ export const initializeOrder = async (
       `${BACKEND_BASE_URL}/api/orders/initialize`,
       payload
     );
+    
     console.log("[orderService] Order initialized:", response.data.data);
     return response.data.data;
   } catch (error) {

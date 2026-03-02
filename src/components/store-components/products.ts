@@ -313,28 +313,54 @@ export const relatedProducts: RelatedProduct[] = [...products, ...newProducts].m
   image: p.image,
 }));
 
-// export const fetchProducts = async (): Promise<BackendProduct[]> => {
-//   const response = await axios.get<ProductsResponse>(
-//     `${BACKEND_BASE_URL}/api/products`
-//   );
-//   return response.data.data.products;
-// };
-//   export function normalizeBackendProduct(bp: BackendProduct): ProductII {
-//   return {
-//     id: bp.id,
-//     name: bp.title,
-//     category: "APPAREL", // backend doesn't send category yet — default or extend later
-//     price: `₦${bp.amount.toLocaleString()}`,
-//     image: bp.image,
-//     images: [bp.image],
-//     description: bp.description,
-//     sizes: [],
-//     colors: [],
-//     delivery: { lagos: "₦2,300", outside: "₦4,000" },
-//     shipping: "Between 3–7 business days if order is placed now.",
-//     rating: 0,
-//     ratingCount: 0,
-//     ratingBreakdown: { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 },
-//     reviews: [],
-//   };
-// }
+// ─── FETCH + MERGE ────────────────────────────────────────────────────────────
+
+export const fetchProducts = async (): Promise<ProductsResponse> => {
+  const response = await axios.get<ProductsResponse>(
+    `${BACKEND_BASE_URL}/api/products`
+  );
+  return response.data;
+};
+
+// Local enrichment data keyed by product name (lowercase for safe matching)
+// Local enrichment keyed by product name (lowercase for safe matching)
+const localEnrichmentMap: Record<string, Partial<ProductII>> = [
+  ...products,
+  ...newProducts,
+].reduce((acc, p) => {
+  acc[p.name.toLowerCase()] = {
+    images:          p.images,
+    sizes:           p.sizes,
+    colors:          p.colors,
+    delivery:        p.delivery,
+    shipping:        p.shipping,
+    rating:          p.rating,
+    ratingCount:     p.ratingCount,
+    ratingBreakdown: p.ratingBreakdown,
+    reviews:         p.reviews,
+    category:        p.category,
+  };
+  return acc;
+}, {} as Record<string, Partial<ProductII>>);
+
+export function mergeProduct(bp: BackendProduct): ProductII {
+  const local = localEnrichmentMap[bp.title.toLowerCase()];
+
+  return {
+    id:              bp.id,    
+    name:            bp.title,
+    price:           `₦${bp.amount.toLocaleString()}`,
+    image:           bp.image,
+    description:     bp.description,
+    category:        local?.category        ?? "GENERAL",
+    images:          local?.images          ?? [bp.image],
+    sizes:           local?.sizes           ?? [],
+    colors:          local?.colors          ?? [],
+    delivery:        local?.delivery        ?? { lagos: "₦2,300", outside: "₦4,000" },
+    shipping:        local?.shipping        ?? "Between 3–7 business days.",
+    rating:          local?.rating          ?? 0,
+    ratingCount:     local?.ratingCount     ?? 0,
+    ratingBreakdown: local?.ratingBreakdown ?? { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 },
+    reviews:         local?.reviews         ?? [],
+  };
+}

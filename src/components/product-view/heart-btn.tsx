@@ -1,66 +1,76 @@
-'use client';
+"use client";
 
-import { Heart } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { useFavoritesStore } from '@/store/favoritesStore';
-import { toast } from 'sonner';
+import React, { forwardRef } from "react";
+import { Heart } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { useFavoritesStore } from "@/store/favoritesStore";
+import { toast } from "sonner";
 
-interface HeartButtonProps {
+interface HeartButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   productId: string;
   size?: number;
-  className?: string;
- 
 }
 
-export default function HeartButton({ productId, size = 24, className }: HeartButtonProps) {
-  const { toggleFavorite, isFavorite, _hasHydrated } = useFavoritesStore();
-  const isLiked = isFavorite(productId);
+const HeartButton = forwardRef<HTMLButtonElement, HeartButtonProps>(
+  ({ productId, size = 24, className, onClick, ...props }, ref) => {
+    const { toggleFavorite, isFavorite, _hasHydrated } = useFavoritesStore();
+    const isLiked = isFavorite(productId);
 
-  // Wait for store to hydrate
-  if (!_hasHydrated) {
+    const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      const wasLiked = isLiked;
+      toggleFavorite(productId);
+
+      if (wasLiked) {
+        toast("Removed from Favorites!");
+      } else {
+        toast("Added to Favorites!");
+      }
+
+      // allow Radix / parent handlers to still run
+      onClick?.(e);
+    };
+
+    // Still render a button during hydration, BUT keep the ref + props!
+    if (!_hasHydrated) {
+      return (
+        <button
+          ref={ref}
+          className={cn("transition-transform duration-150", className)}
+          {...props}
+        >
+          <Heart
+            size={size}
+            className="transition-colors duration-200 stroke-gray-400"
+          />
+        </button>
+      );
+    }
+
     return (
       <button
-        aria-label="Add to favorites"
-        className={cn("transition-transform duration-150", className)}
+        ref={ref}                // ✅ Radix attaches here
+        onClick={handleClick}
+        className={cn(
+          "transition-transform duration-150 hover:scale-110 active:scale-95",
+          className
+        )}
+        {...props}               // ✅ Radix events injected here
       >
         <Heart
           size={size}
-          className="transition-colors duration-200 stroke-gray-400"
+          className={cn(
+            "transition-colors duration-200",
+            isLiked ? "fill-red-500 stroke-red-500" : "stroke-gray-400"
+          )}
         />
       </button>
     );
   }
+);
 
-  return (
-    <button
-      aria-label={isLiked ? 'Remove from favorites' : 'Add to favorites'}
-      onClick={(e) => {
-  e.preventDefault();
-  e.stopPropagation();
+HeartButton.displayName = "HeartButton";
 
-  const wasLiked = isLiked;   // capture previous state
-  toggleFavorite(productId);
-
-  if (wasLiked) {
-    toast(`Removed from Wishlist!`);
-  } else {
-    toast(`Added to Wishlist! `);
-  }
-}}
-
-      
-      className={cn("transition-transform duration-150 hover:scale-110 active:scale-95", className)}
-    >
-      <Heart
-        size={size}
-        className={cn(
-          'transition-colors duration-200',
-          isLiked
-            ? 'fill-red-500 stroke-red-500'
-            : 'stroke-gray-400'
-        )}
-        
-      />
-    </button>
-  );
-}
+export default HeartButton;
