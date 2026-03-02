@@ -216,7 +216,7 @@ function PaymentCallbackContent() {
 
         <div className="space-y-3">
           <Link
-            href="/products"
+            href="/store"
             className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-[#B59157] to-[#EBB659] text-white rounded-lg hover:shadow-lg transition font-semibold"
           >
             <ShoppingBag className="w-5 h-5" />
