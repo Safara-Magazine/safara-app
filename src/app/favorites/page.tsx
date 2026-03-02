@@ -4,55 +4,39 @@ import Image from "next/image";
 import Link from "next/link";
 import { useFavoritesStore } from "@/store/favoritesStore";
 import { useCartStore } from "@/store/cartStore";
-import {
-  allProductsMap,
-  relatedProducts,
-} from "../../components/store-components/products";
+import { useMergedProducts } from "@/auth/hooks/useProductQueries";
 import StoreNavigation from "@/components/layout/Header/StoreNavBar";
 import { HeartIcon } from "lucide-react";
 import HeartButton from "@/components/product-view/heart-btn";
 import AddToCartButton from "@/components/cart/add-to-cart";
 import RelatedProducts from "@/components/product-view/related-products";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 export default function FavouritesPage() {
-  const { favorites, _hasHydrated, toggleFavorite } = useFavoritesStore();
-  const { addToCart, _hasHydrated: cartHydrated } = useCartStore();
+  const { favorites, _hasHydrated, } = useFavoritesStore();
+  const { _hasHydrated: cartHydrated } = useCartStore();
+  const { data: allProducts, isLoading: productsLoading } = useMergedProducts();
 
-  const favouriteItems = favorites
-    .map((id) => allProductsMap[id])
-    .filter(Boolean);
+  // ✅ Look up favorites from real merged products (real backend IDs)
+  const favouriteItems = allProducts
+    ? allProducts.filter((p) => favorites.includes(p.id))
+    : [];
 
-  const getUniqueRandomProducts = (
-    products: typeof relatedProducts,
-    count: number,
-  ) => {
-    // Remove duplicates first
-    const uniqueProducts = products.filter(
-      (product, index, self) =>
-        index === self.findIndex((p) => p.id === product.id),
-    );
+  // ✅ Related = products NOT in favorites, capped at 3
+  const related = allProducts
+    ? allProducts
+        .filter((p) => !favorites.includes(p.id))
+        .slice(0, 3)
+        .map((p) => ({ id: p.id, tag: p.category, name: p.name, price: p.price, image: p.image }))
+    : [];
 
-    // Then shuffle
-    const shuffled = [...uniqueProducts].sort(() => Math.random() - 0.5);
-    return shuffled.slice(0, count);
-  };
-
-  const related = getUniqueRandomProducts(relatedProducts, 3);
-  // Hydration guard
-  if (!_hasHydrated || !cartHydrated) {
+  // Hydration + loading guard
+  if (!_hasHydrated || !cartHydrated || productsLoading) {
     return (
       <div className="max-w-6xl mx-auto px-4 py-8">
         <div className="space-y-4 animate-pulse">
           {[...Array(3)].map((_, i) => (
-            <div
-              key={i}
-              className="grid grid-cols-12 gap-4 items-center pb-4 border-b"
-            >
+            <div key={i} className="grid grid-cols-12 gap-4 items-center pb-4 border-b">
               <div className="col-span-6 flex items-center gap-3">
                 <div className="w-20 h-20 bg-gray-100 rounded-md flex-shrink-0" />
                 <div className="space-y-2">
@@ -73,7 +57,7 @@ export default function FavouritesPage() {
     );
   }
 
-  // empty state
+  // Empty state
   if (favouriteItems.length === 0) {
     return (
       <>
@@ -82,12 +66,8 @@ export default function FavouritesPage() {
           <div className="text-gray-400 mb-4">
             <HeartIcon className="w-24 h-24" />
           </div>
-          <h3 className="text-xl font-medium text-gray-700 mb-2">
-            No favourites yet
-          </h3>
-          <p className="text-gray-500 mb-6">
-            Items added to favourites will show up here
-          </p>
+          <h3 className="text-xl font-medium text-gray-700 mb-2">No favourites yet</h3>
+          <p className="text-gray-500 mb-6">Items added to favourites will show up here</p>
           <Link
             href="/store"
             className="px-6 py-3 bg-gradient-to-r from-[#B59157] to-[#EBB659] text-white rounded-md hover:opacity-90 transition-opacity"
@@ -103,21 +83,16 @@ export default function FavouritesPage() {
     <>
       <StoreNavigation />
 
-      {/* breadcrumbs */}
+      {/* Breadcrumbs */}
       <div className="flex gap-2 mt-24 sm:mt-30 pl-4 sm:pl-[50px] max-w-6xl mx-auto items-center text-[#767572]">
-        <Link className="text-[16px]" href="/">
-          Home
-        </Link>
+        <Link className="text-[16px]" href="/">Home</Link>
         <span>&gt;&gt;</span>
-        <Link className="text-[16px]" href="/store">
-          Store
-        </Link>
+        <Link className="text-[16px]" href="/store">Store</Link>
         <span>&gt;&gt;</span>
         <span className="text-[#2F1C32] font-bold text-[18px]">Favorites</span>
       </div>
 
       <div className="max-w-6xl mx-auto px-4 py-8">
-        {/* Favourite items */}
         <div className="space-y-4 py-6 border border-[#827F7B] rounded-md max-w-6xl">
           {favouriteItems.map((product) => (
             <div
@@ -126,7 +101,6 @@ export default function FavouritesPage() {
             >
               {/* Mobile: top row with heart + product info */}
               <div className="flex w-full sm:contents gap-3 items-start">
-                {/* heart-btn */}
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <HeartButton
@@ -140,23 +114,13 @@ export default function FavouritesPage() {
                   </TooltipContent>
                 </Tooltip>
 
-                {/* Product info */}
                 <div className="col-span-5 flex h-full gap-3 flex-1">
-                  <Link
-                    href={`/store-product/${product.id}`}
-                    className="flex-shrink-0"
-                  >
+                  <Link href={`/store-product/${product.id}`} className="flex-shrink-0">
                     <div className="relative w-20 h-20 bg-gray-100 overflow-hidden">
-                      <Image
-                        src={product.image}
-                        alt={product.name}
-                        fill
-                        className="object-cover"
-                      />
+                      <Image src={product.image} alt={product.name} fill className="object-cover" />
                     </div>
                   </Link>
 
-                  {/* ii */}
                   <div className="flex flex-col justify-between py-2 h-full">
                     <Link href={`/store-product/${product.id}`}>
                       <h3 className="font-medium text-gray-900 truncate hover:underline">
@@ -164,12 +128,8 @@ export default function FavouritesPage() {
                       </h3>
                     </Link>
                     <div className="flex gap-4 text-[#6A6661] text-[18px]">
-                      <p className="text-xs text-gray-500 mt-1">
-                        Color: {product.colors}
-                      </p>
-                      <p className="text-xs text-gray-500 mt-1">
-                        Size: {product.sizes}
-                      </p>
+                      <p className="text-xs text-gray-500 mt-1">Color: {product.colors.join(", ") || "—"}</p>
+                      <p className="text-xs text-gray-500 mt-1">Size: {product.sizes.join(", ") || "—"}</p>
                     </div>
                   </div>
                 </div>
@@ -177,14 +137,9 @@ export default function FavouritesPage() {
 
               {/* Mobile: bottom row with price + add to cart */}
               <div className="flex w-full sm:contents items-center justify-between pl-[calc(24px+0.75rem+0.75rem)] sm:pl-0">
-                {/* Price */}
                 <div className="sm:col-span-3 sm:flex sm:justify-center">
-                  <span className="font-semibold text-gray-900">
-                    {product.price}
-                  </span>
+                  <span className="font-semibold text-gray-900">{product.price}</span>
                 </div>
-
-                {/* Actions */}
                 <div className="sm:col-span-3 sm:flex sm:flex-col sm:items-end sm:gap-2">
                   <AddToCartButton product={product} />
                 </div>
@@ -193,7 +148,7 @@ export default function FavouritesPage() {
           ))}
         </div>
 
-        {/* Action buttons  */}
+        {/* Action buttons */}
         <div className="mt-8 flex flex-col sm:flex-row gap-4">
           <Link
             href="/"
@@ -210,7 +165,7 @@ export default function FavouritesPage() {
         </div>
       </div>
 
-      {/* related products */}
+      {/* Related products */}
       <div className="mt-13 mb-3 max-w-6xl mx-auto px-4 py-8">
         <RelatedProducts products={related} />
       </div>

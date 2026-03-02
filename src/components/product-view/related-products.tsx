@@ -5,12 +5,26 @@ import Link from 'next/link';
 import { RelatedProduct } from '@/components/store-components/products';
 import HeartButton from './heart-btn';
 import AddToCartButton from '../cart/add-to-cart';
+import { useMergedProducts } from "../../auth/hooks/useProductQueries"
 
 interface RelatedProductsProps {
   products: RelatedProduct[];
 }
 
 export default function RelatedProducts({ products }: RelatedProductsProps) {
+   const { data: mergedProducts, isLoading, isError } = useMergedProducts();
+
+  if (isLoading) return <p>Loading...</p>;
+  if (isError)   return <p>Failed to load products.</p>;
+
+  const relatedFormatted = mergedProducts!.map((p) => ({
+    id:    p.id,      
+    tag:   p.category,
+    name:  p.name,
+    price: p.price,
+    image: p.image,
+  }));
+
   return (
     <div className="mt-12">
       <p className="mb-4 text-[22px] sm:text-[26px] md:text-[28px] font-semibold uppercase tracking-widest text-black">
@@ -18,7 +32,7 @@ export default function RelatedProducts({ products }: RelatedProductsProps) {
       </p>
 
       <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        {products.map((item) => (
+        {relatedFormatted.slice(0, 3).map((item) => (
           <div key={item.id} className="group relative">
             <Link href={`/store-product/${item.id}`} className="block">
               {/* Image */}
