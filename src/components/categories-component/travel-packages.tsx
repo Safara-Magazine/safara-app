@@ -1,5 +1,5 @@
 "use client";
-import StoreNavigation from "../layout/Header/StoreNavBar";
+
 import AddToCartButton from "@/components/cart/add-to-cart";
 import HeartButton from "@/components/product-view/heart-btn";
 import { useMergedProducts } from "../../auth/hooks/useProductQueries";
@@ -7,50 +7,39 @@ import { getProductsByCategory } from "@/components/store-components/products";
 import Link from "next/link";
 import Image from "next/image";
 
-export default function ApparelCategories() {
+export default function TravelPackagesCategory() {
   const { data: mergedProducts = [], isLoading, isError } = useMergedProducts();
 
-  const apparelProducts = getProductsByCategory(mergedProducts, "APPAREL");
-  // console.log(apparelProducts);
+  const travelProducts = getProductsByCategory(
+    mergedProducts,
+    "TRAVEL PACKAGES",
+  );
+ 
 
   return (
     <>
-      
-      <main className="md:px-20 px-5 pt-30">
-
-        <div className="flex flex-col space-y-4 py-4">
-
-        {/* breadcrumb */}
-        <div className="flex gap-2 md:hidden items-center  text-[16px] text-[#767572]">
-          <Link href="/">Home</Link>
-          <span>&gt;&gt;</span>
-          <Link href="/store">Store</Link>
-          <span>&gt;&gt;</span>
-          <span className="text-[#2F1C32] font-medium">Categories</span>
-        </div>
-
-        {/* btn -thingy */}
-
-
-        </div>
+      <main className="md:px-20 px-5 md:pt-10 pt-5">
+        <div className="flex flex-col space-y-4 py-4"></div>
 
         <div className="flex  justify-between items-center md:mb-8">
-          <h2 className="hidden md:block text-[20px] font-bold text-gray-800">APPAREL</h2>
+          <h2 className="hidden md:block text-[20px] font-bold text-gray-800">
+            TRAVEL PACKAGES
+          </h2>
 
-          {/* // TODO: add link to see all apparel products */}
+          {/* // TODO: add link to see all home and living products */}
           <Link
             href="/products"
             className="text-[#A67F3B] hidden md:block font-semibold text-[20px] hover:opacity-80 transition-opacity"
           >
             See All
           </Link>
-
-          
         </div>
 
-          {/* sm - thingy here */}
-          <div className="bg-gradient-to-l  from-[#B59157] to-[#EBB659] block md:hidden my-8 flex py-2 px-4 w-full justify-between rounded-md">
-            <h2 className="block md:hidden text-[20px] font-bold text-white">APPAREL</h2>
+        {/* sm - thingy here */}
+        <div className="bg-gradient-to-l   from-[#B59157] to-[#EBB659] block md:hidden my-8 flex py-2 px-4 w-full justify-between rounded-md">
+          <h2 className="block md:hidden text-[20px] font-bold text-white">
+            TRAVEL PACKAGES
+          </h2>
 
           <Link
             href="/products"
@@ -58,7 +47,7 @@ export default function ApparelCategories() {
           >
             View More
           </Link>
-          </div>
+        </div>
 
         {/* Loading State */}
         {isLoading && (
@@ -87,10 +76,10 @@ export default function ApparelCategories() {
         )}
 
         {/* Products Grid */}
-        {apparelProducts && (
+        {travelProducts && (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
             {/* just display first 4 abeg */}
-            {apparelProducts.slice(0, 4).map((product) => (
+            {travelProducts.slice(0, 4).map((product) => (
               <div
                 key={product.id}
                 className="cursor-pointer rounded-[20px] border overflow-hidden"
