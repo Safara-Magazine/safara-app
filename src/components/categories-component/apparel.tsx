@@ -12,6 +12,7 @@ export default function ApparelCategories() {
   const { data: mergedProducts = [], isLoading, isError } = useMergedProducts();
   
   const apparelProducts = getProductsByCategory(mergedProducts, "APPAREL");
+  console.log(apparelProducts);
   
   return (
     <>
@@ -56,7 +57,7 @@ export default function ApparelCategories() {
       
               {/* Products Grid */}
               {apparelProducts && (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
                   {/* just display first 4 abeg */}
                 {apparelProducts.slice(0, 4).map((product) => (
                     <div

@@ -67,7 +67,7 @@ export interface ProductsResponse {
 
 export const products: ProductII[] = [
   {
-    id: "safara-white-tshirt",
+    id: "safara-white-tshirt-ii",
     name: "White T-Shirt",
     category: "APPAREL",
     price: "₦6,600",
@@ -247,6 +247,33 @@ export const newProducts: ProductII[] = [
       "/images/tote-bag.png",
       "/images/tote-bag.png",
       "/images/tote-bag.png",
+      
+    ],
+    description:
+      "The Safara Premium Tote Bag is made from heavy-duty canvas with reinforced stitching and a natural cotton finish. Spacious interior with an inner zip pocket. Perfect for work, travel, or the market run.",
+    sizes: ["One Size"],
+    colors: ["Natural", "Black"],
+    delivery: { lagos: "₦2,300", outside: "₦4,000" },
+    shipping: "Between 3–7 business days if order is placed now.",
+    rating: 4.6,
+    ratingCount: 58,
+    ratingBreakdown: { 5: 42, 4: 10, 3: 4, 2: 1, 1: 1 },
+    reviews: [
+      { name: "Adaeze N.", stars: 5, text: "Absolutely love this bag. Strong and stylish." },
+      { name: "Kayode S.", stars: 4, text: "Great quality. Fits a lot more than it looks." },
+      { name: "Miriam O.", stars: 5, text: "Best tote bag I've owned. The stitching is very solid." },
+    ],
+  },
+  {
+    id: "safara-white-tote-bag",
+    name: "Safara White Tote Bag",
+    category: "APPAREL",
+    price: "₦4,500",
+    image: "/images/tote-bag-ii.png",
+    images: [
+      "/images/tote-bag-ii.png",
+      "/images/tote-bag-ii.png",
+      "/images/tote-bag-ii.png",
       
     ],
     description:
