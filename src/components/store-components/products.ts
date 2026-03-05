@@ -364,3 +364,9 @@ export function mergeProduct(bp: BackendProduct): ProductII {
     reviews:         local?.reviews         ?? [],
   };
 }
+
+
+// helper for categories 
+export function getProductsByCategory(allProducts: ProductII[], category: string): ProductII[] {
+  return allProducts.filter(p => p.category === category);
+}
