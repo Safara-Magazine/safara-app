@@ -79,8 +79,8 @@ const StoreNavigation: React.FC = () => {
 
   return (
     <>
-      <header className="bg-white  md:px-[44px] backdrop-blur-md border-b border-gray-200 fixed top-0 left-0 right-0 z-50 shadow-sm">
-        <nav className="px-10 max-w-7xl mx-auto  sm:px-6 lg:px-8 py-3 lg:py-3">
+      <header className="bg-white px-0  md:px-10 backdrop-blur-md border-b border-gray-200 fixed top-0 left-0 right-0 z-50 shadow-sm">
+        <nav className="md:px-10 px-5 max-w-7xl mx-auto  sm:px-6 lg:px-8 py-3 lg:py-3">
           <div className="flex items-center justify-between ">
             {/* Logo */}
             <div className="flex-shrink-0 z-50">

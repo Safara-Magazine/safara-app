@@ -2,28 +2,34 @@ import HeroSlider, { HeroSlide } from "./component.heroslider";
 
 const heroSlides: HeroSlide[] = [
    {
-      image: '/images/hompagehero.png',
-      title: 'Discover Amazing Destinations',
-      subtitle: 'Explore the world with our curated travel experiences',
-      alt: 'Ocean sunset view'
+      image: '/images/hero-img-1.png',
+      title: 'Connecting Destinations, Creating Memories',
+      subtitle: 'Interactive guides and integrated booking system to make exploring Nigeria an effortless and unforgettable experience',
+      alt: 'Connecting Destinations, Creating Memories'
     },
     {
-      image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=80',
-      title: 'Adventure Awaits',
-      subtitle: 'Create unforgettable memories in breathtaking locations',
-      alt: 'Ocean sunset view'
+      image: '/images/hero-img-2.png',
+      title: 'Your Journey Through Naija Taste Starts Here',
+      subtitle: 'We explore authentic flavours of Nigeria, curated restaurant reviews, chef profiles, and traditional recipes that turn every meal into a cultural discovery.',
+      alt: 'Your Journey Through Naija Taste Starts Here'
     },
     {
-      image: 'https://images.unsplash.com/photo-1511593358241-7eea1f3c84e5?w=1920&q=80',
-      title: 'Luxury Experiences',
-      subtitle: 'Indulge in premium travel and accommodation',
-      alt: 'Ocean sunset view'
+      image: '/images/hero-img-3.png',
+      title: 'Rediscover Your Roots: A Heritage Exploration.',
+      subtitle: 'Beyond the itinerary, we provide the cultural context, etiquette guides, and access needed to connect deeply with your heritage.',
+      alt: 'Rediscover Your Roots: A Heritage Exploration.'
     },
     {
-      image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1920&q=80',
-      title: 'Natural Wonders',
-      subtitle: 'Witness the beauty of untouched landscapes',
-      alt: 'Ocean sunset view'
+      image: "/images/hero-img-4.png",
+      title: 'From Iconic Resorts to Authentic Heritage',
+      subtitle: 'Experience the pinnacle of Nigerian hospitality in spaces that blend world-class luxury with deep-rooted tradition.',
+      alt: 'From Iconic Resorts to Authentic Heritage'
+    },
+    {
+      image: "/images/hero-img-5.png",
+      title: 'Style in Motion: Where Tradition Meets the Runway',
+      subtitle: 'Go behind Nigeria’s fashion scenes with designer interviews, style guides, and exclusive looks at the trends shaping the continent’s most influential fashion hub.',
+      alt: 'Style in Motion: Where Tradition Meets the Runway'
     }
 ];
 
