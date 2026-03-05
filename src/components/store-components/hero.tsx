@@ -4,11 +4,11 @@ import Image from "../Image";
 export default function Hero() {
   return (
     <section className="text-white w-full overflow-hidden mt-16 md:mt-0">
-      <div className=" md:pl-[44px]    md:pt-20  md:bg-[#2F1C32] bg-[#68526B] h-full md:h-screen">
+      <div className=" md:pl-10   md:pt-20  md:bg-[#2F1C32] bg-[#68526B] h-full md:h-screen">
         <div className="grid    mx-auto md:grid-cols-2 gap-12 md:gap-16  items-center">
           {/* Hero Text */}
 
-          <div className="md:h-[458px] p-10     flex flex-col  ">
+          <div className="md:h-[458px] md:p-10 px-5 pt-10    flex flex-col  ">
             <h1 className="text-[44px] md:text-[64px] md:mb-7 mb-5 tracking-[1px] lg:text-6xl font-bold leading-[131%]">
               Look Different,
               <br />

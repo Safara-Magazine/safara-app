@@ -16,7 +16,7 @@ export default function ApparelCategories() {
   return (
     <>
     <StoreNavigation />
-    <main className="px-10 mt-30">
+    <main className="md:px-20 px-5 pt-30">
        <div className="flex  justify-between items-center mb-8">
                 <h2 className="text-[20px] font-bold text-gray-800">
                   APPAREL
