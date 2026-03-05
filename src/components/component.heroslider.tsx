@@ -23,7 +23,7 @@ interface HeroSliderProps {
 
 const HeroSlider: React.FC<HeroSliderProps> = ({
   slides,
-  autoPlayInterval = 5000,
+  autoPlayInterval = 7000,
   showDots = true,
   height = 'h-screen',
   overlayOpacity = 0.5,
@@ -125,7 +125,7 @@ const HeroSlider: React.FC<HeroSliderProps> = ({
       {/* Content Container */}
       <div 
         ref={overlayRef}
-        className="relative z-10 flex flex-col items-center justify-center h-full px-4 text-center"
+        className="relative z-10 flex flex-col border border-green-400 items-center justify-center h-full px-4 text-center"
       >
         <h1
           ref={titleRef}
