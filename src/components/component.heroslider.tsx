@@ -125,11 +125,11 @@ const HeroSlider: React.FC<HeroSliderProps> = ({
       {/* Content Container */}
       <div 
         ref={overlayRef}
-        className="relative z-10 flex flex-col border border-green-400 items-center justify-center h-full px-4 text-center"
+        className="relative z-10 flex flex-col   justify-center h-full md:px-10 px-5   "
       >
         <h1
           ref={titleRef}
-          className="text-5xl md:text-7xl font-bold text-white mb-6 max-w-4xl leading-tight"
+          className="text-5xl md:text-6xl font-bold text-white mb-6 max-w-4xl leading-tight"
         >
           {slides[currentIndex].title}
         </h1>
@@ -142,7 +142,7 @@ const HeroSlider: React.FC<HeroSliderProps> = ({
 
         {/* Navigation Dots */}
         {showDots && slides.length > 1 && (
-          <div className="absolute bottom-10 flex gap-3">
+          <div className="absolute text-center -ml-5  w-full mx-auto justify-center bottom-10 flex gap-3">
             {slides.map((_, index) => (
               <button
                 key={index}
